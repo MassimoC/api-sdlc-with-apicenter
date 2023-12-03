@@ -1,0 +1,48 @@
+parameters:
+  stageName: 'container'
+  stageDisplayName: 'Push to Container Registry'
+  jobName: 'container'
+  jobDisplayName: 'Build & Push Docker Image to Container Registry'
+  dependsOn: []
+  containerRegistryName: 
+  imageRepositoryName: 
+  dockerFile: 
+  buildContext: './src'
+  appVersion: '$(Build.BuildNumber)'
+  containerRegistryConnection: ''
+  trivyVersion: '0.19.2'
+  tags: '$(Build.BuildNumber)'
+
+stages:
+- stage: ${{ parameters.stageName }}
+  displayName: ${{ parameters.stageDisplayName }}
+  dependsOn: ${{ parameters.dependsOn }}
+  jobs:
+  - job: ${{ parameters.jobName }}
+    displayName: ${{ parameters.jobDisplayName }}
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+      # Build the container image locally
+    - template: ../tasks/build-image.yml
+      parameters:
+        containerRegistryConnection: '${{ parameters.containerRegistryConnection }}'
+        buildContext: '${{ parameters.buildContext }}'
+        dockerFile: '${{ parameters.dockerFile }}'
+        containerRegistryName: '${{ parameters.containerRegistryName }}'
+        imageRepositoryName: '${{ parameters.imageRepositoryName }}'
+        appVersion: '${{ parameters.appVersion }}'
+        tags: '${{ parameters.tags }}'
+      
+      # Scan the local image for vulnerabilities
+    - template: ../tasks/scan-image.yml
+      parameters:
+        fullImageName: '${{ parameters.imageRepositoryName }}:ci'
+
+      # Push the container image to the container registry if it's safe
+    - template: ../tasks/push-image.yml
+      parameters:
+        containerRegistryConnection: '${{ parameters.containerRegistryConnection }}'
+        containerRegistryName: '${{ parameters.containerRegistryName }}'
+        imageRepositoryName: '${{ parameters.imageRepositoryName }}'
+        tags: '${{ parameters.tags }}'

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34009.444
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rocketapi", "rocketapi.csproj", "{C37C74E3-3252-42AA-9C4E-182BF087C0D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rocketapi", "rocketapi.csproj", "{C37C74E3-3252-42AA-9C4E-182BF087C0D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rockettest", "..\rockettest\rockettest.csproj", "{DE6BF537-1EBE-4849-A762-07724D39C51C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C37C74E3-3252-42AA-9C4E-182BF087C0D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C37C74E3-3252-42AA-9C4E-182BF087C0D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C37C74E3-3252-42AA-9C4E-182BF087C0D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE6BF537-1EBE-4849-A762-07724D39C51C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE6BF537-1EBE-4849-A762-07724D39C51C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE6BF537-1EBE-4849-A762-07724D39C51C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE6BF537-1EBE-4849-A762-07724D39C51C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,39 @@
+parameters:
+  containerRegistryName: 
+  imageRepositoryName: 
+  containerRegistryConnection: 
+  dockerFile: 
+  buildContext: 
+  appVersion: 
+  tags: 
+
+steps:
+- task: Docker@2
+  displayName: 'Build Docker Image ${{ parameters.containerRegistryName }}.azurecr.io/${{ parameters.imageRepositoryName }} with tag ${{ parameters.appVersion }}'
+  inputs:
+    command: 'build'
+    Dockerfile: '${{ parameters.dockerFile }}'
+    buildContext: ${{ parameters.buildContext }}
+    arguments: '--build-arg VERSION=${{ parameters.appVersion }}'
+    containerRegistry: '${{ parameters.containerRegistryConnection }}'
+    repository: '${{ parameters.imageRepositoryName }}'
+    tags: |
+      ${{ parameters.tags }}
+
+  # This is a workaround given Trivy cannot use the image built above due to the service connection.
+  # Since we build the same thing, we can assume the image is the same.
+  # I have tried re-tagging the image but no luck as it has the same issue
+- task: Docker@2
+  displayName: 'Build CI Docker Image for Trivy'
+  inputs:
+    command: 'build'
+    Dockerfile: '${{ parameters.dockerFile }}'
+    buildContext: ${{ parameters.buildContext }}
+    arguments: '--build-arg VERSION=${{ parameters.appVersion }}'
+    repository: '${{ parameters.imageRepositoryName }}'
+    tags: |
+      ci
+    
+- script: |
+    docker images
+  displayName: List container images

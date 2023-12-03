@@ -1,5 +1,0 @@
-variables:
-  - name: Azure.ResourceGroup.Name
-    value: codit-practices-devops-skeleton-$(App.Environment.Code)
-  - name: Api.Name
-    value: $(App.Environment.Code)-helloworld

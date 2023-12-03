@@ -1,0 +1,35 @@
+name: 1.0$(Rev:.r)
+
+trigger:
+ branches:
+   include:
+   - main
+ paths:
+   include:
+   - src/rocketapi/*
+
+pr: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+- template: variables/containers.yaml
+
+stages:
+  # Build the project & run unit tests
+  - template: ./templates/stages/build-and-test-project.yml
+    parameters:
+      stageName: verify
+      projectPath: 'src/rocketapi/rocketapi.csproj'
+  
+  # Build, tag and push
+  - template: ./templates/stages/build-scan-push-container-image.yml
+    parameters:
+      stageName: container
+      dependsOn: verify
+      containerRegistryConnection: 'Holaaaaaa'
+      dockerFile: 'src/rocketapi/Dockerfile'
+      containerRegistryName: '$(Registry.Name)'
+      imageRepositoryName: '$(Registry.Rocket.RepositoryName)'
+      tags: '$(Build.BuildNumber)'

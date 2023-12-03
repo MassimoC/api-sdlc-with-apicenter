@@ -1,0 +1,7 @@
+variables:
+- name: Registry.Name
+  value: spaceregistry
+- name: Registry.Rocket.RepositoryName
+  value: space/rocketapi
+- name: Registry.Rocket.FullName
+  value: $(Registry.Name).azurecr.io/$(Registry.Rocket.RepositoryName)

@@ -1,0 +1,14 @@
+parameters:
+  containerRegistryName: 
+  imageRepositoryName: 
+  containerRegistryConnection: 
+  tags: 
+
+steps:
+- task: Docker@2
+  displayName: 'Pushing Docker Image ${{ parameters.containerRegistryName }}.azurecr.io/${{ parameters.imageRepositoryName }}:${{ parameters.tags }} to Azure Container Registry'
+  inputs:
+    containerRegistry: '${{ parameters.containerRegistryConnection }}'
+    repository: '${{ parameters.imageRepositoryName }}'
+    command: 'push'
+    tags: '${{ parameters.tags }}'
