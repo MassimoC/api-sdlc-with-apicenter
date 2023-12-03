@@ -1,0 +1,7 @@
+variables:
+  - name: Azure.ServiceConnection.Name
+    value: 'Azure R&D Subscription'
+  - name: Azure.ResourceGroup.Location
+    value: 'West Europe'
+  - name: Azure.Subscription.Id
+    value: c1537527-c126-428d-8f72-1ac9f2c63c1f
