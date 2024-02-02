@@ -36,7 +36,7 @@ variables:
   ##   Connection settings   ##
   #############################
 
-  serviceConnection: 'azure-mvp-connection'
+  serviceConnection: 'codit-rnd-connection'
 
   ################
   ##   Source   ##
