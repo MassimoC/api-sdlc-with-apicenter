@@ -54,7 +54,7 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            az apic api version create -g rg-apicenter -s myapicatalog --api-name rocket-api --name ${{ parameters.apiVersion }} --title "${{ parameters.apiVersion }}"
+            az apic api version create -g rg-apicenter -s myapicatalog --api-name rocket-api --name 1.0.alpha --title "${{ parameters.apiVersion }}"
 
       - task: AzureCLI@2  
         displayName: APIC - api import specification
