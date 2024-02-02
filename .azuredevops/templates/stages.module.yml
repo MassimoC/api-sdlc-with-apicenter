@@ -11,8 +11,8 @@ stages:
     jobs:
       - template: /.azuredevops/templates/jobs.validateopenapi.yml
         parameters:
-          openApiFullPath: '$(modulePath)/main.bicep'
-          spectralRulesFullPath: ${{ parameters.defaultJobTimeoutInMinutes }}
+          openApiFilePath: '$(openApiPath)'
+          rulesetPath: '$(spectralRulesPath)'
 
   - stage: discovery
     displayName: Publish Open API design
@@ -22,8 +22,8 @@ stages:
     jobs:
       - template: /.azuredevops/templates/jobs.publishDesignToApiCenter.yml
         parameters:
-          openApiFullPath: '$(modulePath)/main.bicep'
-          spectralRulesFullPath: ${{ parameters.defaultJobTimeoutInMinutes }}
+          openApiFilePath: '$(openApiPath)'
+          rulesetPath: '$(spectralRulesPath)'
 
   - stage: mocking
     displayName: Publish to API Gateway
@@ -34,5 +34,5 @@ stages:
     jobs:
       - template: /.azuredevops/pipelineTemplates/jobs.publishToApiManagement.yml
         parameters:
-          openApiFullPath: '$(modulePath)/main.bicep'
-          spectralRulesFullPath: ${{ parameters.defaultJobTimeoutInMinutes }}
+          openApiFilePath: '$(openApiPath)'
+          rulesetPath: '$(spectralRulesPath)'

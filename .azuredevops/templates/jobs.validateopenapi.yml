@@ -4,8 +4,8 @@ parameters:
   vmImage: '$(vmImage)'
   defaultJobTimeoutInMinutes: 120
   # Logic-related parameters
-  openApiFullPath: '$(openApiFullPath)'
-  spectralRulesFullPath: '$(spectralRulesFullPath)'
+  openApiFilePath: '$(openApiFullPath)'
+  rulesetPath: '$(spectralRulesPath)'
   failSeverity: 'warn'
 
 ##---------------------------------------------##
@@ -23,16 +23,16 @@ jobs:
     steps:
       - checkout: self
 
-      - script: cat ${{ parameters.spectralRulesFullPath }}
+      - script: cat ${{ parameters.rulesetPath }}
         continueOnError: true
         displayName: 'Show OpenAPI rules'
 
-      - script: cat ${{ parameters.openApiFullPath }}
+      - script: cat ${{ parameters.openApiFilePath }}
         continueOnError: true
         displayName: 'Show OpenAPI spec'
 
       - script: sudo npm install -g @stoplight/spectral
         displayName: 'Install Linting Tool (stoplight/spectral)'
 
-      - script: spectral lint ${{ parameters.openApiFullPath }} --ruleset ${{ parameters.spectralRulesFullPath }} --fail-severity "${{ parameters.failSeverity }}"
+      - script: spectral lint ${{ parameters.openApiFilePath }} --ruleset ${{ parameters.rulesetPath }} --fail-severity "${{ parameters.failSeverity }}"
         displayName: 'Lint OpenAPI specs'

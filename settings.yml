@@ -23,6 +23,7 @@ variables:
   # --------------------- #
 
   location: 'westeurope' # The default location to test deploy resources to
+  spectralRulesPath: '/rules/spectral-mycompany.oas.yaml'
 
   ###########################################################################################################################
   ################################################## Azure DevOps Only ######################################################
@@ -32,7 +33,7 @@ variables:
   ##   Connection settings   ##
   #############################
 
-  serviceConnection: 'CARML-ELZ-Connection'
+  serviceConnection: 'azure-mvp-connection'
 
   ################
   ##   Source   ##

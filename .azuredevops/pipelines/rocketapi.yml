@@ -26,6 +26,8 @@ trigger:
 
 variables:
   - template: '../../settings.yml'
+  - name: modulePath
+    value: '/design/rocketapi/openapi_rocketapi.json'
 
 stages:
   - template: /.azuredevops/templates/stages.module.yml
