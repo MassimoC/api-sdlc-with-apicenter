@@ -3,6 +3,9 @@ variables:
   ################################################## Common Variables #######################################################
   ###########################################################################################################################
 
+
+  azdoWorkDir: '$(System.DefaultWorkingDirectory)'
+
   ########################
   ##   Agent settings   ##
   ########################
@@ -23,7 +26,7 @@ variables:
   # --------------------- #
 
   location: 'westeurope' # The default location to test deploy resources to
-  spectralRulesPath: '/rules/spectral-mycompany.oas.yaml'
+  spectralRulesPath: '$(azdoWorkDir)/rules/spectral-mycompany.oas.yaml'
 
   ###########################################################################################################################
   ################################################## Azure DevOps Only ######################################################
