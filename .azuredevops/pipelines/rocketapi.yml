@@ -28,7 +28,7 @@ variables:
   - template: '../../settings.yml'
   - name: openApiPath
     value: '$(azdoWorkDir)/design/rocketapi/openapi_rocketapi.json'
-  - name: apiVersion
+  - name: currentApiVersion
     value: '1.0.alpha'
     
 

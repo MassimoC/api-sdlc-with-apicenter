@@ -23,7 +23,7 @@ stages:
       - template: /.azuredevops/templates/jobs.publish_ApiDesign.yml
         parameters:
           openApiFilePath: '$(openApiPath)'
-          apiVersion: '$(apiVersion)'
+          currentApiVersion: '$(currentApiVersion)'
 
   - stage: mocking
     displayName: Publish to API Gateway
