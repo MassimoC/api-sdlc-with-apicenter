@@ -36,7 +36,12 @@ jobs:
         displayName: 'Install Linting Tool (stoplight/spectral)'
 
       - script: spectral lint "${{ parameters.openApiFilePath }}" --ruleset "${{ parameters.rulesetPath }}" --fail-severity "${{ parameters.failSeverity }}" --output "${{ parameters.lintResult }}" --format junit
+        continueOnError: true
         displayName: 'Lint OpenAPI specs'
+
+      - script: cat ${{ parameters.lintResult }}
+        continueOnError: true
+        displayName: 'Show result'
 
       - task: PublishTestResults@2
         inputs:
