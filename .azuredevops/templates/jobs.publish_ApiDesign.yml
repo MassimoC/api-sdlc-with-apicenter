@@ -45,7 +45,7 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            az apic api create -g rg-apicenter -s myapicatalog --name rocket-api --title "Rocket API" --kind rest --description "to the clouds and beyond"
+            az apic api create -g rg-apicenter -s myapicatalog --name rocket-api --title "Rocket API" --kind rest --description "to the clouds and beyond" --summary "to the clouds and beyond"
 
       - task: AzureCLI@2  
         displayName: APIC - api version create
