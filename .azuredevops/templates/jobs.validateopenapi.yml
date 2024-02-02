@@ -43,4 +43,4 @@ jobs:
           testResultsFiles: '$(Build.SourcesDirectory)/test-results/spectral-results.xml'
           failTaskOnFailedTests: true
           testRunTitle: 'Spectral Linting Results'
-        displayName: 'Publish Test Results
+        displayName: 'Publish Test Results'
