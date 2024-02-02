@@ -1,0 +1,38 @@
+parameters:
+  staticValidation: true
+  publishDesign: true
+  mocking: true
+  defaultJobTimeoutInMinutes: 120
+
+stages:
+  - stage: validation
+    displayName: Static validation
+    condition: eq('${{ parameters.staticValidation }}', 'True')
+    jobs:
+      - template: /.azuredevops/templates/jobs.validateopenapi.yml
+        parameters:
+          openApiFullPath: '$(modulePath)/main.bicep'
+          spectralRulesFullPath: ${{ parameters.defaultJobTimeoutInMinutes }}
+
+  - stage: discovery
+    displayName: Publish Open API design
+    condition: and(eq('${{ parameters.publishDesign }}', 'True'), not(in(dependencies.validation.result, 'Failed', 'Canceled')))
+    dependsOn:
+      - validation
+    jobs:
+      - template: /.azuredevops/templates/jobs.publishDesignToApiCenter.yml
+        parameters:
+          openApiFullPath: '$(modulePath)/main.bicep'
+          spectralRulesFullPath: ${{ parameters.defaultJobTimeoutInMinutes }}
+
+  - stage: mocking
+    displayName: Publish to API Gateway
+    condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq('${{ parameters.mocking }}', 'True')))
+    dependsOn:
+      - validation
+      - discovery
+    jobs:
+      - template: /.azuredevops/pipelineTemplates/jobs.publishToApiManagement.yml
+        parameters:
+          openApiFullPath: '$(modulePath)/main.bicep'
+          spectralRulesFullPath: ${{ parameters.defaultJobTimeoutInMinutes }}

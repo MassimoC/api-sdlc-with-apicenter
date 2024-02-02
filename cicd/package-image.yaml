@@ -28,7 +28,7 @@ stages:
     parameters:
       stageName: container
       dependsOn: verify
-      containerRegistryConnection: 'Holaaaaaa'
+      containerRegistryConnection: '$(Registry.ConnectionName)'
       dockerFile: 'src/rocketapi/Dockerfile'
       containerRegistryName: '$(Registry.Name)'
       imageRepositoryName: '$(Registry.Rocket.RepositoryName)'

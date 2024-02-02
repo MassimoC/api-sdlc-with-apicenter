@@ -1,0 +1,28 @@
+parameters:
+  # Pipeline-related parameters
+  poolName: '$(poolName)'
+  vmImage: '$(vmImage)'
+  defaultJobTimeoutInMinutes: 120
+  # Logic-related parameters
+  openApiFullPath: '$(openApiFullPath)'
+  spectralRulesFullPath: '$(spectralRulesFullPath)'
+  failSeverity: 'warn'
+
+##---------------------------------------------##
+## TEMPLATE LOGIC                              ##
+##---------------------------------------------##
+jobs:
+  - job:
+    displayName: Publish to API Gateway
+    timeoutInMinutes: ${{ parameters.defaultJobTimeoutInMinutes }}
+    pool:
+      ${{ if ne(parameters.vmImage, '') }}:
+        vmImage: ${{ parameters.vmImage }}
+      ${{ if ne(parameters.poolName, '') }}:
+        name: ${{ parameters.poolName }}
+    steps:
+      - checkout: self
+
+      - script: cat ${{ parameters.openApiFullPath }}
+        continueOnError: true
+        displayName: 'Publish to Azure API Management'

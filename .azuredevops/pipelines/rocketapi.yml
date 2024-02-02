@@ -1,0 +1,34 @@
+name: Rocket-1.0$(Rev:.r)
+
+parameters:
+  - name: staticValidation
+    displayName: Execute static validation
+    type: boolean
+    default: true
+  - name: publishDesign
+    displayName: Publish OpenAPI specification
+    type: boolean
+    default: true
+
+pr: none
+
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - '/.azuredevops/pipelines/rocketapi.yml'
+      - '/.azuredevops/templates/*.yml'
+      - '/design/rocketapi/*'
+    exclude:
+      - '/**/*.md'
+
+variables:
+  - template: '../../settings.yml'
+
+stages:
+  - template: /.azuredevops/templates/stages.module.yml
+    parameters:
+      staticValidation: '${{ parameters.staticValidation }}'
+      publishDesign: '${{ parameters.publishDesign }}'

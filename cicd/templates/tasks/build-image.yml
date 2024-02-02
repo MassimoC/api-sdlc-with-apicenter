@@ -20,9 +20,6 @@ steps:
     tags: |
       ${{ parameters.tags }}
 
-  # This is a workaround given Trivy cannot use the image built above due to the service connection.
-  # Since we build the same thing, we can assume the image is the same.
-  # I have tried re-tagging the image but no luck as it has the same issue
 - task: Docker@2
   displayName: 'Build CI Docker Image for Trivy'
   inputs:
