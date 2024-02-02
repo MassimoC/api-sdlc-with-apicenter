@@ -29,7 +29,7 @@ variables:
   - name: openApiPath
     value: '$(azdoWorkDir)/design/rocketapi/openapi_rocketapi.json'
   - name: apiVersion
-    value: '1.0$(Build.BuildNumber)'
+    value: '1.0.alpha'
     
 
 stages:

@@ -56,9 +56,15 @@ jobs:
           inlineScript: |
             az apic api version create -g rg-apicenter -s myapicatalog --api-name rocket-api --name "${{ parameters.apiVersion }}" --title "${{ parameters.apiVersion }}"
 
-# az apic api create -g rg-apicenter -s myapicatalog --name rocket-api --title "Rocket API"
+      - task: AzureCLI@2  
+        displayName: APIC - api import specification
+        inputs:
+          azureSubscription: ${{ parameters.serviceConnection }}
+          scriptType: pscore
+          scriptLocation: inlineScript
+          inlineScript: |
+            az apic api register -g rg-apicenter -s myapicatalog --api-location "${{ parameters.openApiFilePath }}" --environment-name dev001xyz
 
-# az apic api version create -g api-center-test -s contosoeuap --api-name echo-api --name 2023-01-01 --title "2023-01-01"
-
-# az apic api register -g rg-apicenter -s myapicatalog --api-location "${{ parameters.openApiFilePath }}" --environment-name public
+#
+# az apic api register -g api-center-test -s contosoeuap --api-location "examples/cli-examples/spec-examples/openai.json" --environment-name public
 
