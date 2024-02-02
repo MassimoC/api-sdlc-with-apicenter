@@ -5,7 +5,7 @@ parameters:
   defaultJobTimeoutInMinutes: 120
   serviceConnection: '$(serviceConnection)'
   # Logic-related parameters
-  openApiFullPath: '$(openApiFullPath)'
+  openApiFilePath: '$(openApiFullPath)'
   spectralRulesFullPath: '$(spectralRulesFullPath)'
   failSeverity: 'warn'
 
@@ -24,12 +24,12 @@ jobs:
     steps:
       - checkout: self
 
-      - script: cat ${{ parameters.openApiFullPath }}
+      - script: cat ${{ parameters.openApiFilePath }}
         continueOnError: true
-        displayName: 'Publish to Azure API Center'
+        displayName: 'Show OpenAPI spec'
 
       - task: AzureCLI@2  
-        displayName: Create MGs-Assign Subscription
+        displayName: Publish to API Center
         inputs:
           azureSubscription: ${{ parameters.serviceConnection }}
           scriptType: pscore

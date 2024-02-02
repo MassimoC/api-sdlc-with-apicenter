@@ -7,7 +7,8 @@ parameters:
   openApiFilePath: '$(openApiFullPath)'
   rulesetPath: '$(spectralRulesPath)'
   lintResult: '$(lintResult)'
-  failSeverity: 'warn'
+  # warn, error
+  failSeverity: 'error'
 
 ##---------------------------------------------##
 ## TEMPLATE LOGIC                              ##
