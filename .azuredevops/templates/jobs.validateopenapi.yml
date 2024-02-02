@@ -6,6 +6,7 @@ parameters:
   # Logic-related parameters
   openApiFilePath: '$(openApiFullPath)'
   rulesetPath: '$(spectralRulesPath)'
+  lintResult: '$(lintResult)'
   failSeverity: 'warn'
 
 ##---------------------------------------------##
@@ -34,13 +35,13 @@ jobs:
       - script: sudo npm install -g @stoplight/spectral
         displayName: 'Install Linting Tool (stoplight/spectral)'
 
-      - script: spectral lint ${{ parameters.openApiFilePath }} --ruleset ${{ parameters.rulesetPath }} --fail-severity "${{ parameters.failSeverity }}" -o "$(Build.SourcesDirectory)/test-results/spectral-results.xml" -f junit
+      - script: spectral lint ${{ parameters.openApiFilePath }} --ruleset ${{ parameters.rulesetPath }} --fail-severity "${{ parameters.failSeverity }}" -o "${{ parameters.lintResult }}" -f junit
         displayName: 'Lint OpenAPI specs'
 
       - task: PublishTestResults@2
         inputs:
           testResultsFormat: 'JUnit'
-          testResultsFiles: '$(Build.SourcesDirectory)/test-results/spectral-results.xml'
+          testResultsFiles: '${{ parameters.lintResult }}'
           failTaskOnFailedTests: true
           testRunTitle: 'Spectral Linting Results'
         displayName: 'Publish Test Results'
