@@ -1,0 +1,3320 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "DigitalSales API",
+        "version": "v2"
+    },
+    "paths": {
+        "/allotments/{allotmentIdentifier}/{flightDate}": {
+            "get": {
+                "tags": [
+                    "Allotments"
+                ],
+                "summary": "Get Single Allotment",
+                "parameters": [
+                    {
+                        "name": "allotmentIdentifier",
+                        "in": "path",
+                        "description": "Allotment Identifier of the Allotment to retrieve.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "flightDate",
+                        "in": "path",
+                        "description": "Flight Date of the Allotment to retrieve.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.Allotment"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Issue with Request data"
+                    },
+                    "403": {
+                        "description": "Unauthorized action for current Customer"
+                    },
+                    "404": {
+                        "description": "Allotment with given Allotment Identifier and FlightDate could not be found"
+                    }
+                }
+            }
+        },
+        "/allotments/list": {
+            "post": {
+                "tags": [
+                    "Allotments"
+                ],
+                "summary": "List My allotments",
+                "requestBody": {
+                    "content": {
+                        "application/json-patch+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListMyAllotmentsRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListMyAllotmentsRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListMyAllotmentsRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListMyAllotmentsRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListMyAllotmentsResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Issue with Request data"
+                    },
+                    "403": {
+                        "description": "Unauthorized action for current Customer"
+                    }
+                }
+            }
+        },
+        "/allotments/book": {
+            "post": {
+                "tags": [
+                    "Allotments"
+                ],
+                "summary": "Allotment Booking",
+                "requestBody": {
+                    "content": {
+                        "application/json-patch+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Booking Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Issue with Request data"
+                    },
+                    "403": {
+                        "description": "Unauthorized action for current Customer"
+                    },
+                    "422": {
+                        "description": "Failed Booking Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Allotments"
+                ],
+                "summary": "Update Allotment Booking",
+                "requestBody": {
+                    "content": {
+                        "application/json-patch+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Update Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Issue with Request data"
+                    },
+                    "403": {
+                        "description": "Unauthorized action for current Customer"
+                    },
+                    "422": {
+                        "description": "Failed Update Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/allotments/{allotmentIdentifier}/{flightDate}/bookings": {
+            "get": {
+                "tags": [
+                    "Allotments"
+                ],
+                "summary": "List Allotment Bookings",
+                "parameters": [
+                    {
+                        "name": "allotmentIdentifier",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "flightDate",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListAllotmentBookingsResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListAllotmentBookingsErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized action for current Customer"
+                    },
+                    "422": {
+                        "description": "Failed Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListAllotmentBookingsErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/bookings/track/{awbNumber}": {
+            "get": {
+                "tags": [
+                    "Booking"
+                ],
+                "summary": "Track single Booking",
+                "parameters": [
+                    {
+                        "name": "awbNumber",
+                        "in": "path",
+                        "description": "AirWaybill Number of the booking to track.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.Consignment"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Issue with Request data"
+                    },
+                    "403": {
+                        "description": "Unauthorized action for current Customer"
+                    },
+                    "404": {
+                        "description": "Booking not found"
+                    }
+                }
+            }
+        },
+        "/bookings/track/list": {
+            "post": {
+                "tags": [
+                    "Booking"
+                ],
+                "summary": "Track Bookings",
+                "requestBody": {
+                    "content": {
+                        "application/json-patch+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.TrackListBookingsRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.TrackListBookingsRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.TrackListBookingsRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.TrackListBookingsRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.TrackListBookingsResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Issue with Request data"
+                    },
+                    "403": {
+                        "description": "Unauthorized action for current Customer"
+                    }
+                }
+            }
+        },
+        "/bookings/requestCancellation": {
+            "post": {
+                "tags": [
+                    "Booking"
+                ],
+                "summary": "Request Booking Cancellation",
+                "requestBody": {
+                    "content": {
+                        "application/json-patch+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.BookingCancellationRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.BookingCancellationRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.BookingCancellationRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.BookingCancellationRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Booking Cancellation request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.BookingCancellationResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Issue with Request data"
+                    },
+                    "403": {
+                        "description": "Unauthorized action for current Customer"
+                    },
+                    "422": {
+                        "description": "Failed Booking Cancellation request"
+                    }
+                }
+            }
+        },
+        "/profile": {
+            "get": {
+                "tags": [
+                    "CustomerProfile"
+                ],
+                "summary": "Get my profile",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.CustomerProfile.CustomerProfileResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Issue with Request data"
+                    },
+                    "403": {
+                        "description": "Unauthorized action for current Customer"
+                    }
+                }
+            }
+        },
+        "/quotes/{quoteId}": {
+            "get": {
+                "tags": [
+                    "Quotes"
+                ],
+                "summary": "Get single quote",
+                "parameters": [
+                    {
+                        "name": "quoteId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.Quote"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Issue with Request data"
+                    },
+                    "403": {
+                        "description": "Unauthorized action for current Customer"
+                    }
+                }
+            }
+        },
+        "/quotes/{quoteId}/mail": {
+            "post": {
+                "tags": [
+                    "Quotes"
+                ],
+                "summary": "Get the details of a quote via mail",
+                "parameters": [
+                    {
+                        "name": "quoteId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json-patch+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.GetQuoteViaEmailRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.GetQuoteViaEmailRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.GetQuoteViaEmailRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.GetQuoteViaEmailRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Issue with Request data"
+                    },
+                    "403": {
+                        "description": "Unauthorized action for current Customer"
+                    }
+                }
+            }
+        },
+        "/quotes/list": {
+            "post": {
+                "tags": [
+                    "Quotes"
+                ],
+                "summary": "List my quotes",
+                "requestBody": {
+                    "content": {
+                        "application/json-patch+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ListMyQuotesRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ListMyQuotesRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ListMyQuotesRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ListMyQuotesRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ListMyQuotesResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Issue with Request data"
+                    },
+                    "403": {
+                        "description": "Unauthorized action for current Customer"
+                    }
+                }
+            }
+        },
+        "/quotes/request": {
+            "post": {
+                "tags": [
+                    "Quotes"
+                ],
+                "summary": "Request Quote",
+                "requestBody": {
+                    "content": {
+                        "application/json-patch+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.RequestQuoteRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.RequestQuoteRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.RequestQuoteRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.RequestQuoteRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.RequestQuoteResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Issue with Request data"
+                    },
+                    "403": {
+                        "description": "Unauthorized action for current Customer"
+                    }
+                }
+            }
+        },
+        "/quotes/confirm": {
+            "post": {
+                "tags": [
+                    "Quotes"
+                ],
+                "summary": "Confirm/Book Quote",
+                "requestBody": {
+                    "content": {
+                        "application/json-patch+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Issue with Request data"
+                    },
+                    "403": {
+                        "description": "Unauthorized action for current Customer"
+                    }
+                }
+            }
+        },
+        "/rates/list": {
+            "post": {
+                "tags": [
+                    "Rates"
+                ],
+                "summary": "List my rates",
+                "requestBody": {
+                    "content": {
+                        "application/json-patch+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.ListMyRatesRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.ListMyRatesRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.ListMyRatesRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.ListMyRatesRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.ListMyRatesResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Issue with Request data"
+                    },
+                    "403": {
+                        "description": "Unauthorized action for current Customer"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.Allotment": {
+                "type": "object",
+                "properties": {
+                    "allotmentIdentifier": {
+                        "type": "string",
+                        "description": "Assigned allotment identifier by Cargolux Cargo Management System.\r\nThis number is needed in the allotment booking operation.",
+                        "nullable": true,
+                        "example": "CVLUX1234CUS01A"
+                    },
+                    "allotmentType": {
+                        "type": "string",
+                        "description": "Indicates the type of allotment, used to know if it is a soft allocation or hard allocation allotment.",
+                        "nullable": true,
+                        "example": "SB"
+                    },
+                    "flightNumber": {
+                        "type": "string",
+                        "description": "Flight Number, constructed using the carrier code + flight number.",
+                        "nullable": true,
+                        "example": "CV1234"
+                    },
+                    "flightDate": {
+                        "type": "string",
+                        "description": "Scheduled departure date.",
+                        "nullable": true,
+                        "example": "2020-01-01"
+                    },
+                    "cargoluxBookingOffice": {
+                        "type": "string",
+                        "description": "Local CV office.",
+                        "nullable": true,
+                        "example": "LUX"
+                    },
+                    "airportOfOrigin": {
+                        "type": "string",
+                        "description": "This allotment has been agreed for cargo originating from this particular airport (IATA code).",
+                        "nullable": true,
+                        "example": "CDG"
+                    },
+                    "airportOfOnload": {
+                        "type": "string",
+                        "description": "IATA Airport code where the cargo is loaded on a Cargolux flight.",
+                        "nullable": true,
+                        "example": "LUX"
+                    },
+                    "airportOfOffload": {
+                        "type": "string",
+                        "description": "IATA Airport code where the cargo is loaded off from a Cargolux flight.",
+                        "nullable": true,
+                        "example": "LAX"
+                    },
+                    "airportOfDestination": {
+                        "type": "string",
+                        "description": "IATA Airport code where the cargo is intended to be finally delivered from Cargolux standpoint.",
+                        "nullable": true,
+                        "example": "SFO"
+                    },
+                    "released": {
+                        "type": "boolean",
+                        "description": "Indicates whether this allotment has been released or not.",
+                        "nullable": true,
+                        "example": true
+                    },
+                    "localLatestAcceptanceTime": {
+                        "type": "string",
+                        "description": "Latest Local DateTime on which the the cargo has to be accepted at the departing airport.",
+                        "format": "date-time",
+                        "nullable": true,
+                        "example": "2021-07-31T05:00:00"
+                    },
+                    "utcLatestAcceptanceTime": {
+                        "type": "string",
+                        "description": "Latest UTC DateTime on which the the cargo has to be accepted at the departing airport.",
+                        "format": "date-time",
+                        "nullable": true,
+                        "example": "2021-07-31T03:00:00Z"
+                    },
+                    "currentCapacity": {
+                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.Capacity"
+                    },
+                    "bookedCapacity": {
+                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.Capacity"
+                    },
+                    "availableCapacity": {
+                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.Capacity"
+                    },
+                    "rates": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentRate"
+                        },
+                        "description": "List of applicable rate information for the allotment.",
+                        "nullable": true
+                    },
+                    "routes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.Route"
+                        },
+                        "description": "List of applicable route information for the allotment.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBooking": {
+                "type": "object",
+                "properties": {
+                    "iataNumber": {
+                        "type": "string",
+                        "description": "Identifier of the party in the International Air Transport Association.",
+                        "nullable": true,
+                        "example": "12345678901"
+                    },
+                    "awbNumber": {
+                        "type": "string",
+                        "description": "Airwaybill prefix + \"-\" + number. Expected format is 3 + (1) + 8 digits. Must be mod(7).",
+                        "nullable": true,
+                        "example": "172-43508636"
+                    },
+                    "bookingContactEmail": {
+                        "type": "string",
+                        "description": "Optional contact email of the person in charge of this booking.",
+                        "nullable": true,
+                        "example": "xxx@test.com"
+                    },
+                    "allotmentIdentifier": {
+                        "type": "string",
+                        "description": "Assigned allotment identifier by Cargolux Cargo Management System.",
+                        "nullable": true,
+                        "example": "CVLUX1234CUS01A"
+                    },
+                    "flightNumber": {
+                        "type": "string",
+                        "description": "The flight identifier consisting of the carrier code and the flight number.",
+                        "nullable": true,
+                        "example": "CV1234"
+                    },
+                    "flightDate": {
+                        "type": "string",
+                        "description": "The scheduled departure date.",
+                        "format": "date-time",
+                        "nullable": true,
+                        "example": "2020-09-20"
+                    },
+                    "latestAcceptanceTime": {
+                        "type": "string",
+                        "description": "Latest Acceptance time of this booking.",
+                        "format": "date-time",
+                        "nullable": true,
+                        "example": "2020-09-19T16:00:00+02:00"
+                    },
+                    "airportOfOrigin": {
+                        "type": "string",
+                        "description": "Origin airport or station (IATA code) of the shipment.",
+                        "nullable": true,
+                        "example": "CDG"
+                    },
+                    "airportOfDestination": {
+                        "type": "string",
+                        "description": "Destination airport or station (IATA code) of the shipment.",
+                        "nullable": true,
+                        "example": "SFO"
+                    },
+                    "natureOfGoods": {
+                        "type": "string",
+                        "description": "Description of the shipment (Consolidation/GeneralCargo/...).",
+                        "nullable": true,
+                        "example": "Consolidation"
+                    },
+                    "totalNumberOfPieces": {
+                        "type": "integer",
+                        "description": "Amount of pieces in the shipment.",
+                        "format": "int32",
+                        "nullable": true,
+                        "example": 20
+                    },
+                    "totalVolume": {
+                        "type": "number",
+                        "description": "Total volume of the shipment in cubic meters.",
+                        "format": "double",
+                        "nullable": true,
+                        "example": 10
+                    },
+                    "totalWeight": {
+                        "type": "number",
+                        "description": "Total weight of the shipment in kilograms.",
+                        "format": "double",
+                        "nullable": true,
+                        "example": 50
+                    },
+                    "dimensions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentDimensionElement"
+                        },
+                        "description": "List of detailed dimensions included in the (loose) shipment.",
+                        "nullable": true
+                    },
+                    "specialHandlingCodes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of special handling codes.",
+                        "nullable": true
+                    },
+                    "ulds": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Ulds.Uld"
+                        },
+                        "description": "List of details on the (containerized) shipment.",
+                        "nullable": true
+                    },
+                    "stackable": {
+                        "type": "boolean",
+                        "description": "Is cargo stackable",
+                        "readOnly": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest": {
+                "required": [
+                    "airportOfDestination",
+                    "airportOfOrigin",
+                    "allotmentIdentifier",
+                    "awbNumber",
+                    "flightDate",
+                    "iataNumber",
+                    "natureOfGoods",
+                    "totalNumberOfPieces",
+                    "totalVolume",
+                    "totalWeight"
+                ],
+                "type": "object",
+                "properties": {
+                    "iataNumber": {
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9]{1,12}$",
+                        "type": "string",
+                        "description": "Identifier of the party in the International Air Transport Association.",
+                        "example": "12345678901"
+                    },
+                    "awbNumber": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Airwaybill prefix + \"-\" + number. Expected format is 3 + (1) + 8 digits. Must be mod(7).",
+                        "example": "172-43508636"
+                    },
+                    "bookingContactEmail": {
+                        "type": "string",
+                        "description": "Optional contact email of the person in charge of this booking.",
+                        "nullable": true,
+                        "example": "xxx@test.com"
+                    },
+                    "allotmentIdentifier": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Assigned allotment identifier by Cargolux Cargo Management System.\r\nAllotmentIdentifier is mandatory along with the flightNumber and flightDate.",
+                        "example": "CVLUX1234CUS01A"
+                    },
+                    "flightNumber": {
+                        "pattern": "^[a-zA-Z0-9]{2}\\d{4}$",
+                        "type": "string",
+                        "description": "The flight identifier consisting of the carrier code and the flight number.\r\nMandatory along with allotmentIdentifier and flightDate.",
+                        "nullable": true,
+                        "example": "CV1234"
+                    },
+                    "flightDate": {
+                        "type": "string",
+                        "description": "The scheduled departure date.\r\nMandatory along with the allotmentIdentifier and flightNumber.",
+                        "format": "date-time",
+                        "example": "2020-09-20"
+                    },
+                    "airportOfOrigin": {
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z]{3}$",
+                        "type": "string",
+                        "description": "Origin airport or station (IATA code) of the shipment.",
+                        "example": "CDG"
+                    },
+                    "airportOfDestination": {
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z]{3}$",
+                        "type": "string",
+                        "description": "Destination airport or station (IATA code) of the shipment.",
+                        "example": "SFO"
+                    },
+                    "natureOfGoods": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Description of the shipment (Consolidation/GeneralCargo/...).",
+                        "example": "Consolidation"
+                    },
+                    "stackable": {
+                        "type": "boolean",
+                        "description": "Indicates whether the goods are stackable or not.\r\nIf the goods are non-stackable, ALL pieces have to be included in dimensions.\r\nMust be false for ULD shipments.\r\nDefault true",
+                        "nullable": true,
+                        "example": true
+                    },
+                    "totalNumberOfPieces": {
+                        "maximum": 100000,
+                        "minimum": 0,
+                        "type": "integer",
+                        "description": "Amount of pieces in the shipment.",
+                        "format": "int32",
+                        "example": 20
+                    },
+                    "totalVolume": {
+                        "maximum": 1000,
+                        "minimum": 0,
+                        "type": "number",
+                        "description": "Total volume of the shipment in cubic meters.",
+                        "format": "double",
+                        "example": 10
+                    },
+                    "totalWeight": {
+                        "maximum": 150000,
+                        "minimum": 0,
+                        "type": "number",
+                        "description": "Total weight of the shipment in kilograms.",
+                        "format": "double",
+                        "example": 50
+                    },
+                    "dimensions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentDimensionElement"
+                        },
+                        "description": "List of detailed dimensions included in the (loose) shipment.",
+                        "nullable": true
+                    },
+                    "specialHandlingCodes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of special handling codes.",
+                        "nullable": true
+                    },
+                    "ulds": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Ulds.Uld"
+                        },
+                        "description": "List of details on the (containerized) shipment.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingResponse": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingStatusCode"
+                    },
+                    "awbNumber": {
+                        "type": "string",
+                        "description": "The requested AirwayBill number.",
+                        "nullable": true,
+                        "example": "172-43508636"
+                    },
+                    "allotmentIdentifier": {
+                        "type": "string",
+                        "description": "Assigned allotment identifier by Cargolux Cargo Management System on which the booking was created.",
+                        "nullable": true,
+                        "example": "CVLUX1234CUS01A"
+                    },
+                    "totalChargeableWeight": {
+                        "type": "number",
+                        "description": "The total chargeable weight of the booking in kilograms.",
+                        "format": "double",
+                        "nullable": true,
+                        "example": 35.4
+                    },
+                    "warnings": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoWarning"
+                        },
+                        "description": "List of warnings related to the booking.",
+                        "nullable": true
+                    },
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoError"
+                        },
+                        "description": "List of errors related to the booking.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Status of an allotmentBooking, a model for catching errors and warnings."
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingStatusCode": {
+                "enum": [
+                    "SUCCESS",
+                    "FAILURE"
+                ],
+                "type": "string"
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentDimensionElement": {
+                "required": [
+                    "height",
+                    "length",
+                    "pieces",
+                    "unit",
+                    "width"
+                ],
+                "type": "object",
+                "properties": {
+                    "pieces": {
+                        "maximum": 100000,
+                        "minimum": 0,
+                        "type": "integer",
+                        "description": "Number of pieces having these dimensions.",
+                        "format": "int32",
+                        "example": 30
+                    },
+                    "unit": {
+                        "minLength": 1,
+                        "enum": [
+                            "CM",
+                            "IN"
+                        ],
+                        "type": "string",
+                        "description": "Unit of length used for this dimension.",
+                        "example": "CM"
+                    },
+                    "actualWeightPerPiece": {
+                        "maximum": 150000,
+                        "minimum": 0,
+                        "type": "number",
+                        "description": "Weight of the shipment piece(s) in kg.",
+                        "format": "double",
+                        "nullable": true,
+                        "example": 0.24
+                    },
+                    "height": {
+                        "maximum": 100000,
+                        "minimum": 0,
+                        "type": "number",
+                        "description": "Height of the shipment piece(s) in the specified unit (CM or IN).",
+                        "format": "double",
+                        "example": 20
+                    },
+                    "length": {
+                        "maximum": 100000,
+                        "minimum": 0,
+                        "type": "number",
+                        "description": "Length of the shipment piece(s) in the specified unit (CM or IN).",
+                        "format": "double",
+                        "example": 20
+                    },
+                    "width": {
+                        "maximum": 100000,
+                        "minimum": 0,
+                        "type": "number",
+                        "description": "Width of the shipment piece(s) in the specified unit (CM or IN).",
+                        "format": "double",
+                        "example": 20
+                    },
+                    "stackablePieces": {
+                        "type": "boolean",
+                        "description": "Indicates if these pieces are stackable.\r\nOptional: default true.",
+                        "nullable": true,
+                        "example": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentRate": {
+                "type": "object",
+                "properties": {
+                    "currencyCode": {
+                        "type": "string",
+                        "description": "ISO Currency Code; Coded representation of a currency approved by ISO.",
+                        "nullable": true,
+                        "example": "EUR"
+                    },
+                    "weightUnit": {
+                        "type": "string",
+                        "description": "Code identifying the unit of weight used.",
+                        "nullable": true,
+                        "example": "KG"
+                    },
+                    "allIn": {
+                        "type": "boolean",
+                        "description": "Indicates if all surcharges are included or not.",
+                        "example": true
+                    },
+                    "ratingBasis": {
+                        "type": "string",
+                        "description": "Indicates how the rates are based (bulk/pivot).",
+                        "nullable": true,
+                        "example": "bulk"
+                    },
+                    "applicableNatureOfGoods": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of nature of goods to which this rate applies.",
+                        "nullable": true
+                    },
+                    "specialHandlingCodes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of special handling codes related to the rate.",
+                        "nullable": true
+                    },
+                    "bulkRateDetail": {
+                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.BulkRateDetail"
+                    },
+                    "pivotRateDetail": {
+                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.PivotRateDetail"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.BulkRateDetail": {
+                "type": "object",
+                "properties": {
+                    "minimumCharge": {
+                        "type": "number",
+                        "description": "The minimum charge that will apply.",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "normalRatePerWgtUnit": {
+                        "type": "number",
+                        "description": "The normal rate that will apply per specified weight unit.",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "weightBreaks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.WeightBreak"
+                        },
+                        "description": "List of weightbreaks. These are the weight ranges on which a particular unit price applies.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The bulk rate detail for the rate definition."
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.Capacity": {
+                "type": "object",
+                "properties": {
+                    "actualWeight": {
+                        "type": "number",
+                        "description": "Actual weight in kilograms.",
+                        "format": "double",
+                        "example": 1000
+                    },
+                    "volume": {
+                        "type": "number",
+                        "description": "Volume in cubic meters.",
+                        "format": "double",
+                        "example": 6
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Capacity values for the allotment. (Original, current, booked, available)"
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.ListAllotmentBookingsErrorResponse": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListAllotmentBookingsStatusCode"
+                    },
+                    "allotmentNumber": {
+                        "type": "string",
+                        "description": "Requested AllotmentNumber to list bookings of.",
+                        "nullable": true,
+                        "example": "A65960"
+                    },
+                    "warnings": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoWarning"
+                        },
+                        "description": "List of warnings related to the request.",
+                        "nullable": true
+                    },
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoError"
+                        },
+                        "description": "List of errors related to the request.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.ListAllotmentBookingsResponse": {
+                "type": "object",
+                "properties": {
+                    "bookings": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBooking"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.ListAllotmentBookingsStatusCode": {
+                "enum": [
+                    "FAILURE",
+                    "SUCCESS"
+                ],
+                "type": "string"
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.ListMyAllotmentsRequest": {
+                "required": [
+                    "flightDateFrom",
+                    "iataNumber"
+                ],
+                "type": "object",
+                "properties": {
+                    "iataNumber": {
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9]{1,12}$",
+                        "type": "string",
+                        "description": "Identifier of the party in the International Air Transport Association.",
+                        "example": "12345678901"
+                    },
+                    "flightNumber": {
+                        "pattern": "^[a-zA-Z0-9]{2}\\d{4}$",
+                        "type": "string",
+                        "description": "The flight identifier consisting of the carrier code and the flight number.",
+                        "nullable": true,
+                        "example": "CV1234"
+                    },
+                    "flightDateFrom": {
+                        "type": "string",
+                        "description": "Any valid flight date format yyyy-MM-dd.",
+                        "format": "date-time",
+                        "example": "2020-05-30"
+                    },
+                    "flightDateTo": {
+                        "type": "string",
+                        "description": "Can be null or any valid flight date format yyyy-MM-dd. Default value is (flightDateFrom + 14d) if not provided.",
+                        "format": "date-time",
+                        "nullable": true,
+                        "example": "2020-05-30"
+                    },
+                    "cargoluxBookingOffice": {
+                        "pattern": "^[a-zA-Z]{3}$",
+                        "type": "string",
+                        "description": "Cargolux booking office (IATA code).",
+                        "nullable": true,
+                        "example": "LUX"
+                    },
+                    "airportOfOrigin": {
+                        "pattern": "^[a-zA-Z]{3}$",
+                        "type": "string",
+                        "description": "Originating Airport (IATA code).",
+                        "nullable": true,
+                        "example": "CDG"
+                    },
+                    "airportOfOnload": {
+                        "pattern": "^[a-zA-Z]{3}$",
+                        "type": "string",
+                        "description": "IATA station code where cargo is onloaded.",
+                        "nullable": true,
+                        "example": "LUX"
+                    },
+                    "airportOfOffload": {
+                        "pattern": "^[a-zA-Z]{3}$",
+                        "type": "string",
+                        "description": "IATA station code where cargo is offloaded.",
+                        "nullable": true,
+                        "example": "LAX"
+                    },
+                    "airportOfDestination": {
+                        "pattern": "^[a-zA-Z]{3}$",
+                        "type": "string",
+                        "description": "Destination Airport (IATA code).",
+                        "nullable": true,
+                        "example": "SFO"
+                    },
+                    "allotmentType": {
+                        "enum": [
+                            "HB",
+                            "SB",
+                            null
+                        ],
+                        "type": "string",
+                        "description": "The indication whether the allotment is based on Soft allocation agreement or on a hard allocation agreement.",
+                        "nullable": true,
+                        "example": "HB"
+                    },
+                    "includeRoutes": {
+                        "type": "boolean",
+                        "description": "(Optional) Flag on whether routes linked to the allotments should be included in the response.\r\nDefault false.",
+                        "nullable": true,
+                        "example": true
+                    },
+                    "includeRates": {
+                        "type": "boolean",
+                        "description": "(Optional) Flag on whether rates linked to the allotments should be included in the response.\r\nDefault false.",
+                        "nullable": true,
+                        "example": true
+                    },
+                    "minimumAvailableCapacity": {
+                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.MinimumAvailableCapacity"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.ListMyAllotmentsResponse": {
+                "type": "object",
+                "properties": {
+                    "allotments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.Allotment"
+                        },
+                        "description": "List of allotments.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.MinimumAvailableCapacity": {
+                "required": [
+                    "actualWeight",
+                    "volume"
+                ],
+                "type": "object",
+                "properties": {
+                    "actualWeight": {
+                        "maximum": 150000,
+                        "minimum": 0,
+                        "type": "number",
+                        "description": "Weight in kilograms.",
+                        "format": "double",
+                        "example": 50
+                    },
+                    "volume": {
+                        "maximum": 1000,
+                        "minimum": 0,
+                        "type": "number",
+                        "description": "Volume in cubic meters.",
+                        "format": "double",
+                        "example": 90
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.PivotRateDetail": {
+                "type": "object",
+                "properties": {
+                    "pivotWeight": {
+                        "type": "number",
+                        "description": "Weight at which surcharges may be applied.",
+                        "format": "double",
+                        "nullable": true,
+                        "example": 1650
+                    },
+                    "pivotCharge": {
+                        "type": "number",
+                        "description": "Pivot charge",
+                        "format": "double",
+                        "nullable": true,
+                        "example": 1485
+                    },
+                    "overPivotRatePerWgtUnit": {
+                        "type": "number",
+                        "description": "Rate per weight unit when pivot weight has been exceeded.",
+                        "format": "double",
+                        "nullable": true,
+                        "example": 0.7
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.Route": {
+                "type": "object",
+                "properties": {
+                    "localScheduledDepartureDateAndTime": {
+                        "type": "string",
+                        "description": "Local scheduled Departure datetime of a (truck) flight.",
+                        "format": "date-time",
+                        "nullable": true,
+                        "example": "2020-10-27T13:35:00"
+                    },
+                    "localScheduledArrivalDateAndTime": {
+                        "type": "string",
+                        "description": "Local scheduled Arrival datetime of a (truck) flight.",
+                        "format": "date-time",
+                        "nullable": true,
+                        "example": "2020-10-27T13:35:00"
+                    },
+                    "utcScheduledDepartureDateAndTime": {
+                        "type": "string",
+                        "description": "UTC scheduled Departure datetime of a (truck) flight.",
+                        "format": "date-time",
+                        "nullable": true,
+                        "example": "2020-10-27T11:35:00Z"
+                    },
+                    "utcScheduledArrivalDateAndTime": {
+                        "type": "string",
+                        "description": "UTC scheduled Arrival datetime of a (truck) flight.",
+                        "format": "date-time",
+                        "nullable": true,
+                        "example": "2020-10-27T11:35:00Z"
+                    },
+                    "reference": {
+                        "type": "string",
+                        "description": "(Truck) flight number.",
+                        "nullable": true,
+                        "example": "CV6691"
+                    },
+                    "onload": {
+                        "type": "string",
+                        "description": "Onload of the route (IATA station code).",
+                        "nullable": true,
+                        "example": "LUX"
+                    },
+                    "offload": {
+                        "type": "string",
+                        "description": "Offload of the route (IATA station code).",
+                        "nullable": true,
+                        "example": "LAX"
+                    },
+                    "mode": {
+                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.RouteMode"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Allotments.WeightBreak": {
+                "type": "object",
+                "properties": {
+                    "weightBreak": {
+                        "type": "number",
+                        "description": "Weight up until which the given rate per weight unit applies.",
+                        "format": "double",
+                        "nullable": true,
+                        "example": 200
+                    },
+                    "ratePerWgtUnit": {
+                        "type": "number",
+                        "description": "Rate that applies per weight unit.",
+                        "format": "double",
+                        "nullable": true,
+                        "example": 15.6
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Bookings.BookingCancellationRequest": {
+                "required": [
+                    "awbNumber",
+                    "contactEmails",
+                    "iataNumber"
+                ],
+                "type": "object",
+                "properties": {
+                    "iataNumber": {
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9]{1,12}$",
+                        "type": "string",
+                        "description": "IATA number (identifier) of the office requesting the cancellation."
+                    },
+                    "awbNumber": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Airwaybill prefix + \"-\" + number. Expected format is 3 + (1) + 8 digits. Must be mod(7)."
+                    },
+                    "contactEmails": {
+                        "maxItems": 20,
+                        "minItems": 1,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of emails that will be contacted in regards to updates of the cancellation request."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Bookings.BookingCancellationResponse": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.CancellationRequestStatus"
+                    },
+                    "awbNumber": {
+                        "type": "string",
+                        "description": "Airwaybill prefix + \"-\" + number. Expected format is 3 + (1) + 8 digits. Must be mod(7).",
+                        "nullable": true
+                    },
+                    "warnings": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoWarning"
+                        },
+                        "description": "List of warnings with code and description",
+                        "nullable": true
+                    },
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoError"
+                        },
+                        "description": "List of errors with code and description",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Bookings.CancellationRequestStatus": {
+                "enum": [
+                    "CANCELLATION_REQUESTED",
+                    "FAILURE"
+                ],
+                "type": "string"
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Bookings.Consignment": {
+                "type": "object",
+                "properties": {
+                    "awbNumber": {
+                        "type": "string",
+                        "description": "Airwaybill prefix + \"-\" + number. Expected format is 3 + (1) + 8 digits. Must be mod(7).",
+                        "nullable": true,
+                        "example": "172-11111111"
+                    },
+                    "cargoIq": {
+                        "type": "boolean",
+                        "description": "Cargo IQ compliant flag.",
+                        "example": true
+                    },
+                    "carrier": {
+                        "type": "string",
+                        "description": "Carrier code of the current flight number.",
+                        "nullable": true,
+                        "example": "CV"
+                    },
+                    "currentStatus": {
+                        "type": "string",
+                        "description": "Most recent message received for the shipment.",
+                        "nullable": true,
+                        "example": "RCS"
+                    },
+                    "currentStatusDescription": {
+                        "type": "string",
+                        "description": "High level description with piece count.",
+                        "nullable": true,
+                        "example": "1 piece documents delivered"
+                    },
+                    "currentStatusFlight": {
+                        "type": "string",
+                        "description": "Flight number when current milestone is flight related.",
+                        "nullable": true,
+                        "example": "1234"
+                    },
+                    "currentStatusHighlighted": {
+                        "type": "boolean",
+                        "description": "When current milestone is not flight related this is true. Otherwise the value is false.",
+                        "example": true
+                    },
+                    "currentStatusStation": {
+                        "type": "string",
+                        "description": "Station Code with station name of the current station.",
+                        "nullable": true,
+                        "example": "BKK - Bangkok (TH)"
+                    },
+                    "currentStatusStationCode": {
+                        "type": "string",
+                        "description": "Station Code of the current station.",
+                        "nullable": true,
+                        "example": "BKK"
+                    },
+                    "currentStatusTimeLocal": {
+                        "type": "string",
+                        "description": "Timestamp value on local station for the current milestone.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "currentStatusTimeUtc": {
+                        "type": "string",
+                        "description": "Timestamp value on UTC timezone for the current milestone.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "currentAssociatedStation": {
+                        "type": "string",
+                        "description": "Station code for milestone event.",
+                        "nullable": true,
+                        "example": "BKK"
+                    },
+                    "currentPlannedEventTimeLocal": {
+                        "type": "string",
+                        "description": "Timestamp value on local station for the PET of this milestone event.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "currentPlannedEventTimeUtc": {
+                        "type": "string",
+                        "description": "Timestamp value on UTC timezone for the PET of this milestone event.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "currentActualEventTimeLocal": {
+                        "type": "string",
+                        "description": "Timestamp value on local station for the AET of this milestone event.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "currentActualEventTimeUtc": {
+                        "type": "string",
+                        "description": "Timestamp value on UTC timezone for the AET of this milestone event.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "currentMessageReceivedTimeLocal": {
+                        "type": "string",
+                        "description": "Timestamp value on local station for message received time of this milestone event.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "currentMessageReceivedTimeUtc": {
+                        "type": "string",
+                        "description": "Timestamp value on UTC timezone for message recvd time of this milestone event.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "currentMilestoneCompleted": {
+                        "type": "string",
+                        "description": "Milestone completed indicator. \"C\" = complete, \"I\" = incomplete.",
+                        "nullable": true,
+                        "example": "C"
+                    },
+                    "currentMilestone": {
+                        "type": "string",
+                        "description": "Milestone name.",
+                        "nullable": true,
+                        "example": "AWD"
+                    },
+                    "currentMilestoneType": {
+                        "type": "string",
+                        "description": "Milestone type assigned to current milestone.\r\n\"O\"=origin\r\n\"D\"=destination\r\n\"TI\"=transit intermediate\r\n\"TO\"=transit origin",
+                        "nullable": true,
+                        "example": "TO"
+                    },
+                    "currentPcs": {
+                        "type": "integer",
+                        "description": "Pieces assigned to the current milestone event.",
+                        "format": "int64",
+                        "nullable": true,
+                        "example": 1
+                    },
+                    "currentCarrier": {
+                        "type": "string",
+                        "description": "Carrier code of the current flight number.",
+                        "nullable": true,
+                        "example": "CV"
+                    },
+                    "currentFlt": {
+                        "type": "string",
+                        "description": "Flight number of the current flight number.",
+                        "nullable": true,
+                        "example": "1234"
+                    },
+                    "delivered": {
+                        "type": "boolean",
+                        "description": "True when delivered, otherwise the value is false.",
+                        "example": false
+                    },
+                    "deliveredTimeLocal": {
+                        "type": "string",
+                        "description": "Timestamp value on local station for the event time of the DLV message.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "deliveredTimeUtc": {
+                        "type": "string",
+                        "description": "Timestamp value on UTC timezone for the event time of the DLV message.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "nfdPlannedTimeLocal": {
+                        "type": "string",
+                        "description": "Timestamp value on local station for the PET of the NFD message.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "nfdPlannedTimeUtc": {
+                        "type": "string",
+                        "description": "Timestamp value on UTC timezone for the PET of the NFD message.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "destination": {
+                        "type": "string",
+                        "description": "Station Code with Station Name of the destination station.",
+                        "nullable": true
+                    },
+                    "origin": {
+                        "type": "string",
+                        "description": "Station Code with Station Name of the origin station.",
+                        "nullable": true
+                    },
+                    "originStation": {
+                        "type": "string",
+                        "description": "Station Code of the origin station.",
+                        "nullable": true,
+                        "example": "SEA"
+                    },
+                    "destinationStation": {
+                        "type": "string",
+                        "description": "Station Code of the destination station.",
+                        "nullable": true,
+                        "example": "LUX"
+                    },
+                    "bookedPieces": {
+                        "type": "integer",
+                        "description": "The number of pieces for the shipment.",
+                        "format": "int64",
+                        "nullable": true,
+                        "example": 7
+                    },
+                    "stationMilestonesMap": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.StationMilestone"
+                        },
+                        "description": "Contains data structure for each Station in this shipment.",
+                        "nullable": true
+                    },
+                    "weight": {
+                        "type": "integer",
+                        "description": "The numeric value of weight.",
+                        "format": "int64",
+                        "nullable": true,
+                        "example": 4.5
+                    },
+                    "weightCode": {
+                        "type": "string",
+                        "description": "The unit of measurement of weight.",
+                        "nullable": true,
+                        "example": "KG"
+                    },
+                    "complete": {
+                        "type": "boolean",
+                        "description": "True when the segment data for the shipment is complete.",
+                        "example": false
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Bookings.StationMilestone": {
+                "type": "object",
+                "properties": {
+                    "flightNumber": {
+                        "type": "string",
+                        "description": "Flight number associated with flight segment.",
+                        "nullable": true,
+                        "example": "CV1234"
+                    },
+                    "plannedPiecesMilestone": {
+                        "type": "integer",
+                        "description": "Pieces count for this milestone.",
+                        "format": "int64",
+                        "nullable": true,
+                        "example": 1
+                    },
+                    "isPlanned": {
+                        "type": "boolean",
+                        "description": "Value is true when milestone message is not yet processed. Value is false when milestone message is processed.",
+                        "example": true
+                    },
+                    "milestoneMessageDisplay": {
+                        "type": "string",
+                        "description": "Display text for this milestone.",
+                        "nullable": true,
+                        "example": "1 piece for delivery"
+                    },
+                    "milestoneIndex": {
+                        "type": "integer",
+                        "description": "Index of milestone in relative order.",
+                        "format": "int64",
+                        "nullable": true,
+                        "example": 4
+                    },
+                    "milestoneLatestDate": {
+                        "type": "string",
+                        "description": "AET in UTC when available, otherwise PET in UTC.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "pastMilestone": {
+                        "type": "boolean",
+                        "description": "Past milestone.",
+                        "example": false
+                    },
+                    "milestonePos": {
+                        "type": "integer",
+                        "description": "Absolute milestone position.",
+                        "format": "int64",
+                        "nullable": true,
+                        "example": 4
+                    },
+                    "associatedStation": {
+                        "type": "string",
+                        "description": "Station code for milestone event.",
+                        "nullable": true,
+                        "example": "BKK"
+                    },
+                    "plannedEventTimeLocal": {
+                        "type": "string",
+                        "description": "Timestamp value on local station for the PET of this milestone event.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "plannedEventTimeUtc": {
+                        "type": "string",
+                        "description": "Timestamp value on UTC timezone for the PET of this milestone event.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "actualEventTimeLocal": {
+                        "type": "string",
+                        "description": "Timestamp value on local station for the AET of this milestone event.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "actualEventTimeUtc": {
+                        "type": "string",
+                        "description": "Timestamp value on UTC timezone for the AET of this milestone event.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "messageReceivedTimeLocal": {
+                        "type": "string",
+                        "description": "Timestamp value on local station for message received time of this milestone event.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "messageReceivedTimeUtc": {
+                        "type": "string",
+                        "description": "Timestamp value on UTC timezone for message recvd time of this milestone event.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "milestoneCompleted": {
+                        "type": "string",
+                        "description": "Milestone completed indicator. \"C\" = complete, \"I\" = incomplete.",
+                        "nullable": true,
+                        "example": "C"
+                    },
+                    "milestone": {
+                        "type": "string",
+                        "description": "Milestone name.",
+                        "nullable": true,
+                        "example": "AWD"
+                    },
+                    "milestoneType": {
+                        "type": "string",
+                        "description": "Milestone type assigned to current milestone.\r\n\"O\"=origin\r\n\"D\"=destination\r\n\"TI\"=transit intermediate\r\n\"TO\"=transit origin",
+                        "nullable": true,
+                        "example": "TO"
+                    },
+                    "actualPiecesMilestone": {
+                        "type": "integer",
+                        "description": "Pieces assigned to the current milestone event.",
+                        "format": "int64",
+                        "nullable": true,
+                        "example": 1
+                    },
+                    "carrier": {
+                        "type": "string",
+                        "description": "Carrier code of the current flight number.",
+                        "nullable": true,
+                        "example": "CV"
+                    },
+                    "flt": {
+                        "type": "string",
+                        "description": "Flight number of the current flight number.",
+                        "nullable": true,
+                        "example": "1234"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Bookings.TrackListBookingsRequest": {
+                "type": "object",
+                "properties": {
+                    "awbNumbers": {
+                        "maxItems": 25,
+                        "minItems": 1,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of AwbNumbers that ought to be tracked.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Bookings.TrackListBookingsResponse": {
+                "type": "object",
+                "properties": {
+                    "NOT_FOUND": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of AwbNumbers that were not found (if any).",
+                        "nullable": true
+                    },
+                    "RESULTS_FOUND": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.Consignment"
+                        },
+                        "description": "List of found bookings (if any).",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.CustomerProfile.CustomerOffice": {
+                "type": "object",
+                "properties": {
+                    "cmsAccountIdentifier": {
+                        "type": "string",
+                        "description": "Identifier of the customer office in the CMS system.",
+                        "nullable": true,
+                        "example": "123456EUR"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "(Friendly) Name of the customer office.",
+                        "nullable": true,
+                        "example": "Cargolux Luxembourg"
+                    },
+                    "iataNumber": {
+                        "type": "string",
+                        "description": "IATA number of the customer office.",
+                        "nullable": true,
+                        "example": "1234567891"
+                    },
+                    "cargoluxBookingOffice": {
+                        "type": "string",
+                        "description": "Cargolux Booking Office assigned to the customer office.",
+                        "nullable": true,
+                        "example": "LUX"
+                    },
+                    "currency": {
+                        "type": "string",
+                        "description": "Currency used by the customer office.",
+                        "nullable": true,
+                        "example": "EUR"
+                    },
+                    "maxWeightPerPieceInKilogram": {
+                        "type": "integer",
+                        "description": "Set limit on the maximum weight per piece (in kg) for this customerOffice.",
+                        "format": "int32",
+                        "example": 300
+                    },
+                    "maxWeightPerRequestInKilogram": {
+                        "type": "integer",
+                        "description": "Set limit on the maximum weight per request (in kg) for this customerOffice.",
+                        "format": "int32",
+                        "example": 1600
+                    },
+                    "maxWeightWithoutDimensionsInKilogram": {
+                        "type": "integer",
+                        "description": "Set limit on the maximum weight per request (in kg) in case no dimensions are provided. If 0, dimensions are always required.",
+                        "format": "int32",
+                        "example": 800
+                    },
+                    "maxVolumeWithoutDimensionsInM3": {
+                        "type": "number",
+                        "description": "Set limit on the maximum volume per request (in m3) in case no dimensions are provided. If 0, dimensions are always required.",
+                        "format": "double",
+                        "example": 1.4
+                    },
+                    "maxLengthInCm": {
+                        "type": "integer",
+                        "description": "Maximum length of a piece (in cm) a dimensions may have for this customerOffice.\r\nInterchangable with maxWidthInCm.",
+                        "format": "int32",
+                        "example": 280
+                    },
+                    "maxHeightInCm": {
+                        "type": "integer",
+                        "description": "Maximum height of a piece (in cm) a dimensions may have for this customerOffice.",
+                        "format": "int32",
+                        "example": 160
+                    },
+                    "maxWidthInCm": {
+                        "type": "integer",
+                        "description": "Maximum width of a piece (in cm) a dimensions may have for this customerOffice.\r\nInterchangable with maxLengthInCm.",
+                        "format": "int32",
+                        "example": 300
+                    },
+                    "allowedAirportsOfOrigin": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of origin airports (IATA-code) from where this customer may request quotes.",
+                        "nullable": true,
+                        "example": [
+                            "LUX",
+                            "CDG",
+                            "FRA"
+                        ]
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.CustomerProfile.CustomerProfileResponse": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "(Friendly) Name of the customer.",
+                        "nullable": true,
+                        "example": "Cargolux"
+                    },
+                    "CustomerOffices": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.CustomerProfile.CustomerOffice"
+                        },
+                        "description": "List of CustomerOffices linked to this customer.",
+                        "nullable": true
+                    },
+                    "allowedAllotmentContracts": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Optional whitelist restriction of allotment contracts the customer may book on.\r\nIf empty, restriction does not apply.",
+                        "nullable": true,
+                        "example": [
+                            "A1234",
+                            "A2345"
+                        ]
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoError": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "Code of the error.",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the error.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoWarning": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "Code of the warning.",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the warning.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.General.RouteMode": {
+                "enum": [
+                    "ROAD",
+                    "AIR"
+                ],
+                "type": "string"
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.General.Ulds.Uld": {
+                "required": [
+                    "contour",
+                    "quantity",
+                    "uldType",
+                    "weight"
+                ],
+                "type": "object",
+                "properties": {
+                    "contour": {
+                        "minLength": 1,
+                        "enum": [
+                            "A1",
+                            "A2",
+                            "PHW",
+                            "PLD",
+                            "PWG",
+                            "Q4",
+                            "Q5",
+                            "Q6",
+                            "Q7",
+                            "S5",
+                            "S6",
+                            "S7"
+                        ],
+                        "type": "string",
+                        "description": "ULD contour code. Industry standard.",
+                        "example": "A1"
+                    },
+                    "quantity": {
+                        "maximum": 100000,
+                        "minimum": 0,
+                        "type": "integer",
+                        "description": "Amount of the specified ULD container.",
+                        "format": "int32",
+                        "example": 3
+                    },
+                    "uldType": {
+                        "minLength": 1,
+                        "enum": [
+                            "AKE",
+                            "ALF",
+                            "AMA",
+                            "AMD",
+                            "AMF",
+                            "AMH",
+                            "AMP",
+                            "HMA",
+                            "HMC",
+                            "HMR",
+                            "PAG",
+                            "PAJ",
+                            "PEB",
+                            "PGA",
+                            "PGF",
+                            "PLA",
+                            "PLB",
+                            "PMC",
+                            "PRA",
+                            "PRF",
+                            "PYB",
+                            "PZA",
+                            "PZX",
+                            "RAP",
+                            "RGX",
+                            "RKN",
+                            "RZX"
+                        ],
+                        "type": "string",
+                        "description": "ULD type (IATA code).",
+                        "example": "PLA"
+                    },
+                    "weight": {
+                        "maximum": 150000,
+                        "minimum": 0,
+                        "type": "number",
+                        "description": "Weight per ULD container in kilograms.",
+                        "format": "double",
+                        "example": 15
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteRequest": {
+                "required": [
+                    "awbNumber",
+                    "iataNumber",
+                    "quoteId",
+                    "quoteOptionId"
+                ],
+                "type": "object",
+                "properties": {
+                    "iataNumber": {
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9]{1,12}$",
+                        "type": "string",
+                        "description": "IATA number of the office confirming the quote.",
+                        "example": "12345678910"
+                    },
+                    "quoteId": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "The identifier of the quote to confirm."
+                    },
+                    "quoteOptionId": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Identifier of the option within the quote to confirm."
+                    },
+                    "awbNumber": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Airwaybill prefix + \"-\" + number. Expected format is 3 + (1) + 8 digits. Must be mod(7).",
+                        "example": "172-43508636"
+                    },
+                    "emailConfirmation": {
+                        "type": "boolean",
+                        "description": "Enable email confirmation (optional: default false).",
+                        "example": true
+                    },
+                    "contactEmails": {
+                        "maxItems": 20,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of email addresses that may be used for confirmation.",
+                        "nullable": true,
+                        "example": [
+                            "email1@domain.com",
+                            "email2@domain.com"
+                        ]
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteResponse": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteStatus"
+                    },
+                    "awbNumber": {
+                        "type": "string",
+                        "description": "Airwaybill prefix + \"-\" + number. Expected format is 3 + (1) + 8 digits. Must be mod(7).",
+                        "nullable": true,
+                        "example": "172-43508636"
+                    },
+                    "quoteId": {
+                        "type": "string",
+                        "description": "Technical identifier of the quote.",
+                        "nullable": true
+                    },
+                    "quoteOptionId": {
+                        "type": "string",
+                        "description": "Technical identifier of the quote option.",
+                        "nullable": true
+                    },
+                    "quoteName": {
+                        "type": "string",
+                        "description": "(Friendly) Identifier of the quote.",
+                        "nullable": true
+                    },
+                    "warnings": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoWarning"
+                        },
+                        "description": "List of warnings.",
+                        "nullable": true
+                    },
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoError"
+                        },
+                        "description": "List of errors.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteStatus": {
+                "enum": [
+                    "SUCCESS",
+                    "FAILURE",
+                    "PENDING"
+                ],
+                "type": "string"
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Quotes.GetQuoteViaEmailRequest": {
+                "required": [
+                    "emails"
+                ],
+                "type": "object",
+                "properties": {
+                    "emails": {
+                        "maxItems": 10,
+                        "minItems": 1,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Quotes.ListMyQuotesRequest": {
+                "required": [
+                    "iataNumber",
+                    "quoteCreationDateTimeFrom",
+                    "quoteCreationDateTimeTo"
+                ],
+                "type": "object",
+                "properties": {
+                    "iataNumber": {
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9]{1,12}$",
+                        "type": "string",
+                        "description": "Identifier of the party in the International Air Transport Association.",
+                        "example": "23470416001"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Filter on the status of the requested quotes.",
+                        "nullable": true,
+                        "example": "Awaiting Customer Response"
+                    },
+                    "airportOfOrigin": {
+                        "pattern": "^[a-zA-Z]{3}$",
+                        "type": "string",
+                        "description": "Optional filter on the origin of the available quotes. 3 digit airport IATA code.",
+                        "nullable": true,
+                        "example": "LUX"
+                    },
+                    "airportOfDestination": {
+                        "pattern": "^[a-zA-Z]{3}$",
+                        "type": "string",
+                        "description": "Optional filter on the destination of the available quotes. 3 digit airport IATA code.",
+                        "nullable": true,
+                        "example": "LAX"
+                    },
+                    "quoteCreationDateTimeFrom": {
+                        "type": "string",
+                        "description": "Earliest DateTime the quotes were created. ISO8601 Format (yyyy-MM-dd'T'hh:mm:ss'Z').",
+                        "format": "date-time",
+                        "example": "2020-11-11T05:00:00Z"
+                    },
+                    "quoteCreationDateTimeTo": {
+                        "type": "string",
+                        "description": "Latest possible DateTime when the quotes were created. ISO8601 Format (yyyy-MM-dd'T'hh:mm:ss'Z').",
+                        "format": "date-time",
+                        "example": "2020-11-11T18:00:00Z"
+                    },
+                    "awbNumber": {
+                        "type": "string",
+                        "description": "AirwayBill Number to optionally filter on",
+                        "nullable": true,
+                        "example": "172-43508636"
+                    },
+                    "cargoluxBookingOffice": {
+                        "pattern": "^[a-zA-Z]{3}$",
+                        "type": "string",
+                        "description": "Cargolux booking office. 3 digit IATA code.",
+                        "nullable": true,
+                        "example": "PAR"
+                    },
+                    "contactEmail": {
+                        "type": "string",
+                        "description": "Contact email to optionally filter on",
+                        "nullable": true,
+                        "example": "someone@somedomain.com"
+                    },
+                    "includeQuoteOptions": {
+                        "type": "boolean",
+                        "description": "Flag to return all options within a quote (default false).",
+                        "example": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Quotes.ListMyQuotesResponse": {
+                "type": "object",
+                "properties": {
+                    "quotes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.Quote"
+                        },
+                        "description": "List of returned quotes.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Quotes.OtherApplicableCharge": {
+                "type": "object",
+                "properties": {
+                    "chargeCode": {
+                        "type": "string",
+                        "description": "Qualifier code of the surcharge.",
+                        "nullable": true
+                    },
+                    "iataChargeCode": {
+                        "type": "string",
+                        "description": "IATA Qualifier code of the surcharge.",
+                        "nullable": true,
+                        "readOnly": true
+                    },
+                    "chargeDescription": {
+                        "type": "string",
+                        "description": "Description of the surcharge.",
+                        "nullable": true
+                    },
+                    "chargeAmountPerKg": {
+                        "type": "number",
+                        "description": "Amount charged per KG in the surcharge.",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "chargeAmountFixedPrice": {
+                        "type": "number",
+                        "description": "Fixed price of the surcharge.",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "chargeMinimumAmount": {
+                        "type": "number",
+                        "description": "Minimum amount charged in the surcharge.",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "calculatedSurcharge": {
+                        "type": "number",
+                        "description": "Total calculated surcharge.",
+                        "format": "double",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Other applicable charges."
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Quotes.Quote": {
+                "type": "object",
+                "properties": {
+                    "iataNumber": {
+                        "type": "string",
+                        "description": "Identifier of the party in the International Air Transport Association.",
+                        "nullable": true,
+                        "example": "12345678910"
+                    },
+                    "airportOfOrigin": {
+                        "type": "string",
+                        "description": "Airport or City code, origin of the quote. 3 digit IATA code.",
+                        "nullable": true,
+                        "example": "LUX"
+                    },
+                    "airportOfDestination": {
+                        "type": "string",
+                        "description": "Airport or City code, destination of the quote. 3 digit IATA code.",
+                        "nullable": true,
+                        "example": "LAX"
+                    },
+                    "cargoluxBookingOffice": {
+                        "type": "string",
+                        "description": "IATA Code of the Cargolux booking office.",
+                        "nullable": true,
+                        "example": "LUX"
+                    },
+                    "natureOfGoods": {
+                        "type": "string",
+                        "description": "Description of the shipment (Consolidation/GeneralCargo/...).",
+                        "nullable": true,
+                        "example": "Consolidation"
+                    },
+                    "stackable": {
+                        "type": "boolean",
+                        "description": "Indicates whether the goods in the quote are stackable or not.",
+                        "example": true
+                    },
+                    "contactEmails": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of contact email addresses that are linked to this quote.",
+                        "nullable": true
+                    },
+                    "totalActualWeight": {
+                        "type": "number",
+                        "description": "The total actual weight of the shipment.",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "totalChargeableWeight": {
+                        "type": "number",
+                        "description": "The total chargeable weight of the shipment.",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "totalVolume": {
+                        "type": "number",
+                        "description": "The total volume of the shipment.",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "totalNumberOfPieces": {
+                        "type": "integer",
+                        "description": "The amount of pieces in the shipment.",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "sph": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Special handling codes of the shipment.",
+                        "nullable": true,
+                        "example": [
+                            "COL",
+                            "NST"
+                        ]
+                    },
+                    "dimensions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.QuoteDimensionElement"
+                        },
+                        "description": "List of dimensions of the loose shipment.",
+                        "nullable": true
+                    },
+                    "ulds": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Ulds.Uld"
+                        },
+                        "description": "List of details of the containerized (ULD) shipment.",
+                        "nullable": true
+                    },
+                    "quoteId": {
+                        "type": "string",
+                        "description": "Technical identifier of the quote.",
+                        "nullable": true
+                    },
+                    "quoteName": {
+                        "type": "string",
+                        "description": "(Friendly) Identifier of the quote.",
+                        "nullable": true
+                    },
+                    "awbNumber": {
+                        "type": "string",
+                        "description": "Airwaybill prefix + \"-\" + number. Expected format is 3 + (1) + 8 digits. Must be mod(7).",
+                        "nullable": true,
+                        "example": "172-43508636"
+                    },
+                    "bookingCreationDateTime": {
+                        "type": "string",
+                        "description": "DateTime indicating when the quote was confirmed, and the booking was created.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "quoteCreationDateTime": {
+                        "type": "string",
+                        "description": "DateTime indicating when the quote was created.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Status of the quote.",
+                        "nullable": true
+                    },
+                    "termsAndConditionsDocument": {
+                        "type": "string",
+                        "description": "Link to a document stating the terms and conditions associated with this quote.",
+                        "nullable": true
+                    },
+                    "quoteOptions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.QuoteOption"
+                        },
+                        "description": "List of options for the quote.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Quotes.QuoteDimensionElement": {
+                "required": [
+                    "height",
+                    "length",
+                    "pieces",
+                    "unit",
+                    "width"
+                ],
+                "type": "object",
+                "properties": {
+                    "pieces": {
+                        "maximum": 100000,
+                        "minimum": 0,
+                        "type": "integer",
+                        "description": "Number of pieces having these dimensions.",
+                        "format": "int32",
+                        "example": 30
+                    },
+                    "unit": {
+                        "minLength": 1,
+                        "enum": [
+                            "CM",
+                            "IN"
+                        ],
+                        "type": "string",
+                        "description": "Unit of length used for this dimension.",
+                        "example": "CM"
+                    },
+                    "actualWeightPerPiece": {
+                        "maximum": 150000,
+                        "minimum": 0,
+                        "type": "number",
+                        "description": "Weight of the shipment piece(s) in kg.",
+                        "format": "double",
+                        "nullable": true,
+                        "example": 0.24
+                    },
+                    "height": {
+                        "maximum": 100000,
+                        "minimum": 0,
+                        "type": "number",
+                        "description": "Height of the shipment piece(s) in the specified unit (CM or IN).",
+                        "format": "double",
+                        "example": 20
+                    },
+                    "length": {
+                        "maximum": 100000,
+                        "minimum": 0,
+                        "type": "number",
+                        "description": "Length of the shipment piece(s) in the specified unit (CM or IN).",
+                        "format": "double",
+                        "example": 20
+                    },
+                    "width": {
+                        "maximum": 100000,
+                        "minimum": 0,
+                        "type": "number",
+                        "description": "Width of the shipment piece(s) in the specified unit (CM or IN).",
+                        "format": "double",
+                        "example": 20
+                    },
+                    "stackablePieces": {
+                        "type": "boolean",
+                        "description": "Indicates if these pieces are stackable.\r\nOptional: default true.",
+                        "nullable": true,
+                        "example": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "RequestQuoteDimensionElement is based on the generic DimensionElement."
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Quotes.QuoteOption": {
+                "type": "object",
+                "properties": {
+                    "quoteOptionId": {
+                        "type": "string",
+                        "description": "Technical identifier of the quote option.",
+                        "nullable": true
+                    },
+                    "localLatestAcceptanceTime": {
+                        "type": "string",
+                        "description": "Latest local DateTime that the cargo has to be delivered at the origin.\r\nTimezone corresponds to the first route in this option.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "utcLatestAcceptanceTime": {
+                        "type": "string",
+                        "description": "Latest DateTime (UTC) that the cargo has to be delivered at the origin.",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "bookingCreated": {
+                        "type": "boolean",
+                        "description": "Indicates whether the quote option has been confirmed and the booking has been created."
+                    },
+                    "flight": {
+                        "type": "string",
+                        "description": "The flight identifier consisting of the carrier code, the flight number and operation date(DD/MON)",
+                        "nullable": true,
+                        "example": "CV1234/01JAN"
+                    },
+                    "routingAndTiming": {
+                        "type": "string",
+                        "description": "Information on the route taken in this quote option, including estimated times.",
+                        "nullable": true,
+                        "example": "CV1234/01JAN LUX(01:01) - LAX(13:13)"
+                    },
+                    "serviceLevel": {
+                        "type": "string",
+                        "description": "Service level of the quote option.",
+                        "nullable": true,
+                        "example": "SELECT"
+                    },
+                    "cargoluxProduct": {
+                        "type": "string",
+                        "description": "Cargolux Product identification code of the quote option.",
+                        "nullable": true,
+                        "example": "GEN"
+                    },
+                    "currency": {
+                        "type": "string",
+                        "description": "ISO Currency code of the quote option.",
+                        "nullable": true,
+                        "example": "EUR"
+                    },
+                    "allIn": {
+                        "type": "boolean",
+                        "description": "Indicates if all surcharges are included in the quote option or not."
+                    },
+                    "ratePerKg": {
+                        "type": "number",
+                        "description": "Weight charges per kg of the quote option.",
+                        "format": "double"
+                    },
+                    "otherApplicableCharges": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.OtherApplicableCharge"
+                        },
+                        "description": "List of other applicable charges in the quote option.",
+                        "nullable": true
+                    },
+                    "routes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.Route"
+                        },
+                        "description": "List of routes taken in the quote option.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Quotes.RequestQuoteRequest": {
+                "required": [
+                    "airportOfDestination",
+                    "airportOfOrigin",
+                    "contactEmails",
+                    "dualUseGoods",
+                    "earliestDepartureDate",
+                    "iataNumber",
+                    "natureOfGoods",
+                    "totalActualWeight",
+                    "totalNumberOfPieces",
+                    "totalVolume"
+                ],
+                "type": "object",
+                "properties": {
+                    "iataNumber": {
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9]{1,12}$",
+                        "type": "string",
+                        "description": "Identifier of the party in the International Air Transport Association.",
+                        "example": "12345678910"
+                    },
+                    "airportOfOrigin": {
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z]{3}$",
+                        "type": "string",
+                        "description": "Origin airport (IATA code) for the requested Quote.",
+                        "example": "LUX"
+                    },
+                    "airportOfDestination": {
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z]{3}$",
+                        "type": "string",
+                        "description": "Destination airport (IATA code) for the requested Quote.",
+                        "example": "ORD"
+                    },
+                    "earliestDepartureDate": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Earliest possible date of departure (format 'yyyy-MM-dd') for the requested Quote.",
+                        "example": "2020-10-16"
+                    },
+                    "latestArrivalDate": {
+                        "type": "string",
+                        "description": "Latest date of arrival (format 'yyyy-MM-dd') for the requested Quote. Will default to the (earliestDepartureDate + 14 days) if not provided.\r\nCannot be set later than 3 weeks compared to the earliestDepartureDate.",
+                        "nullable": true,
+                        "example": "2020-10-19"
+                    },
+                    "flightNumbers": {
+                        "maxItems": 3,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of flight numbers to scope the requested quote to.",
+                        "nullable": true,
+                        "example": [
+                            "CV1234",
+                            "CV5678"
+                        ]
+                    },
+                    "natureOfGoods": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Description of the shipment (Consolidation/GeneralCargo/...).",
+                        "example": "Consolidation"
+                    },
+                    "stackable": {
+                        "type": "boolean",
+                        "description": "Indicates whether the goods for the requested quote are stackable or not.\r\nIf the goods are non-stackable, ALL pieces have to be included in dimensions.\r\nMust be false for ULD shipments.\r\nDefault true",
+                        "nullable": true,
+                        "example": true
+                    },
+                    "dualUseGoods": {
+                        "type": "boolean",
+                        "description": "Dual-use goods are goods that can be used for both civilian and military applications and subject to regulation\r\nOnly non-dual-use goods are allowed (must be false).",
+                        "example": false
+                    },
+                    "totalActualWeight": {
+                        "maximum": 150000,
+                        "minimum": 0,
+                        "type": "number",
+                        "description": "Details on the total weight of goods for the requested quote.",
+                        "format": "double"
+                    },
+                    "totalVolume": {
+                        "maximum": 1000,
+                        "minimum": 0,
+                        "type": "number",
+                        "description": "Details on the total volume of goods for the requested quote.",
+                        "format": "double"
+                    },
+                    "totalNumberOfPieces": {
+                        "maximum": 100000,
+                        "minimum": 0,
+                        "type": "integer",
+                        "description": "Amount of goods for the requested quote.",
+                        "format": "int32"
+                    },
+                    "dimensions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.QuoteDimensionElement"
+                        },
+                        "description": "List of detailed dimensions of the loose shipment for the requested quote.\r\nMandatory if TotalActualWeight exceeds 1 tonne or TotalVolume exceeds 6 cubic meters.",
+                        "nullable": true
+                    },
+                    "specialHandlingCodes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of special handling codes for the requested quote.",
+                        "nullable": true,
+                        "example": [
+                            "COL",
+                            "NST"
+                        ]
+                    },
+                    "ulds": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Ulds.Uld"
+                        },
+                        "description": "List of details of the containerized (ULD) shipment.",
+                        "nullable": true
+                    },
+                    "contactEmails": {
+                        "maxItems": 20,
+                        "minItems": 1,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Contactdetails (list of emails) for the requested quote."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Quotes.RequestQuoteResponse": {
+                "type": "object",
+                "properties": {
+                    "quote": {
+                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.Quote"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Quotes.Route": {
+                "type": "object",
+                "properties": {
+                    "localScheduledArrivalDateAndTime": {
+                        "type": "string",
+                        "description": "Local scheduled time of departure of a flight.",
+                        "format": "date-time",
+                        "example": "2020-10-27T13:35:00"
+                    },
+                    "localScheduledDepartureDateAndTime": {
+                        "type": "string",
+                        "description": "Local scheduled time of arrival of a flight.",
+                        "format": "date-time",
+                        "example": "2020-10-27T13:35:00"
+                    },
+                    "utcScheduledArrivalDateAndTime": {
+                        "type": "string",
+                        "description": "UTC scheduled time of departure of a flight.",
+                        "format": "date-time",
+                        "nullable": true,
+                        "example": "2020-10-27T12:35:00Z"
+                    },
+                    "utcScheduledDepartureDateAndTime": {
+                        "type": "string",
+                        "description": "UTC scheduled time of arrival of a flight.",
+                        "format": "date-time",
+                        "nullable": true,
+                        "example": "2020-10-27T20:35:00Z"
+                    },
+                    "mode": {
+                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.RouteMode"
+                    },
+                    "onload": {
+                        "type": "string",
+                        "description": "Onload station (IATA code) for this route.",
+                        "nullable": true,
+                        "example": "LUX"
+                    },
+                    "offload": {
+                        "type": "string",
+                        "description": "Offload station (IATA code) for this route.",
+                        "nullable": true,
+                        "example": "LAX"
+                    },
+                    "reference": {
+                        "type": "string",
+                        "description": "(Truck) flight identifier.",
+                        "nullable": true,
+                        "example": "CV1234/01JAN"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Rates.BulkRateDetail": {
+                "type": "object",
+                "properties": {
+                    "breakEven": {
+                        "type": "boolean",
+                        "description": "Indicator for weightbreak processing. If false: then the normal weight breaks are used. If not, then the adjusted weight breaks apply.",
+                        "example": false
+                    },
+                    "weightBreaks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.WeightBreak"
+                        },
+                        "description": "List of weightbreaks. These are the weight ranges on which a particular unit price applies.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The bulk rate detail for the rate definition."
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Rates.ListMyRatesRequest": {
+                "required": [
+                    "iataNumber"
+                ],
+                "type": "object",
+                "properties": {
+                    "iataNumber": {
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9]{1,12}$",
+                        "type": "string",
+                        "description": "Identifier of the party in the International Air Transport Association.",
+                        "example": "12345678910"
+                    },
+                    "flightDateFrom": {
+                        "type": "string",
+                        "description": "Any valid flight date format 'yyyy-MM-dd'. If not provided, value will default to today's date.\r\nCannot be set further than 30 days in the future.",
+                        "nullable": true,
+                        "example": "2020-05-30"
+                    },
+                    "flightDateTo": {
+                        "type": "string",
+                        "description": "Any valid flight date format 'yyyy-MM-dd'. If not provided, value will default to (flightDateFrom + 14 days).\r\nMust be a later date than flightDateFrom, cannot be set further than 30 days in the future.",
+                        "nullable": true,
+                        "example": "2020-05-30"
+                    },
+                    "airportOfOrigin": {
+                        "pattern": "^[a-zA-Z]{3}$",
+                        "type": "string",
+                        "description": "Can be null or any valid airport code. In IATA format.",
+                        "nullable": true,
+                        "example": "LUX"
+                    },
+                    "airportOfDestination": {
+                        "pattern": "^[a-zA-Z]{3}$",
+                        "type": "string",
+                        "description": "Can be null or any valid airport code. In IATA format.",
+                        "nullable": true,
+                        "example": "PAR"
+                    },
+                    "rateCode": {
+                        "enum": [
+                            "HB",
+                            "SB",
+                            "PA",
+                            null
+                        ],
+                        "type": "string",
+                        "description": "The indication whether the contractual rate is based on Soft Block (SB), Hard Block (HB) or Price Agreement (PA).\r\nCan be null, \"HB\" or \"SB\" or \"PA\".",
+                        "nullable": true,
+                        "example": "HB"
+                    },
+                    "commodityForRating": {
+                        "type": "string",
+                        "description": "To apply a specific commodity-rate for this shipment.",
+                        "nullable": true,
+                        "example": "PHARMA"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Rates.ListMyRatesResponse": {
+                "type": "object",
+                "properties": {
+                    "rates": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.Rate"
+                        },
+                        "description": "List of requested Rates.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Rates.Rate": {
+                "type": "object",
+                "properties": {
+                    "rateSequenceNumber": {
+                        "type": "string",
+                        "description": "This is the rate sequence identifier that was assigned by Cargolux.",
+                        "nullable": true,
+                        "example": "50.0"
+                    },
+                    "origin": {
+                        "type": "string",
+                        "description": "The origin airport (IATA code) for which this rate applies.",
+                        "nullable": true,
+                        "example": "LUX"
+                    },
+                    "destination": {
+                        "type": "string",
+                        "description": "The destination airport (IATA code) for which this rate applies.",
+                        "nullable": true,
+                        "example": "ORD"
+                    },
+                    "rateCode": {
+                        "type": "string",
+                        "description": "The rateCode applied for this rate.",
+                        "nullable": true,
+                        "example": "HB"
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "description": "The starting date from which this rate is valid.",
+                        "format": "date-time",
+                        "nullable": true,
+                        "example": "2020-10-19"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "description": "The expiry date until which this rate is valid.\r\nIf null, the rate's validity is indefinite.",
+                        "format": "date-time",
+                        "nullable": true,
+                        "example": "2021-12-31"
+                    },
+                    "currencyCode": {
+                        "type": "string",
+                        "description": "ISO Currency Code; Coded representation of a currency approved by ISO.",
+                        "nullable": true,
+                        "example": "EUR"
+                    },
+                    "weightUnit": {
+                        "type": "string",
+                        "description": "Code identifying the unit of weight used in this rate.",
+                        "nullable": true,
+                        "example": "KG"
+                    },
+                    "allIn": {
+                        "type": "boolean",
+                        "description": "Indicates if all surcharges are included or not.",
+                        "example": true
+                    },
+                    "bulkRateDetail": {
+                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.BulkRateDetail"
+                    },
+                    "commodityForRating": {
+                        "type": "string",
+                        "description": "Commodity for rating.",
+                        "nullable": true,
+                        "example": "PHARMA"
+                    },
+                    "uldContour": {
+                        "type": "string",
+                        "description": "The shape/outline of a ULD (unit Load device)",
+                        "nullable": true,
+                        "example": "A1"
+                    },
+                    "uldDetails": {
+                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.UldDetails"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Rates.UldDetails": {
+                "type": "object",
+                "properties": {
+                    "minimumChargePerUld": {
+                        "type": "number",
+                        "description": "Minimum charge per ULD.",
+                        "format": "double",
+                        "example": 8250
+                    },
+                    "pivotWeight": {
+                        "type": "number",
+                        "description": "If the weight inside a container exceeds this amount of kgs, surcharges can be applied.",
+                        "format": "double",
+                        "example": 1650
+                    },
+                    "overPivotRate": {
+                        "type": "number",
+                        "description": "This is the rate per kg surcharge.",
+                        "format": "double",
+                        "example": 1.6
+                    },
+                    "outsideBulkRate": {
+                        "type": "number",
+                        "description": "Extra charge for cargo outside the ULD container.",
+                        "format": "double",
+                        "example": 0
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Information on the weight brakes of the rate for ‘containerized’ cargo (empty if bulk rate).\r\nDetail of the UL rate (empty if bulk rate)"
+            },
+            "Cv.Sales.DigitalSales.Models.Dto.Rates.WeightBreak": {
+                "type": "object",
+                "properties": {
+                    "weightBreak": {
+                        "type": "string",
+                        "description": "A weight range on which a particular unit price applies.",
+                        "nullable": true,
+                        "example": "MINIMUM"
+                    },
+                    "pricePerWgtUnit": {
+                        "type": "number",
+                        "description": "Price per weight unit.",
+                        "format": "double",
+                        "example": 20
+                    },
+                    "pivotWeight": {
+                        "type": "number",
+                        "description": "Pivot weight is an alternate weightbreak maximum that applies when the breakeven rule is set to true for that particular weightbreak.",
+                        "format": "double",
+                        "example": 20
+                    }
+                },
+                "additionalProperties": false
+            }
+        }
+    }
+}

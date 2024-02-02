@@ -37,3 +37,7 @@ jobs:
           inlineScript: |
             az apic api list -g rg-apicenter `
               -s myapicatalog
+
+# az apic api create -g rg-apicenter -s myapicatalog --name rocket-api --title "Rocket API"
+
+# az apic api register -g rg-apicenter -s myapicatalog --api-location "${{ parameters.openApiFilePath }}" --environment-name public
