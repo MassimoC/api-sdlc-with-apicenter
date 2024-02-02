@@ -9,7 +9,7 @@ stages:
     displayName: Static validation
     condition: eq('${{ parameters.staticValidation }}', 'True')
     jobs:
-      - template: /.azuredevops/templates/jobs.validateopenapi.yml
+      - template: /.azuredevops/templates/jobs.validate_OpenApi.yml
         parameters:
           openApiFilePath: '$(openApiPath)'
           rulesetPath: '$(spectralRulesPath)'
@@ -20,10 +20,10 @@ stages:
     dependsOn:
       - validation
     jobs:
-      - template: /.azuredevops/templates/jobs.publishDesignToApiCenter.yml
+      - template: /.azuredevops/templates/jobs.publish_ApiDesign.yml
         parameters:
           openApiFilePath: '$(openApiPath)'
-          rulesetPath: '$(spectralRulesPath)'
+          apiVersion: '$(apiVersion)'
 
   - stage: mocking
     displayName: Publish to API Gateway
@@ -32,7 +32,7 @@ stages:
       - validation
       - discovery
     jobs:
-      - template: /.azuredevops/templates/jobs.publishToApiManagement.yml
+      - template: /.azuredevops/templates/jobs.enable_Mocking.yml
         parameters:
           openApiFilePath: '$(openApiPath)'
           rulesetPath: '$(spectralRulesPath)'

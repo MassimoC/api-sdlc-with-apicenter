@@ -6,6 +6,7 @@ parameters:
   serviceConnection: '$(serviceConnection)'
   # Logic-related parameters
   openApiFilePath: '$(openApiFullPath)'
+  apiVersion: '$(apiVersion)'
   spectralRulesFullPath: '$(spectralRulesFullPath)'
   failSeverity: 'warn'
 
@@ -35,9 +36,29 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            az apic api list -g rg-apicenter `
-              -s myapicatalog
+            az apic api list -g rg-apicenter -s myapicatalog
+
+      - task: AzureCLI@2  
+        displayName: APIC - api create
+        inputs:
+          azureSubscription: ${{ parameters.serviceConnection }}
+          scriptType: pscore
+          scriptLocation: inlineScript
+          inlineScript: |
+            az apic api create -g rg-apicenter -s myapicatalog --name rocket-api --title "Rocket API" --kind rest --description "to the clouds and beyond"
+
+      - task: AzureCLI@2  
+        displayName: APIC - api version create
+        inputs:
+          azureSubscription: ${{ parameters.serviceConnection }}
+          scriptType: pscore
+          scriptLocation: inlineScript
+          inlineScript: |
+            az apic api version create -g rg-apicenter -s myapicatalog --api-name rocket-api --name "${{ parameters.apiVersion }}" --title "${{ parameters.apiVersion }}"
 
 # az apic api create -g rg-apicenter -s myapicatalog --name rocket-api --title "Rocket API"
 
+# az apic api version create -g api-center-test -s contosoeuap --api-name echo-api --name 2023-01-01 --title "2023-01-01"
+
 # az apic api register -g rg-apicenter -s myapicatalog --api-location "${{ parameters.openApiFilePath }}" --environment-name public
+

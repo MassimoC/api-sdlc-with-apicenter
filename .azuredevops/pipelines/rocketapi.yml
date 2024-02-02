@@ -27,7 +27,10 @@ trigger:
 variables:
   - template: '../../settings.yml'
   - name: openApiPath
-    value: '$(azdoWorkDir)/design/rocketapi/openapi_rocketapi.json'    
+    value: '$(azdoWorkDir)/design/rocketapi/openapi_rocketapi.json'
+  - name: apiVersion
+    value: '1.0$(Rev:.r)'
+    
 
 stages:
   - template: /.azuredevops/templates/stages.module.yml
