@@ -32,7 +32,7 @@ stages:
       - validation
       - discovery
     jobs:
-      - template: /.azuredevops/pipelineTemplates/jobs.publishToApiManagement.yml
+      - template: /.azuredevops/templates/jobs.publishToApiManagement.yml
         parameters:
           openApiFilePath: '$(openApiPath)'
           rulesetPath: '$(spectralRulesPath)'
