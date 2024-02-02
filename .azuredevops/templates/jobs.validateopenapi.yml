@@ -35,11 +35,7 @@ jobs:
       - script: sudo npm install -g @stoplight/spectral
         displayName: 'Install Linting Tool (stoplight/spectral)'
 
-      - script: |
-          spectral lint ${{ parameters.openApiFilePath }} `
-            --ruleset ${{ parameters.rulesetPath }} `
-            --fail-severity "${{ parameters.failSeverity }}" `
-            --output ${{ parameters.lintResult }} --format junit
+      - script: spectral lint "${{ parameters.openApiFilePath }}" --ruleset "${{ parameters.rulesetPath }}" --fail-severity "${{ parameters.failSeverity }}" --output "${{ parameters.lintResult }}" --format junit
         displayName: 'Lint OpenAPI specs'
 
       - task: PublishTestResults@2
