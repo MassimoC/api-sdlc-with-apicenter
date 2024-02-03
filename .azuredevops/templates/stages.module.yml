@@ -28,7 +28,6 @@ stages:
           currentApiVersion: $(Build.BuildNumber)
           apiName: '${{ parameters.apiName }}'
 
-
   - stage: mocking
     displayName: Publish to API Gateway
     condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq('${{ parameters.mocking }}', 'True')))
@@ -41,3 +40,16 @@ stages:
           openApiFilePath: '$(openApiPath)'
           currentApiVersion: $(Build.BuildNumber)
           apiName: '${{ parameters.apiName }}'
+
+  - stage: dev
+    displayName: Development
+    condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.SourceBranch'], 'refs/heads/master')))
+    dependsOn:
+      - mocking
+    jobs:
+      - template: /.azuredevops/templates/jobs.deploy_Api.yml
+        parameters:
+          apiName: '${{ parameters.apiName }}'
+          releaseDate: $(Build.BuildNumber)
+          apiVersion: $(Build.BuildNumber)
+          environmentCode : 'development'

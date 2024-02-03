@@ -1,4 +1,4 @@
-name: $(Date:yyyyMMdd).$(Rev:rr)
+name: $(Date:yyyy)-$(Date:MM)-$(Date:dd)-$(Rev:rr)
 
 parameters:
   - name: staticValidation

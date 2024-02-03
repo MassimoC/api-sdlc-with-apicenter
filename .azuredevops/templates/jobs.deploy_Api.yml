@@ -57,5 +57,9 @@ jobs:
             echo "------------------------------------"
             environmentId='/workspaces/default/environments/${{ parameters.environmentCode }}'
             definitionId='"/workspaces/default/apis/echo-api/versions/2023-01-01/definitions/openapi"'
-            az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name production --title $deploymentName --description deploymentName --api ${{ parameters.apiName }} --environmentId $environmentId --definitionId $definitionId
+            echo "...environmentId"
+            echo $environmentId
+            echo "...deploymentName"
+            echo $deploymentName
+            az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name $deploymentName  --title $deploymentName --description deploymentName --api ${{ parameters.apiName }} --environmentId $environmentId --definitionId $definitionId
             echo "------------------------------------"
