@@ -44,21 +44,23 @@ jobs:
 
 
             - task: AzureCLI@2  
-              displayName: APIC - api import specification
+              displayName: APIC - Register deployment
               inputs:
                 azureSubscription: ${{ parameters.serviceConnection }}
                 scriptType: pscore
                 scriptLocation: inlineScript
                 inlineScript: |
-                  deploymentName='${{ parameters.environmentCode }}-${{ parameters.releaseDate }}'
+                  echo "------------------------------------"
+                  deploymentName="${{ parameters.environmentCode }}-${{ parameters.releaseDate }}"
+                  echo "------------------------------------"
                   echo $deploymentName
                   echo "------------------------------------"
                   echo "... Executing command :"
                   echo "az apic ...."
                   echo ""
                   echo "------------------------------------"
-                  environmentResource='/workspaces/default/environments/${{ parameters.environmentId }}'
-                  definitionResource='"/workspaces/default/apis/${{ parameters.apicName }}/versions/${{ parameters.apiVersion }}/definitions/xdef006"'
+                  environmentResource="/workspaces/default/environments/${{ parameters.environmentId }}""
+                  definitionResource="/workspaces/default/apis/${{ parameters.apicName }}/versions/${{ parameters.apiVersion }}/definitions/xdef006"
                   echo "... environmentResource"
                   echo $environmentResource
                   echo "... definitionResource"
