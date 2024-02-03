@@ -53,3 +53,4 @@ stages:
           releaseDate: $(Build.BuildNumber)
           apiVersion: $(Build.BuildNumber)
           environmentCode : 'development'
+          lifecycleStage: 'development'
