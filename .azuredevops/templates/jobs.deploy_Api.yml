@@ -79,6 +79,6 @@ jobs:
                   echo "... definitionResource"
                   echo $definitionResource
                   echo "------------EXECUTE------------"
-                  az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name $deploymentName  --title $deploymentName --description $deploymentName --api "${{ parameters.apiName }}" --environmentId "$environmentId" --definitionId "$definitionId"
+                  az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name $deploymentName  --title $deploymentName --description $deploymentName --api "${{ parameters.apiName }}" --environment-id "$environmentId" --definition-id "$definitionId"
                   echo "------------UPDATE-LIFECYCLE------------"
                   az apic api version update -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --name ${{ parameters.apiVersion }}  --lifecycle-stage ${{ parameters.lifecycleStage }}
