@@ -5,10 +5,13 @@ parameters:
   defaultJobTimeoutInMinutes: 120
   serviceConnection: '$(serviceConnection)'
   # Logic-related parameters
-  openApiFilePath: '$(openApiFullPath)'
-  currentApiVersion: '$(currentApiVersion)'
   spectralRulesFullPath: '$(spectralRulesFullPath)'
   failSeverity: 'warn'
+  openApiFilePath: '$(openApiFullPath)'
+  # APIC parameters
+  rg: 'rg-apicenter'
+  apicName: 'myapicatalog'
+  currentApiVersion: '$(currentApiVersion)'
 
 ##---------------------------------------------##
 ## TEMPLATE LOGIC                              ##
@@ -41,9 +44,10 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             sudo apt --assume-yes install jq
-            export fileContent=$( jq -c . ${{ parameters.openApiFilePath }} )
-            echo $(fileContent)
             echo '##vso[task.setvariable variable=openApiContent]$( jq -c . ${{ parameters.openApiFilePath }} )'
+
+      - bash: |
+          echo "use macro syntax to read variables: $(openApiContent)"
 
       - task: AzureCLI@2  
         displayName: APIC - api list
@@ -52,7 +56,7 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            az apic api list -g rg-apicenter -s myapicatalog
+            az apic api list -g ${{ parameters.rg }} -s ${{ parameters.apicName }}
 
       - task: AzureCLI@2  
         displayName: APIC - api create
@@ -61,7 +65,7 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            az apic api create -g rg-apicenter -s myapicatalog --name rocket-api --title "Rocket API" --kind rest --description "to the clouds and beyond" --summary "to the clouds and beyond"
+            az apic api create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name rocket-api --title "Rocket API" --kind rest --description "to the clouds and beyond" --summary "to the clouds and beyond"
 
       - task: AzureCLI@2  
         displayName: APIC - api version create
@@ -70,7 +74,7 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            az apic api version create -g rg-apicenter -s myapicatalog --api-name rocket-api --name 2024-01-01 --title "${{ parameters.currentApiVersion }}"
+            az apic api version create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name rocket-api --name 2024-01-01 --title "${{ parameters.currentApiVersion }}"
 
       - task: AzureCLI@2  
         displayName: APIC - api import specification
@@ -79,7 +83,7 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            az apic api definition import-specification -g rg-apicenter -s myapicatalog --api-name rocket-api --version-name 2024-01-01 --definition-name openapi3 --format "inline" --value '$($openApiContent)'
+            az apic api definition import-specification -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name rocket-api --version-name 2024-01-01 --definition-name openapi3 --format "inline" --value '$(jq -c . ${{ parameters.openApiFilePath }})'
 
 # az apic api definition import-specification -g api-center-test -s contosoeuap --api-name echo-api-2 --version-name 2023-08-01 --definition-name openapi3 --format "inline" --value '{"openapi":"3.0.1","info":{"title":"httpbin.org","description":"API Management facade for a very handy and free online HTTP tool.","version":"1.0"}}' --specification '{"name":"openapi","version":"3.0.0"}'
 # az apic api register -g api-center-test -s contosoeuap --api-location "examples/cli-examples/spec-examples/openai.json" --environment-name public
