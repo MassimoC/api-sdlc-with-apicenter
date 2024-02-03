@@ -5,4 +5,5 @@ jobs:
     - bash: |
         echo "##vso[build.updatebuildnumber]$(Pipeline.Version)"
         echo "Pipeline version is '$(Pipeline.Version)'"
+        #$(Date:yyyyMMdd).$(Rev:rr)
       displayName: 'Change pipeline version $(Pipeline.Version)'

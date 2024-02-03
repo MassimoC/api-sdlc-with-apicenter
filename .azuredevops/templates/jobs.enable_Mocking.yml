@@ -6,14 +6,14 @@ parameters:
   serviceConnection: '$(serviceConnection)'
   # Logic-related parameters
   openApiFilePath: '$(openApiFullPath)'
-  currentApiVersion: '$(currentApiVersion)'
+
 
 ##---------------------------------------------##
 ## TEMPLATE LOGIC                              ##
 ##---------------------------------------------##
 jobs:
   - job:
-    displayName: Publish to API Gateway
+    displayName: Publish API Design to API Center
     timeoutInMinutes: ${{ parameters.defaultJobTimeoutInMinutes }}
     pool:
       ${{ if ne(parameters.vmImage, '') }}:
@@ -23,6 +23,6 @@ jobs:
     steps:
       - checkout: self
 
-      - script: cat ${{ parameters.openApiFullPath }}
+      - script: cat ${{ parameters.openApiFilePath }}
         continueOnError: true
-        displayName: 'Publish to Azure API Management'
+        displayName: 'Show OpenAPI spec'

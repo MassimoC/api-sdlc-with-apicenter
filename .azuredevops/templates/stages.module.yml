@@ -9,6 +9,7 @@ stages:
     displayName: Static validation
     condition: eq('${{ parameters.staticValidation }}', 'True')
     jobs:
+      - template: /.azuredevops/templates/jobs.pipelineVersion.yml
       - template: /.azuredevops/templates/jobs.validate_OpenApi.yml
         parameters:
           openApiFilePath: '$(openApiPath)'
