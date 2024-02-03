@@ -12,6 +12,7 @@ parameters:
   apiVersion: ''
   environmentCode : ''
   environmentId: 'dev001xyz'
+  lifecycleStage: 'development'
 
 ##---------------------------------------------##
 ## TEMPLATE LOGIC                              ##
@@ -58,7 +59,7 @@ jobs:
                   echo "... Executing command :"
                   echo "az apic ...."
                   echo ""
-                  echo "------------------------------------"
+                  echo "------------DEPLOYMENT------------"
                   environmentResource="/workspaces/default/environments/${{ parameters.environmentId }}""
                   definitionResource="/workspaces/default/apis/${{ parameters.apicName }}/versions/${{ parameters.apiVersion }}/definitions/xdef006"
                   echo "... environmentResource"
@@ -66,4 +67,5 @@ jobs:
                   echo "... definitionResource"
                   echo $definitionResource
                   az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name $deploymentName  --title $deploymentName --description $deploymentName --api ${{ parameters.apiName }} --environmentId $environmentId --definitionId $definitionId
-                  echo "------------------------------------"
+                  echo "------------UPDATE-LIFECYCLE------------"
+                  az apic api version update -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --name ${{ parameters.apiVersion }}  --lifecycle-stage ${{ parameters.lifecycleStage }}
