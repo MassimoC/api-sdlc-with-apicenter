@@ -11,7 +11,7 @@ parameters:
   # APIC parameters
   rg: 'rg-apicenter'
   apicName: 'myapicatalog'
-  apiName: 'rocket-api'
+  apiName: ''
   currentApiVersion: ''
 
 ##---------------------------------------------##
@@ -28,10 +28,20 @@ jobs:
         name: ${{ parameters.poolName }}
     steps:
       - checkout: self
+      
+      - task: AzureCLI@2  
+        displayName: Debug
+        inputs:
+          azureSubscription: ${{ parameters.serviceConnection }}
+          scriptType: pscore
+          scriptLocation: inlineScript
+          inlineScript: |
+            echo "... Open API Path"
+            cat ${{ parameters.openApiFilePath }}
+            echo ""
+            echo "... API version"
+            cat ${{ parameters.currentApiVersion }}
 
-      - script: cat ${{ parameters.openApiFilePath }}
-        continueOnError: true
-        displayName: 'Show OpenAPI spec'
 
       - task: AzureCLI@2
         displayName: 'JQ'

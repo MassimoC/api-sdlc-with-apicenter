@@ -6,6 +6,7 @@ parameters:
   serviceConnection: '$(serviceConnection)'
   # Logic-related parameters
   openApiFilePath: '$(openApiFullPath)'
+  apiName: ''
 
 
 ##---------------------------------------------##

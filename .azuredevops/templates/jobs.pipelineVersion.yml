@@ -3,7 +3,6 @@ jobs:
     displayName: Determine Version
     steps:
     - bash: |
-        echo "##vso[build.updatebuildnumber]$(Pipeline.Version)"
-        echo "Pipeline version is '$(Pipeline.Version)'"
-        #$(Date:yyyyMMdd).$(Rev:rr)
+        echo '##vso[build.updatebuildnumber]$(Pipeline.Version)'
+        echo 'Pipeline version is $(Pipeline.Version)'
       displayName: 'Change pipeline version $(Pipeline.Version)'
