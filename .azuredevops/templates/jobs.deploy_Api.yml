@@ -16,50 +16,51 @@ parameters:
 ## TEMPLATE LOGIC                              ##
 ##---------------------------------------------##
 jobs:
-  - job:
-    displayName: Deploy to environment ${{ parameters.environmentCode }}
+  - deployment: ${{ parameters.environmentCode }}
+    displayName: Deploy to ${{ parameters.environmentCode }}
+    environment: ${{ parameters.environmentCode }}
     timeoutInMinutes: ${{ parameters.defaultJobTimeoutInMinutes }}
     pool:
       ${{ if ne(parameters.vmImage, '') }}:
         vmImage: ${{ parameters.vmImage }}
       ${{ if ne(parameters.poolName, '') }}:
         name: ${{ parameters.poolName }}
-    steps:
-      - checkout: self
-      
-      - task: AzureCLI@2  
-        displayName: Debug
-        inputs:
-          azureSubscription: ${{ parameters.serviceConnection }}
-          scriptType: pscore
-          scriptLocation: inlineScript
-          inlineScript: |
-            echo "... Open API Path"
-            cat ${{ parameters.openApiFilePath }}
-            echo ""
-            echo "... API version"
-            cat ${{ parameters.currentApiVersion }}
+    strategy:
+      runOnce:
+        deploy:         
+          steps:
+            - checkout: self
+            
+            - task: AzureCLI@2  
+              displayName: Debug
+              inputs:
+                azureSubscription: ${{ parameters.serviceConnection }}
+                scriptType: pscore
+                scriptLocation: inlineScript
+                inlineScript: |
+                  echo "... API version"
+                  cat ${{ parameters.apiVersion }}
 
 
-      - task: AzureCLI@2  
-        displayName: APIC - api import specification
-        inputs:
-          azureSubscription: ${{ parameters.serviceConnection }}
-          scriptType: pscore
-          scriptLocation: inlineScript
-          inlineScript: |
-            deploymentName='${{ parameters.environmentCode }}-${{ parameters.releaseDate }}'
-            echo $deploymentName
-            echo "------------------------------------"
-            echo "... Executing command :"
-            echo "az apic ...."
-            echo ""
-            echo "------------------------------------"
-            environmentId='/workspaces/default/environments/${{ parameters.environmentCode }}'
-            definitionId='"/workspaces/default/apis/echo-api/versions/2023-01-01/definitions/openapi"'
-            echo "...environmentId"
-            echo $environmentId
-            echo "...deploymentName"
-            echo $deploymentName
-            az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name $deploymentName  --title $deploymentName --description deploymentName --api ${{ parameters.apiName }} --environmentId $environmentId --definitionId $definitionId
-            echo "------------------------------------"
+            - task: AzureCLI@2  
+              displayName: APIC - api import specification
+              inputs:
+                azureSubscription: ${{ parameters.serviceConnection }}
+                scriptType: pscore
+                scriptLocation: inlineScript
+                inlineScript: |
+                  deploymentName='${{ parameters.environmentCode }}-${{ parameters.releaseDate }}'
+                  echo $deploymentName
+                  echo "------------------------------------"
+                  echo "... Executing command :"
+                  echo "az apic ...."
+                  echo ""
+                  echo "------------------------------------"
+                  environmentId='/workspaces/default/environments/${{ parameters.environmentCode }}'
+                  definitionId='"/workspaces/default/apis/echo-api/versions/2023-01-01/definitions/openapi"'
+                  echo "...environmentId"
+                  echo $environmentId
+                  echo "...deploymentName"
+                  echo $deploymentName
+                  az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name $deploymentName  --title $deploymentName --description $deploymentName --api ${{ parameters.apiName }} --environmentId $environmentId --definitionId $definitionId
+                  echo "------------------------------------"
