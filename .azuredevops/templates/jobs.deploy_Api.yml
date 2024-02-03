@@ -17,7 +17,7 @@ parameters:
 ##---------------------------------------------##
 jobs:
   - deployment: ${{ parameters.environmentCode }}
-    displayName: Deploy to ${{ parameters.environmentCode }}
+    displayName: 'Deploy to ${{ parameters.environmentCode }}'
     environment: ${{ parameters.environmentCode }}
     timeoutInMinutes: ${{ parameters.defaultJobTimeoutInMinutes }}
     pool:
