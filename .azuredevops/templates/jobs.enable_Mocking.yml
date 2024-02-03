@@ -3,10 +3,10 @@ parameters:
   poolName: '$(poolName)'
   vmImage: '$(vmImage)'
   defaultJobTimeoutInMinutes: 120
+  serviceConnection: '$(serviceConnection)'
   # Logic-related parameters
-  openApiFullPath: '$(openApiFullPath)'
-  spectralRulesFullPath: '$(spectralRulesFullPath)'
-  failSeverity: 'warn'
+  openApiFilePath: '$(openApiFullPath)'
+  currentApiVersion: '$(currentApiVersion)'
 
 ##---------------------------------------------##
 ## TEMPLATE LOGIC                              ##

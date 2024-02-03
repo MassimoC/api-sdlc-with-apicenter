@@ -35,4 +35,4 @@ stages:
       - template: /.azuredevops/templates/jobs.enable_Mocking.yml
         parameters:
           openApiFilePath: '$(openApiPath)'
-          rulesetPath: '$(spectralRulesPath)'
+          currentApiVersion: '$(currentApiVersion)'
