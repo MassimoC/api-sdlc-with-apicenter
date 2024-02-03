@@ -47,11 +47,11 @@ jobs:
               displayName: APIC - Register deployment
               inputs:
                 azureSubscription: ${{ parameters.serviceConnection }}
-                scriptType: bash
+                scriptType: pscore
                 scriptLocation: inlineScript
                 inlineScript: |
                   echo "------------------------------------"
-                  deploymentName="${{ parameters.environmentCode }}-${{ parameters.releaseDate }}"
+                  $deploymentName="${{ parameters.environmentCode }}-${{ parameters.releaseDate }}"
                   echo "------------------------------------"
                   echo $deploymentName
                   echo "------------------------------------"
@@ -60,20 +60,20 @@ jobs:
               displayName: APIC - Lifecycle
               inputs:
                 azureSubscription: ${{ parameters.serviceConnection }}
-                scriptType: bash
+                scriptType: pscore
                 scriptLocation: inlineScript
                 inlineScript: |
                   echo "------------------------------------"
-                  deploymentName="${{ parameters.environmentCode }}-${{ parameters.releaseDate }}"
+                  $deploymentName="${{ parameters.environmentCode }}-${{ parameters.releaseDate }}"
                   echo "------------------------------------"
-                  echo "$deploymentName"
+                  echo $deploymentName
                   echo "------------------------------------"
                   echo "... Executing command :"
                   echo "az apic ...."
                   echo ""
                   echo "------------DEPLOYMENT------------"
-                  environmentResource="/workspaces/default/environments/${{ parameters.environmentId }}"
-                  definitionResource="/workspaces/default/apis/${{ parameters.apicName }}/versions/${{ parameters.apiVersion }}/definitions/xdef006"
+                  $environmentResource="/workspaces/default/environments/${{ parameters.environmentId }}"
+                  $definitionResource="/workspaces/default/apis/${{ parameters.apicName }}/versions/${{ parameters.apiVersion }}/definitions/xdef006"
                   echo "... environmentResource"
                   echo $environmentResource
                   echo "... definitionResource"
