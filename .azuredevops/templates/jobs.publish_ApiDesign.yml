@@ -12,7 +12,7 @@ parameters:
   rg: 'rg-apicenter'
   apicName: 'myapicatalog'
   apiName: 'rocket-api'
-  currentApiVersion: '$(currentApiVersion)'
+  currentApiVersion: ''
 
 ##---------------------------------------------##
 ## TEMPLATE LOGIC                              ##
@@ -71,7 +71,7 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            az apic api version create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --name 2024-01-01 --title "${{ parameters.currentApiVersion }}"
+            az apic api version create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --name ${{ parameters.currentApiVersion }} --title "${{ parameters.currentApiVersion }}"
 
       - task: AzureCLI@2  
         displayName: APIC - api import specification
@@ -80,13 +80,16 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            echo "... Creating definition "
-            az apic api definition create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version 2024-01-01 --name "def001" --title "OpenAPI 3.0.1"
+            echo "... Executing command :"
+            echo "az apic api definition create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version ${{ parameters.currentApiVersion }} --name 'xdef005' --title 'OpenAPI xdef005'"
+            echo ""
+            az apic api definition create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version ${{ parameters.currentApiVersion }} --name "xdef005" --title "OpenAPI xdef005"
+            echo "------------------------------------"
             echo ""
             echo "... Executing command :"
-            echo "az apic api definition import-specification -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name 2024-01-01 --definition-name "def001" --format "inline" --value '$(openApiContent)'"
+            echo "az apic api definition import-specification -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name ${{ parameters.currentApiVersion }} --definition-name "xdef005" --format "inline" --value '$(openApiContent)'"
             echo ""
-            az apic api definition import-specification -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name 2024-01-01 --definition-name "def001" --format "inline" --value '$(openApiContent)'
+            az apic api definition import-specification -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name ${{ parameters.currentApiVersion }} --definition-name "xdef005" --format "inline" --value '$(openApiContent)'
 
 # az apic api definition import-specification -g api-center-test -s contosoeuap --api-name echo-api-2 --version-name 2023-08-01 --definition-name openapi3 --format "inline" --value '{"openapi":"3.0.1","info":{"title":"httpbin.org","description":"API Management facade for a very handy and free online HTTP tool.","version":"1.0"}}' --specification '{"name":"openapi","version":"3.0.0"}'
 # az apic api register -g api-center-test -s contosoeuap --api-location "examples/cli-examples/spec-examples/openai.json" --environment-name public
