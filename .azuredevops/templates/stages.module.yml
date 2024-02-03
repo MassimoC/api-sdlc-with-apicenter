@@ -25,7 +25,7 @@ stages:
       - template: /.azuredevops/templates/jobs.publish_ApiDesign.yml
         parameters:
           openApiFilePath: '$(openApiPath)'
-          currentApiVersion: '$(Pipeline.Version)'
+          currentApiVersion: $(Build.BuildNumber)
           apiName: '${{ parameters.apiName }}'
 
 
@@ -39,5 +39,5 @@ stages:
       - template: /.azuredevops/templates/jobs.enable_Mocking.yml
         parameters:
           openApiFilePath: '$(openApiPath)'
-          currentApiVersion: '$(Pipeline.Version)'
+          currentApiVersion: $(Build.BuildNumber)
           apiName: '${{ parameters.apiName }}'
