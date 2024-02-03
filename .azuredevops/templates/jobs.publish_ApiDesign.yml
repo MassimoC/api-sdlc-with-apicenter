@@ -19,7 +19,7 @@ parameters:
 ##---------------------------------------------##
 jobs:
   - job:
-    displayName: Publish API Design to API Center
+    displayName: Azure API Center
     timeoutInMinutes: ${{ parameters.defaultJobTimeoutInMinutes }}
     pool:
       ${{ if ne(parameters.vmImage, '') }}:

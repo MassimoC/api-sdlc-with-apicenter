@@ -72,7 +72,7 @@ jobs:
                   echo "az apic ...."
                   echo ""
                   echo "------------DEPLOYMENT------------"
-                  environmentResource="/workspaces/default/environments/${{ parameters.environmentId }}""
+                  environmentResource="/workspaces/default/environments/${{ parameters.environmentId }}"
                   definitionResource="/workspaces/default/apis/${{ parameters.apicName }}/versions/${{ parameters.apiVersion }}/definitions/xdef006"
                   echo "... environmentResource"
                   echo $environmentResource

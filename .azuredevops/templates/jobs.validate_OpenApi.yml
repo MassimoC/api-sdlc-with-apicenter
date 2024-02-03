@@ -15,7 +15,7 @@ parameters:
 ##---------------------------------------------##
 jobs:
   - job:
-    displayName: Run Spectral validation
+    displayName: Spectral
     timeoutInMinutes: ${{ parameters.defaultJobTimeoutInMinutes }}
     pool:
       ${{ if ne(parameters.vmImage, '') }}:
