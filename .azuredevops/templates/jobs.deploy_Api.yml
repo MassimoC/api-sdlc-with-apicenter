@@ -55,16 +55,6 @@ jobs:
                   echo "------------------------------------"
                   echo $deploymentName
                   echo "------------------------------------"
-                  echo "... Executing command :"
-                  echo "az apic ...."
-                  echo ""
-                  echo "------------DEPLOYMENT------------"
-                  environmentResource="/workspaces/default/environments/${{ parameters.environmentId }}""
-                  definitionResource="/workspaces/default/apis/${{ parameters.apicName }}/versions/${{ parameters.apiVersion }}/definitions/xdef006"
-                  echo "... environmentResource"
-                  echo $environmentResource
-                  echo "... definitionResource"
-                  echo $definitionResource
 
             - task: AzureCLI@2  
               displayName: APIC - Lifecycle
