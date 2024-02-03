@@ -41,9 +41,9 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             sudo apt --assume-yes install jq
-            fileContent=$( jq -c . ${{ parameters.openApiFilePath }} )
+            export fileContent=$( jq -c . ${{ parameters.openApiFilePath }} )
             echo $(fileContent)
-            echo '##vso[task.setvariable variable=openApiContent]$(fileContent)'
+            echo '##vso[task.setvariable variable=openApiContent]$( jq -c . ${{ parameters.openApiFilePath }} )'
 
       - task: AzureCLI@2  
         displayName: APIC - api list
