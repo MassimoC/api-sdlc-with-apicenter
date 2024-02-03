@@ -41,7 +41,7 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             sudo apt --assume-yes install jq
-            echo '##vso[task.setvariable variable=openApiContent]$( jq -c . ${{ parameters.openApiFilePath }} )'
+            echo '##vso[task.setvariable variable=openApiContent]$( jq --rawfile . ${{ parameters.openApiFilePath }} )'
 
       - bash: |
           echo "use macro syntax to read variables: $(openApiContent)"
@@ -80,7 +80,9 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
+            echo "... Executing command :"
             echo "az apic api definition import-specification -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name 2024-01-01 --definition-name openapi3 --format "inline" --value '$(openApiContent)'"
+            echo ""
             az apic api definition import-specification -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name 2024-01-01 --definition-name openapi3 --format "inline" --value '$(openApiContent)'
 
 # az apic api definition import-specification -g api-center-test -s contosoeuap --api-name echo-api-2 --version-name 2023-08-01 --definition-name openapi3 --format "inline" --value '{"openapi":"3.0.1","info":{"title":"httpbin.org","description":"API Management facade for a very handy and free online HTTP tool.","version":"1.0"}}' --specification '{"name":"openapi","version":"3.0.0"}'
