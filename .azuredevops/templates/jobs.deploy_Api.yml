@@ -43,7 +43,6 @@ jobs:
                   echo "... API version"
                   echo ${{ parameters.apiVersion }}
 
-
             - task: AzureCLI@2  
               displayName: APIC - Register deployment
               inputs:
@@ -66,6 +65,29 @@ jobs:
                   echo $environmentResource
                   echo "... definitionResource"
                   echo $definitionResource
-                  az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name $deploymentName  --title $deploymentName --description $deploymentName --api ${{ parameters.apiName }} --environmentId $environmentId --definitionId $definitionId
+
+            - task: AzureCLI@2  
+              displayName: APIC - Lifecycle
+              inputs:
+                azureSubscription: ${{ parameters.serviceConnection }}
+                scriptType: pscore
+                scriptLocation: inlineScript
+                inlineScript: |
+                  echo "------------------------------------"
+                  deploymentName="${{ parameters.environmentCode }}-${{ parameters.releaseDate }}"
+                  echo "------------------------------------"
+                  echo $deploymentName
+                  echo "------------------------------------"
+                  echo "... Executing command :"
+                  echo "az apic ...."
+                  echo ""
+                  echo "------------DEPLOYMENT------------"
+                  environmentResource="/workspaces/default/environments/${{ parameters.environmentId }}""
+                  definitionResource="/workspaces/default/apis/${{ parameters.apicName }}/versions/${{ parameters.apiVersion }}/definitions/xdef006"
+                  echo "... environmentResource"
+                  echo $environmentResource
+                  echo "... definitionResource"
+                  echo $definitionResource
+                  az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name $deploymentName  --title $deploymentName --description $deploymentName --api "${{ parameters.apiName }}" --environmentId "$environmentId" --definitionId "$definitionId"
                   echo "------------UPDATE-LIFECYCLE------------"
                   az apic api version update -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --name ${{ parameters.apiVersion }}  --lifecycle-stage ${{ parameters.lifecycleStage }}
