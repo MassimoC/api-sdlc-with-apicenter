@@ -40,7 +40,7 @@ jobs:
             cat ${{ parameters.openApiFilePath }}
             echo ""
             echo "... API version"
-            cat ${{ parameters.currentApiVersion }}
+            echo ${{ parameters.currentApiVersion }}
 
 
       - task: AzureCLI@2

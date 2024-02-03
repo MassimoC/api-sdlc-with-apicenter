@@ -1,4 +1,4 @@
-name: Rocket-1.0$(Rev:.r)
+name: $(Date:yyyyMMdd).$(Rev:rr)
 
 parameters:
   - name: staticValidation
