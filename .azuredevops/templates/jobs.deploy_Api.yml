@@ -11,6 +11,7 @@ parameters:
   releaseDate: ''
   apiVersion: ''
   environmentCode : ''
+  environmentId: 'dev001xyz'
 
 ##---------------------------------------------##
 ## TEMPLATE LOGIC                              ##
@@ -39,7 +40,7 @@ jobs:
                 scriptLocation: inlineScript
                 inlineScript: |
                   echo "... API version"
-                  cat ${{ parameters.apiVersion }}
+                  echo ${{ parameters.apiVersion }}
 
 
             - task: AzureCLI@2  
@@ -56,11 +57,11 @@ jobs:
                   echo "az apic ...."
                   echo ""
                   echo "------------------------------------"
-                  environmentId='/workspaces/default/environments/${{ parameters.environmentCode }}'
-                  definitionId='"/workspaces/default/apis/echo-api/versions/2023-01-01/definitions/openapi"'
-                  echo "...environmentId"
-                  echo $environmentId
-                  echo "...deploymentName"
-                  echo $deploymentName
+                  environmentResource='/workspaces/default/environments/${{ parameters.environmentId }}'
+                  definitionResource='"/workspaces/default/apis/${{ parameters.apicName }}/versions/${{ parameters.apiVersion }}/definitions/xdef006"'
+                  echo "... environmentResource"
+                  echo $environmentResource
+                  echo "... definitionResource"
+                  echo $definitionResource
                   az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name $deploymentName  --title $deploymentName --description $deploymentName --api ${{ parameters.apiName }} --environmentId $environmentId --definitionId $definitionId
                   echo "------------------------------------"
