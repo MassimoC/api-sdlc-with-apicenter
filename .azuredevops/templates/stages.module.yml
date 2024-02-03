@@ -3,13 +3,14 @@ parameters:
   publishDesign: true
   mocking: true
   defaultJobTimeoutInMinutes: 120
+  apiName: ''
 
 stages:
   - stage: validation
     displayName: Static validation
     condition: eq('${{ parameters.staticValidation }}', 'True')
     jobs:
-      - template: /.azuredevops/templates/jobs.pipelineVersion.yml
+      #- template: /.azuredevops/templates/jobs.pipelineVersion.yml
       - template: /.azuredevops/templates/jobs.validate_OpenApi.yml
         parameters:
           openApiFilePath: '$(openApiPath)'
@@ -25,6 +26,8 @@ stages:
         parameters:
           openApiFilePath: '$(openApiPath)'
           currentApiVersion: '$(Pipeline.Version)'
+          apiName: '${{ parameters.apiName }}'
+
 
   - stage: mocking
     displayName: Publish to API Gateway
@@ -37,3 +40,4 @@ stages:
         parameters:
           openApiFilePath: '$(openApiPath)'
           currentApiVersion: '$(Pipeline.Version)'
+          apiName: '${{ parameters.apiName }}'
