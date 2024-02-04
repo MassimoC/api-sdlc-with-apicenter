@@ -55,19 +55,6 @@ jobs:
                   echo "------------------------------------"
                   echo $deploymentName
                   echo "------------------------------------"
-
-            - task: AzureCLI@2  
-              displayName: APIC - Lifecycle
-              inputs:
-                azureSubscription: ${{ parameters.serviceConnection }}
-                scriptType: pscore
-                scriptLocation: inlineScript
-                inlineScript: |
-                  echo "------------------------------------"
-                  $deploymentName="${{ parameters.environmentCode }}-${{ parameters.releaseDate }}"
-                  echo "------------------------------------"
-                  echo $deploymentName
-                  echo "------------------------------------"
                   echo "... Executing command :"
                   echo "az apic ...."
                   echo ""
@@ -79,6 +66,14 @@ jobs:
                   echo "... definitionResource"
                   echo $definitionResource
                   echo "------------EXECUTE------------"
-                  az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name $deploymentName  --title $deploymentName --description $deploymentName --api "${{ parameters.apiName }}" --environment-id "$environmentId" --definition-id "$definitionId"
+                  az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name $deploymentName  --title $deploymentName --description $deploymentName --api "${{ parameters.apiName }}" --environment-id "$environmentId" --definition-id "$definitionId" --server runtime-uri[0]="https://kube.it"
+
+            - task: AzureCLI@2  
+              displayName: APIC - Lifecycle
+              inputs:
+                azureSubscription: ${{ parameters.serviceConnection }}
+                scriptType: pscore
+                scriptLocation: inlineScript
+                inlineScript: |
                   echo "------------UPDATE-LIFECYCLE------------"
-                  az apic api version update -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --name ${{ parameters.apiVersion }}  --lifecycle-stage ${{ parameters.lifecycleStage }}
+                  az apic api version update -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --name ${{ parameters.apiVersion }}  --lifecycle-stage ${{ parameters.lifecycleStage }} -w default
