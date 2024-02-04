@@ -27,7 +27,7 @@ trigger:
 variables:
   - template: '../../settings.yml'
   - name: openApiPath
-    value: '$(azdoWorkDir)/design/rocketapi/openapi_salesapi.json'
+    value: '$(azdoWorkDir)/design/sales/openapi_salesapi.json'
   - name: currentApiVersion
     value: '2.0.1'
     
