@@ -70,8 +70,8 @@ stages:
           environmentId: 'tst001xyz'
           lifecycleStage: 'testing'
 
-  - stage: acc
-    displayName: Acceptance
+  - stage: stg
+    displayName: Staging
     condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.SourceBranch'], 'refs/heads/master')))
     dependsOn:
       - tst
@@ -81,7 +81,7 @@ stages:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
           apiVersion: $(Build.BuildNumber)
-          environmentCode : 'acceptance'
+          environmentCode : 'staging'
           environmentId: 'acc001xyz'
           lifecycleStage: 'preview'
 
@@ -89,7 +89,7 @@ stages:
     displayName: Production
     condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.SourceBranch'], 'refs/heads/master')))
     dependsOn:
-      - acc
+      - stg
     jobs:
       - template: /.azuredevops/templates/jobs.deploy_Api.yml
         parameters:
