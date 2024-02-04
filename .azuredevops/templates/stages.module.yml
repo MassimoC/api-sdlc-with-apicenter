@@ -54,3 +54,18 @@ stages:
           apiVersion: $(Build.BuildNumber)
           environmentCode : 'development'
           lifecycleStage: 'development'
+
+  - stage: tst
+    displayName: Testing
+    condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.SourceBranch'], 'refs/heads/master')))
+    dependsOn:
+      - dev
+    jobs:
+      - template: /.azuredevops/templates/jobs.deploy_Api.yml
+        parameters:
+          apiName: '${{ parameters.apiName }}'
+          releaseDate: $(Build.BuildNumber)
+          apiVersion: $(Build.BuildNumber)
+          environmentCode : 'testing'
+          environmentId: 'tst001xyz'
+          lifecycleStage: 'testing'
