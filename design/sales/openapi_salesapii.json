@@ -2,7 +2,7 @@
     "openapi": "3.0.1",
     "info": {
         "title": "DigitalSales API",
-        "version": "v2"
+        "version": "2.0.1"
     },
     "paths": {
         "/allotments/{allotmentIdentifier}/{flightDate}": {

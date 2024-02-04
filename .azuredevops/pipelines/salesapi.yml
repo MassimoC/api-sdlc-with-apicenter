@@ -1,0 +1,40 @@
+name: $(Date:yyyyMMdd)-$(Rev:rr)
+
+parameters:
+  - name: staticValidation
+    displayName: Execute static validation
+    type: boolean
+    default: true
+  - name: publishDesign
+    displayName: Publish OpenAPI specification
+    type: boolean
+    default: true
+
+pr: none
+
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - '/.azuredevops/pipelines/salesapi.yml'
+      - '/.azuredevops/templates/*.yml'
+      - '/design/salesapi/*'
+    exclude:
+      - '/**/*.md'
+
+variables:
+  - template: '../../settings.yml'
+  - name: openApiPath
+    value: '$(azdoWorkDir)/design/rocketapi/openapi_salesapi.json'
+  - name: currentApiVersion
+    value: '2.0.1'
+    
+
+stages:
+  - template: /.azuredevops/templates/stages.module.yml
+    parameters:
+      staticValidation: '${{ parameters.staticValidation }}'
+      publishDesign: '${{ parameters.publishDesign }}'
+      apiName: 'sales-api'
