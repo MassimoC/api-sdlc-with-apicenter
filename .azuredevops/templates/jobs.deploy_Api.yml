@@ -61,6 +61,8 @@ jobs:
                   echo "... definitionResource"
                   echo $definitionResource
                   echo "------------EXECUTE------------"
+                  echo "... Executing command :"
+                  echo "az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name $deploymentName  --title $deploymentName --description $deploymentName --api '${{ parameters.apiName }}' --environment-id '$environmentId' --definition-id '$definitionId' --server runtime-uri[0]='https://kube.it'"
                   az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name $deploymentName  --title $deploymentName --description $deploymentName --api "${{ parameters.apiName }}" --environment-id "$environmentId" --definition-id "$definitionId" --server runtime-uri[0]="https://kube.it"
 
             - task: AzureCLI@2  
