@@ -50,17 +50,16 @@ jobs:
                 scriptType: pscore
                 scriptLocation: inlineScript
                 inlineScript: |
-                  $deploymentName="${{ parameters.environmentCode }}-${{ parameters.releaseDate }}"
                   echo "------------DEPLOYMENT------------"
                   $deploymentName="${{ parameters.environmentCode }}-${{ parameters.releaseDate }}"
-				  $environmentResource="/workspaces/default/environments/${{ parameters.environmentId }}"
+				          $environmentResource="/workspaces/default/environments/${{ parameters.environmentId }}"
                   $definitionResource="/workspaces/default/apis/${{ parameters.apiName }}/versions/${{ parameters.apiVersion }}/definitions/xdef006"
                   echo "... deploymentName"
                   echo $deploymentName
                   echo "... environmentResource"
                   echo $environmentResource
                   echo "... definitionResource"
-				  echo $definitionResource
+				          echo $definitionResource
                   echo "------------EXECUTE------------"
                   az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name $deploymentName  --title $deploymentName --description $deploymentName --api "${{ parameters.apiName }}" --environment-id "$environmentId" --definition-id "$definitionId" --server runtime-uri[0]="https://kube.it"
 
