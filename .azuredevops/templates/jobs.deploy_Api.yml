@@ -59,7 +59,7 @@ jobs:
                   echo "... environmentResource"
                   echo $environmentResource
                   echo "... definitionResource"
-				          echo $definitionResource
+                  echo $definitionResource
                   echo "------------EXECUTE------------"
                   az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name $deploymentName  --title $deploymentName --description $deploymentName --api "${{ parameters.apiName }}" --environment-id "$environmentId" --definition-id "$definitionId" --server runtime-uri[0]="https://kube.it"
 
