@@ -5,7 +5,7 @@ variables:
 
 
   azdoWorkDir: '$(System.DefaultWorkingDirectory)'
-
+  azdoRunId: '$(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)'
   ########################
   ##   Agent settings   ##
   ########################
