@@ -12,6 +12,8 @@ parameters:
   rg: 'rg-apicenter'
   apicName: 'myapicatalog'
   apiName: ''
+  apiTitle: ''
+  apiDescription: ''
   currentApiVersion: ''
 
 ##---------------------------------------------##
@@ -72,7 +74,7 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            az apic api create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name ${{ parameters.apiName }} --title "Rocket API" --kind rest --description "to the clouds and beyond" --summary "to the clouds and beyond"
+            az apic api create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name ${{ parameters.apiName }} --title ${{ parameters.apiTitle }}  --kind rest --description ${{ parameters.apiDescription }}  --summary ${{ parameters.apiDescription }} 
 
       - task: AzureCLI@2  
         displayName: APIC - api version create

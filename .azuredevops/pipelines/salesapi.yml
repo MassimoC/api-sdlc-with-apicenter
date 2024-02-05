@@ -38,3 +38,5 @@ stages:
       staticValidation: '${{ parameters.staticValidation }}'
       publishDesign: '${{ parameters.publishDesign }}'
       apiName: 'sales-api'
+      apiTitle: 'Sales API'
+      apiDescription: 'digitalize the sales'
