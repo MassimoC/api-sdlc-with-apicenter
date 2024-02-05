@@ -1,14 +1,14 @@
 {
     "openapi": "3.0.1",
     "info": {
-        "title": "DigitalSales API",
+        "title": "Sales API",
         "version": "2.0.1"
     },
     "paths": {
         "/allotments/{allotmentIdentifier}/{flightDate}": {
             "get": {
                 "tags": [
-                    "Allotments"
+                    "Allocations"
                 ],
                 "summary": "Get Single Allotment",
                 "parameters": [
@@ -38,7 +38,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.Allotment"
+                                    "$ref": "#/components/schemas/Models.Allocations.Allotment"
                                 }
                             }
                         }
@@ -58,29 +58,29 @@
         "/allotments/list": {
             "post": {
                 "tags": [
-                    "Allotments"
+                    "Allocations"
                 ],
                 "summary": "List My allotments",
                 "requestBody": {
                     "content": {
                         "application/json-patch+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListMyAllotmentsRequest"
+                                "$ref": "#/components/schemas/Models.Allocations.ListMyAllotmentsRequest"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListMyAllotmentsRequest"
+                                "$ref": "#/components/schemas/Models.Allocations.ListMyAllotmentsRequest"
                             }
                         },
                         "text/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListMyAllotmentsRequest"
+                                "$ref": "#/components/schemas/Models.Allocations.ListMyAllotmentsRequest"
                             }
                         },
                         "application/*+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListMyAllotmentsRequest"
+                                "$ref": "#/components/schemas/Models.Allocations.ListMyAllotmentsRequest"
                             }
                         }
                     }
@@ -91,7 +91,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListMyAllotmentsResponse"
+                                    "$ref": "#/components/schemas/Models.Allocations.ListMyAllotmentsResponse"
                                 }
                             }
                         }
@@ -108,29 +108,29 @@
         "/allotments/book": {
             "post": {
                 "tags": [
-                    "Allotments"
+                    "Allocations"
                 ],
                 "summary": "Allotment Booking",
                 "requestBody": {
                     "content": {
                         "application/json-patch+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest"
+                                "$ref": "#/components/schemas/Models.Allocations.AllotmentBookingRequest"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest"
+                                "$ref": "#/components/schemas/Models.Allocations.AllotmentBookingRequest"
                             }
                         },
                         "text/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest"
+                                "$ref": "#/components/schemas/Models.Allocations.AllotmentBookingRequest"
                             }
                         },
                         "application/*+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest"
+                                "$ref": "#/components/schemas/Models.Allocations.AllotmentBookingRequest"
                             }
                         }
                     }
@@ -141,7 +141,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingResponse"
+                                    "$ref": "#/components/schemas/Models.Allocations.AllotmentBookingResponse"
                                 }
                             }
                         }
@@ -157,7 +157,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingResponse"
+                                    "$ref": "#/components/schemas/Models.Allocations.AllotmentBookingResponse"
                                 }
                             }
                         }
@@ -166,29 +166,29 @@
             },
             "put": {
                 "tags": [
-                    "Allotments"
+                    "Allocations"
                 ],
                 "summary": "Update Allotment Booking",
                 "requestBody": {
                     "content": {
                         "application/json-patch+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest"
+                                "$ref": "#/components/schemas/Models.Allocations.AllotmentBookingRequest"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest"
+                                "$ref": "#/components/schemas/Models.Allocations.AllotmentBookingRequest"
                             }
                         },
                         "text/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest"
+                                "$ref": "#/components/schemas/Models.Allocations.AllotmentBookingRequest"
                             }
                         },
                         "application/*+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest"
+                                "$ref": "#/components/schemas/Models.Allocations.AllotmentBookingRequest"
                             }
                         }
                     }
@@ -199,7 +199,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingResponse"
+                                    "$ref": "#/components/schemas/Models.Allocations.AllotmentBookingResponse"
                                 }
                             }
                         }
@@ -215,7 +215,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingResponse"
+                                    "$ref": "#/components/schemas/Models.Allocations.AllotmentBookingResponse"
                                 }
                             }
                         }
@@ -226,7 +226,7 @@
         "/allotments/{allotmentIdentifier}/{flightDate}/bookings": {
             "get": {
                 "tags": [
-                    "Allotments"
+                    "Allocations"
                 ],
                 "summary": "List Allotment Bookings",
                 "parameters": [
@@ -254,7 +254,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListAllotmentBookingsResponse"
+                                    "$ref": "#/components/schemas/Models.Allocations.ListAllotmentBookingsResponse"
                                 }
                             }
                         }
@@ -264,7 +264,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListAllotmentBookingsErrorResponse"
+                                    "$ref": "#/components/schemas/Models.Allocations.ListAllotmentBookingsErrorResponse"
                                 }
                             }
                         }
@@ -277,7 +277,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListAllotmentBookingsErrorResponse"
+                                    "$ref": "#/components/schemas/Models.Allocations.ListAllotmentBookingsErrorResponse"
                                 }
                             }
                         }
@@ -308,7 +308,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.Consignment"
+                                    "$ref": "#/components/schemas/Models.Dto.Bookings.Consignment"
                                 }
                             }
                         }
@@ -335,22 +335,22 @@
                     "content": {
                         "application/json-patch+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.TrackListBookingsRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Bookings.TrackListBookingsRequest"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.TrackListBookingsRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Bookings.TrackListBookingsRequest"
                             }
                         },
                         "text/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.TrackListBookingsRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Bookings.TrackListBookingsRequest"
                             }
                         },
                         "application/*+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.TrackListBookingsRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Bookings.TrackListBookingsRequest"
                             }
                         }
                     }
@@ -361,7 +361,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.TrackListBookingsResponse"
+                                    "$ref": "#/components/schemas/Models.Dto.Bookings.TrackListBookingsResponse"
                                 }
                             }
                         }
@@ -385,22 +385,22 @@
                     "content": {
                         "application/json-patch+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.BookingCancellationRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Bookings.BookingCancellationRequest"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.BookingCancellationRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Bookings.BookingCancellationRequest"
                             }
                         },
                         "text/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.BookingCancellationRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Bookings.BookingCancellationRequest"
                             }
                         },
                         "application/*+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.BookingCancellationRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Bookings.BookingCancellationRequest"
                             }
                         }
                     }
@@ -411,7 +411,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.BookingCancellationResponse"
+                                    "$ref": "#/components/schemas/Models.Dto.Bookings.BookingCancellationResponse"
                                 }
                             }
                         }
@@ -440,7 +440,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.CustomerProfile.CustomerProfileResponse"
+                                    "$ref": "#/components/schemas/Models.Dto.CustomerProfile.CustomerProfileResponse"
                                 }
                             }
                         }
@@ -476,7 +476,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.Quote"
+                                    "$ref": "#/components/schemas/Models.Dto.Quotes.Quote"
                                 }
                             }
                         }
@@ -510,22 +510,22 @@
                     "content": {
                         "application/json-patch+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.GetQuoteViaEmailRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Quotes.GetQuoteViaEmailRequest"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.GetQuoteViaEmailRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Quotes.GetQuoteViaEmailRequest"
                             }
                         },
                         "text/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.GetQuoteViaEmailRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Quotes.GetQuoteViaEmailRequest"
                             }
                         },
                         "application/*+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.GetQuoteViaEmailRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Quotes.GetQuoteViaEmailRequest"
                             }
                         }
                     }
@@ -553,22 +553,22 @@
                     "content": {
                         "application/json-patch+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ListMyQuotesRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Quotes.ListMyQuotesRequest"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ListMyQuotesRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Quotes.ListMyQuotesRequest"
                             }
                         },
                         "text/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ListMyQuotesRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Quotes.ListMyQuotesRequest"
                             }
                         },
                         "application/*+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ListMyQuotesRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Quotes.ListMyQuotesRequest"
                             }
                         }
                     }
@@ -579,7 +579,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ListMyQuotesResponse"
+                                    "$ref": "#/components/schemas/Models.Dto.Quotes.ListMyQuotesResponse"
                                 }
                             }
                         }
@@ -603,22 +603,22 @@
                     "content": {
                         "application/json-patch+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.RequestQuoteRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Quotes.RequestQuoteRequest"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.RequestQuoteRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Quotes.RequestQuoteRequest"
                             }
                         },
                         "text/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.RequestQuoteRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Quotes.RequestQuoteRequest"
                             }
                         },
                         "application/*+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.RequestQuoteRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Quotes.RequestQuoteRequest"
                             }
                         }
                     }
@@ -629,7 +629,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.RequestQuoteResponse"
+                                    "$ref": "#/components/schemas/Models.Dto.Quotes.RequestQuoteResponse"
                                 }
                             }
                         }
@@ -653,22 +653,22 @@
                     "content": {
                         "application/json-patch+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Quotes.ConfirmQuoteRequest"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Quotes.ConfirmQuoteRequest"
                             }
                         },
                         "text/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Quotes.ConfirmQuoteRequest"
                             }
                         },
                         "application/*+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Quotes.ConfirmQuoteRequest"
                             }
                         }
                     }
@@ -679,7 +679,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteResponse"
+                                    "$ref": "#/components/schemas/Models.Dto.Quotes.ConfirmQuoteResponse"
                                 }
                             }
                         }
@@ -703,22 +703,22 @@
                     "content": {
                         "application/json-patch+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.ListMyRatesRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Rates.ListMyRatesRequest"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.ListMyRatesRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Rates.ListMyRatesRequest"
                             }
                         },
                         "text/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.ListMyRatesRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Rates.ListMyRatesRequest"
                             }
                         },
                         "application/*+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.ListMyRatesRequest"
+                                "$ref": "#/components/schemas/Models.Dto.Rates.ListMyRatesRequest"
                             }
                         }
                     }
@@ -729,7 +729,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.ListMyRatesResponse"
+                                    "$ref": "#/components/schemas/Models.Dto.Rates.ListMyRatesResponse"
                                 }
                             }
                         }
@@ -746,14 +746,14 @@
     },
     "components": {
         "schemas": {
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.Allotment": {
+            "Models.Allocations.Allotment": {
                 "type": "object",
                 "properties": {
                     "allotmentIdentifier": {
                         "type": "string",
-                        "description": "Assigned allotment identifier by Cargolux Cargo Management System.\r\nThis number is needed in the allotment booking operation.",
+                        "description": "Assigned allotment identifier by  package Management System.\r\nThis number is needed in the allotment booking operation.",
                         "nullable": true,
-                        "example": "CVLUX1234CUS01A"
+                        "example": "CVBNL1234CUS01A"
                     },
                     "allotmentType": {
                         "type": "string",
@@ -773,33 +773,33 @@
                         "nullable": true,
                         "example": "2020-01-01"
                     },
-                    "cargoluxBookingOffice": {
+                    "BookingOffice": {
                         "type": "string",
                         "description": "Local CV office.",
                         "nullable": true,
-                        "example": "LUX"
+                        "example": "BNL"
                     },
                     "airportOfOrigin": {
                         "type": "string",
-                        "description": "This allotment has been agreed for cargo originating from this particular airport (IATA code).",
+                        "description": "This allotment has been agreed for package originating from this particular airport (IATA code).",
                         "nullable": true,
                         "example": "CDG"
                     },
                     "airportOfOnload": {
                         "type": "string",
-                        "description": "IATA Airport code where the cargo is loaded on a Cargolux flight.",
+                        "description": "IATA Airport code where the package is loaded on a  flight.",
                         "nullable": true,
-                        "example": "LUX"
+                        "example": "BNL"
                     },
                     "airportOfOffload": {
                         "type": "string",
-                        "description": "IATA Airport code where the cargo is loaded off from a Cargolux flight.",
+                        "description": "IATA Airport code where the package is loaded off from a  flight.",
                         "nullable": true,
                         "example": "LAX"
                     },
                     "airportOfDestination": {
                         "type": "string",
-                        "description": "IATA Airport code where the cargo is intended to be finally delivered from Cargolux standpoint.",
+                        "description": "IATA Airport code where the package is intended to be finally delivered from  standpoint.",
                         "nullable": true,
                         "example": "SFO"
                     },
@@ -811,31 +811,31 @@
                     },
                     "localLatestAcceptanceTime": {
                         "type": "string",
-                        "description": "Latest Local DateTime on which the the cargo has to be accepted at the departing airport.",
+                        "description": "Latest Local DateTime on which the the package has to be accepted at the departing airport.",
                         "format": "date-time",
                         "nullable": true,
                         "example": "2021-07-31T05:00:00"
                     },
                     "utcLatestAcceptanceTime": {
                         "type": "string",
-                        "description": "Latest UTC DateTime on which the the cargo has to be accepted at the departing airport.",
+                        "description": "Latest UTC DateTime on which the the package has to be accepted at the departing airport.",
                         "format": "date-time",
                         "nullable": true,
                         "example": "2021-07-31T03:00:00Z"
                     },
                     "currentCapacity": {
-                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.Capacity"
+                        "$ref": "#/components/schemas/Models.Allocations.Capacity"
                     },
                     "bookedCapacity": {
-                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.Capacity"
+                        "$ref": "#/components/schemas/Models.Allocations.Capacity"
                     },
                     "availableCapacity": {
-                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.Capacity"
+                        "$ref": "#/components/schemas/Models.Allocations.Capacity"
                     },
                     "rates": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentRate"
+                            "$ref": "#/components/schemas/Models.Allocations.AllotmentRate"
                         },
                         "description": "List of applicable rate information for the allotment.",
                         "nullable": true
@@ -843,7 +843,7 @@
                     "routes": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.Route"
+                            "$ref": "#/components/schemas/Models.Allocations.Route"
                         },
                         "description": "List of applicable route information for the allotment.",
                         "nullable": true
@@ -851,7 +851,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBooking": {
+            "Models.Allocations.AllotmentBooking": {
                 "type": "object",
                 "properties": {
                     "iataNumber": {
@@ -874,9 +874,9 @@
                     },
                     "allotmentIdentifier": {
                         "type": "string",
-                        "description": "Assigned allotment identifier by Cargolux Cargo Management System.",
+                        "description": "Assigned allotment identifier by package Management System.",
                         "nullable": true,
-                        "example": "CVLUX1234CUS01A"
+                        "example": "CVBNL1234CUS01A"
                     },
                     "flightNumber": {
                         "type": "string",
@@ -912,7 +912,7 @@
                     },
                     "natureOfGoods": {
                         "type": "string",
-                        "description": "Description of the shipment (Consolidation/GeneralCargo/...).",
+                        "description": "Description of the shipment (Consolidation/Generalpackage/...).",
                         "nullable": true,
                         "example": "Consolidation"
                     },
@@ -940,7 +940,7 @@
                     "dimensions": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentDimensionElement"
+                            "$ref": "#/components/schemas/Models.Allocations.AllotmentDimensionElement"
                         },
                         "description": "List of detailed dimensions included in the (loose) shipment.",
                         "nullable": true
@@ -956,20 +956,20 @@
                     "ulds": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Ulds.Uld"
+                            "$ref": "#/components/schemas/Models.Dto.General.Ulds.Uld"
                         },
                         "description": "List of details on the (containerized) shipment.",
                         "nullable": true
                     },
                     "stackable": {
                         "type": "boolean",
-                        "description": "Is cargo stackable",
+                        "description": "Is package stackable",
                         "readOnly": true
                     }
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingRequest": {
+            "Models.Allocations.AllotmentBookingRequest": {
                 "required": [
                     "airportOfDestination",
                     "airportOfOrigin",
@@ -1006,8 +1006,8 @@
                     "allotmentIdentifier": {
                         "minLength": 1,
                         "type": "string",
-                        "description": "Assigned allotment identifier by Cargolux Cargo Management System.\r\nAllotmentIdentifier is mandatory along with the flightNumber and flightDate.",
-                        "example": "CVLUX1234CUS01A"
+                        "description": "Assigned allotment identifier by  package Management System.\r\nAllotmentIdentifier is mandatory along with the flightNumber and flightDate.",
+                        "example": "CVBNL1234CUS01A"
                     },
                     "flightNumber": {
                         "pattern": "^[a-zA-Z0-9]{2}\\d{4}$",
@@ -1039,7 +1039,7 @@
                     "natureOfGoods": {
                         "minLength": 1,
                         "type": "string",
-                        "description": "Description of the shipment (Consolidation/GeneralCargo/...).",
+                        "description": "Description of the shipment (Consolidation/Generalpackage/...).",
                         "example": "Consolidation"
                     },
                     "stackable": {
@@ -1075,7 +1075,7 @@
                     "dimensions": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentDimensionElement"
+                            "$ref": "#/components/schemas/Models.Allocations.AllotmentDimensionElement"
                         },
                         "description": "List of detailed dimensions included in the (loose) shipment.",
                         "nullable": true
@@ -1091,7 +1091,7 @@
                     "ulds": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Ulds.Uld"
+                            "$ref": "#/components/schemas/Models.Dto.General.Ulds.Uld"
                         },
                         "description": "List of details on the (containerized) shipment.",
                         "nullable": true
@@ -1099,11 +1099,11 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingResponse": {
+            "Models.Allocations.AllotmentBookingResponse": {
                 "type": "object",
                 "properties": {
                     "status": {
-                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingStatusCode"
+                        "$ref": "#/components/schemas/Models.Allocations.AllotmentBookingStatusCode"
                     },
                     "awbNumber": {
                         "type": "string",
@@ -1113,9 +1113,9 @@
                     },
                     "allotmentIdentifier": {
                         "type": "string",
-                        "description": "Assigned allotment identifier by Cargolux Cargo Management System on which the booking was created.",
+                        "description": "Assigned allotment identifier by  package Management System on which the booking was created.",
                         "nullable": true,
-                        "example": "CVLUX1234CUS01A"
+                        "example": "CVBNL1234CUS01A"
                     },
                     "totalChargeableWeight": {
                         "type": "number",
@@ -1127,7 +1127,7 @@
                     "warnings": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoWarning"
+                            "$ref": "#/components/schemas/Models.Dto.General.Errors.DtoWarning"
                         },
                         "description": "List of warnings related to the booking.",
                         "nullable": true
@@ -1135,7 +1135,7 @@
                     "errors": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoError"
+                            "$ref": "#/components/schemas/Models.Dto.General.Errors.DtoError"
                         },
                         "description": "List of errors related to the booking.",
                         "nullable": true
@@ -1144,14 +1144,14 @@
                 "additionalProperties": false,
                 "description": "Status of an allotmentBooking, a model for catching errors and warnings."
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBookingStatusCode": {
+            "Models.Allocations.AllotmentBookingStatusCode": {
                 "enum": [
                     "SUCCESS",
                     "FAILURE"
                 ],
                 "type": "string"
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentDimensionElement": {
+            "Models.Allocations.AllotmentDimensionElement": {
                 "required": [
                     "height",
                     "length",
@@ -1221,7 +1221,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentRate": {
+            "Models.Allocations.AllotmentRate": {
                 "type": "object",
                 "properties": {
                     "currencyCode": {
@@ -1264,15 +1264,15 @@
                         "nullable": true
                     },
                     "bulkRateDetail": {
-                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.BulkRateDetail"
+                        "$ref": "#/components/schemas/Models.Allocations.BulkRateDetail"
                     },
                     "pivotRateDetail": {
-                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.PivotRateDetail"
+                        "$ref": "#/components/schemas/Models.Allocations.PivotRateDetail"
                     }
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.BulkRateDetail": {
+            "Models.Allocations.BulkRateDetail": {
                 "type": "object",
                 "properties": {
                     "minimumCharge": {
@@ -1290,7 +1290,7 @@
                     "weightBreaks": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.WeightBreak"
+                            "$ref": "#/components/schemas/Models.Allocations.WeightBreak"
                         },
                         "description": "List of weightbreaks. These are the weight ranges on which a particular unit price applies.",
                         "nullable": true
@@ -1299,7 +1299,7 @@
                 "additionalProperties": false,
                 "description": "The bulk rate detail for the rate definition."
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.Capacity": {
+            "Models.Allocations.Capacity": {
                 "type": "object",
                 "properties": {
                     "actualWeight": {
@@ -1318,11 +1318,11 @@
                 "additionalProperties": false,
                 "description": "Capacity values for the allotment. (Original, current, booked, available)"
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.ListAllotmentBookingsErrorResponse": {
+            "Models.Allocations.ListAllotmentBookingsErrorResponse": {
                 "type": "object",
                 "properties": {
                     "status": {
-                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.ListAllotmentBookingsStatusCode"
+                        "$ref": "#/components/schemas/Models.Allocations.ListAllotmentBookingsStatusCode"
                     },
                     "allotmentNumber": {
                         "type": "string",
@@ -1333,7 +1333,7 @@
                     "warnings": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoWarning"
+                            "$ref": "#/components/schemas/Models.Dto.General.Errors.DtoWarning"
                         },
                         "description": "List of warnings related to the request.",
                         "nullable": true
@@ -1341,7 +1341,7 @@
                     "errors": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoError"
+                            "$ref": "#/components/schemas/Models.Dto.General.Errors.DtoError"
                         },
                         "description": "List of errors related to the request.",
                         "nullable": true
@@ -1349,27 +1349,27 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.ListAllotmentBookingsResponse": {
+            "Models.Allocations.ListAllotmentBookingsResponse": {
                 "type": "object",
                 "properties": {
                     "bookings": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.AllotmentBooking"
+                            "$ref": "#/components/schemas/Models.Allocations.AllotmentBooking"
                         },
                         "nullable": true
                     }
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.ListAllotmentBookingsStatusCode": {
+            "Models.Allocations.ListAllotmentBookingsStatusCode": {
                 "enum": [
                     "FAILURE",
                     "SUCCESS"
                 ],
                 "type": "string"
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.ListMyAllotmentsRequest": {
+            "Models.Allocations.ListMyAllotmentsRequest": {
                 "required": [
                     "flightDateFrom",
                     "iataNumber"
@@ -1403,12 +1403,12 @@
                         "nullable": true,
                         "example": "2020-05-30"
                     },
-                    "cargoluxBookingOffice": {
+                    "BookingOffice": {
                         "pattern": "^[a-zA-Z]{3}$",
                         "type": "string",
-                        "description": "Cargolux booking office (IATA code).",
+                        "description": " booking office (IATA code).",
                         "nullable": true,
-                        "example": "LUX"
+                        "example": "BNL"
                     },
                     "airportOfOrigin": {
                         "pattern": "^[a-zA-Z]{3}$",
@@ -1420,14 +1420,14 @@
                     "airportOfOnload": {
                         "pattern": "^[a-zA-Z]{3}$",
                         "type": "string",
-                        "description": "IATA station code where cargo is onloaded.",
+                        "description": "IATA station code where package is onloaded.",
                         "nullable": true,
-                        "example": "LUX"
+                        "example": "BNL"
                     },
                     "airportOfOffload": {
                         "pattern": "^[a-zA-Z]{3}$",
                         "type": "string",
-                        "description": "IATA station code where cargo is offloaded.",
+                        "description": "IATA station code where package is offloaded.",
                         "nullable": true,
                         "example": "LAX"
                     },
@@ -1462,18 +1462,18 @@
                         "example": true
                     },
                     "minimumAvailableCapacity": {
-                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.MinimumAvailableCapacity"
+                        "$ref": "#/components/schemas/Models.Allocations.MinimumAvailableCapacity"
                     }
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.ListMyAllotmentsResponse": {
+            "Models.Allocations.ListMyAllotmentsResponse": {
                 "type": "object",
                 "properties": {
-                    "allotments": {
+                    "Allocations": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Allotments.Allotment"
+                            "$ref": "#/components/schemas/Models.Allocations.Allotment"
                         },
                         "description": "List of allotments.",
                         "nullable": true
@@ -1481,7 +1481,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.MinimumAvailableCapacity": {
+            "Models.Allocations.MinimumAvailableCapacity": {
                 "required": [
                     "actualWeight",
                     "volume"
@@ -1507,7 +1507,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.PivotRateDetail": {
+            "Models.Allocations.PivotRateDetail": {
                 "type": "object",
                 "properties": {
                     "pivotWeight": {
@@ -1534,7 +1534,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.Route": {
+            "Models.Allocations.Route": {
                 "type": "object",
                 "properties": {
                     "localScheduledDepartureDateAndTime": {
@@ -1575,7 +1575,7 @@
                         "type": "string",
                         "description": "Onload of the route (IATA station code).",
                         "nullable": true,
-                        "example": "LUX"
+                        "example": "BNL"
                     },
                     "offload": {
                         "type": "string",
@@ -1584,12 +1584,12 @@
                         "example": "LAX"
                     },
                     "mode": {
-                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.RouteMode"
+                        "$ref": "#/components/schemas/Models.Dto.General.RouteMode"
                     }
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Allotments.WeightBreak": {
+            "Models.Allocations.WeightBreak": {
                 "type": "object",
                 "properties": {
                     "weightBreak": {
@@ -1609,7 +1609,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Bookings.BookingCancellationRequest": {
+            "Models.Dto.Bookings.BookingCancellationRequest": {
                 "required": [
                     "awbNumber",
                     "contactEmails",
@@ -1640,11 +1640,11 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Bookings.BookingCancellationResponse": {
+            "Models.Dto.Bookings.BookingCancellationResponse": {
                 "type": "object",
                 "properties": {
                     "status": {
-                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.CancellationRequestStatus"
+                        "$ref": "#/components/schemas/Models.Dto.Bookings.CancellationRequestStatus"
                     },
                     "awbNumber": {
                         "type": "string",
@@ -1654,7 +1654,7 @@
                     "warnings": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoWarning"
+                            "$ref": "#/components/schemas/Models.Dto.General.Errors.DtoWarning"
                         },
                         "description": "List of warnings with code and description",
                         "nullable": true
@@ -1662,7 +1662,7 @@
                     "errors": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoError"
+                            "$ref": "#/components/schemas/Models.Dto.General.Errors.DtoError"
                         },
                         "description": "List of errors with code and description",
                         "nullable": true
@@ -1670,14 +1670,14 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Bookings.CancellationRequestStatus": {
+            "Models.Dto.Bookings.CancellationRequestStatus": {
                 "enum": [
                     "CANCELLATION_REQUESTED",
                     "FAILURE"
                 ],
                 "type": "string"
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Bookings.Consignment": {
+            "Models.Dto.Bookings.Consignment": {
                 "type": "object",
                 "properties": {
                     "awbNumber": {
@@ -1686,9 +1686,9 @@
                         "nullable": true,
                         "example": "172-11111111"
                     },
-                    "cargoIq": {
+                    "packageIq": {
                         "type": "boolean",
-                        "description": "Cargo IQ compliant flag.",
+                        "description": "package IQ compliant flag.",
                         "example": true
                     },
                     "carrier": {
@@ -1872,7 +1872,7 @@
                         "type": "string",
                         "description": "Station Code of the destination station.",
                         "nullable": true,
-                        "example": "LUX"
+                        "example": "BNL"
                     },
                     "bookedPieces": {
                         "type": "integer",
@@ -1884,7 +1884,7 @@
                     "stationMilestonesMap": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.StationMilestone"
+                            "$ref": "#/components/schemas/Models.Dto.Bookings.StationMilestone"
                         },
                         "description": "Contains data structure for each Station in this shipment.",
                         "nullable": true
@@ -1910,7 +1910,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Bookings.StationMilestone": {
+            "Models.Dto.Bookings.StationMilestone": {
                 "type": "object",
                 "properties": {
                     "flightNumber": {
@@ -2044,7 +2044,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Bookings.TrackListBookingsRequest": {
+            "Models.Dto.Bookings.TrackListBookingsRequest": {
                 "type": "object",
                 "properties": {
                     "awbNumbers": {
@@ -2060,7 +2060,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Bookings.TrackListBookingsResponse": {
+            "Models.Dto.Bookings.TrackListBookingsResponse": {
                 "type": "object",
                 "properties": {
                     "NOT_FOUND": {
@@ -2074,7 +2074,7 @@
                     "RESULTS_FOUND": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Bookings.Consignment"
+                            "$ref": "#/components/schemas/Models.Dto.Bookings.Consignment"
                         },
                         "description": "List of found bookings (if any).",
                         "nullable": true
@@ -2082,7 +2082,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.CustomerProfile.CustomerOffice": {
+            "Models.Dto.CustomerProfile.CustomerOffice": {
                 "type": "object",
                 "properties": {
                     "cmsAccountIdentifier": {
@@ -2095,7 +2095,7 @@
                         "type": "string",
                         "description": "(Friendly) Name of the customer office.",
                         "nullable": true,
-                        "example": "Cargolux Luxembourg"
+                        "example": " BNLembourg"
                     },
                     "iataNumber": {
                         "type": "string",
@@ -2103,11 +2103,11 @@
                         "nullable": true,
                         "example": "1234567891"
                     },
-                    "cargoluxBookingOffice": {
+                    "BookingOffice": {
                         "type": "string",
-                        "description": "Cargolux Booking Office assigned to the customer office.",
+                        "description": " Booking Office assigned to the customer office.",
                         "nullable": true,
-                        "example": "LUX"
+                        "example": "BNL"
                     },
                     "currency": {
                         "type": "string",
@@ -2165,7 +2165,7 @@
                         "description": "List of origin airports (IATA-code) from where this customer may request quotes.",
                         "nullable": true,
                         "example": [
-                            "LUX",
+                            "BNL",
                             "CDG",
                             "FRA"
                         ]
@@ -2173,19 +2173,19 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.CustomerProfile.CustomerProfileResponse": {
+            "Models.Dto.CustomerProfile.CustomerProfileResponse": {
                 "type": "object",
                 "properties": {
                     "name": {
                         "type": "string",
                         "description": "(Friendly) Name of the customer.",
                         "nullable": true,
-                        "example": "Cargolux"
+                        "example": ""
                     },
                     "CustomerOffices": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.CustomerProfile.CustomerOffice"
+                            "$ref": "#/components/schemas/Models.Dto.CustomerProfile.CustomerOffice"
                         },
                         "description": "List of CustomerOffices linked to this customer.",
                         "nullable": true
@@ -2205,7 +2205,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoError": {
+            "Models.Dto.General.Errors.DtoError": {
                 "type": "object",
                 "properties": {
                     "code": {
@@ -2221,7 +2221,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoWarning": {
+            "Models.Dto.General.Errors.DtoWarning": {
                 "type": "object",
                 "properties": {
                     "code": {
@@ -2237,14 +2237,14 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.General.RouteMode": {
+            "Models.Dto.General.RouteMode": {
                 "enum": [
                     "ROAD",
                     "AIR"
                 ],
                 "type": "string"
             },
-            "Cv.Sales.DigitalSales.Models.Dto.General.Ulds.Uld": {
+            "Models.Dto.General.Ulds.Uld": {
                 "required": [
                     "contour",
                     "quantity",
@@ -2327,7 +2327,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteRequest": {
+            "Models.Dto.Quotes.ConfirmQuoteRequest": {
                 "required": [
                     "awbNumber",
                     "iataNumber",
@@ -2380,11 +2380,11 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteResponse": {
+            "Models.Dto.Quotes.ConfirmQuoteResponse": {
                 "type": "object",
                 "properties": {
                     "status": {
-                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteStatus"
+                        "$ref": "#/components/schemas/Models.Dto.Quotes.ConfirmQuoteStatus"
                     },
                     "awbNumber": {
                         "type": "string",
@@ -2410,7 +2410,7 @@
                     "warnings": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoWarning"
+                            "$ref": "#/components/schemas/Models.Dto.General.Errors.DtoWarning"
                         },
                         "description": "List of warnings.",
                         "nullable": true
@@ -2418,7 +2418,7 @@
                     "errors": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Errors.DtoError"
+                            "$ref": "#/components/schemas/Models.Dto.General.Errors.DtoError"
                         },
                         "description": "List of errors.",
                         "nullable": true
@@ -2426,7 +2426,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Quotes.ConfirmQuoteStatus": {
+            "Models.Dto.Quotes.ConfirmQuoteStatus": {
                 "enum": [
                     "SUCCESS",
                     "FAILURE",
@@ -2434,7 +2434,7 @@
                 ],
                 "type": "string"
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Quotes.GetQuoteViaEmailRequest": {
+            "Models.Dto.Quotes.GetQuoteViaEmailRequest": {
                 "required": [
                     "emails"
                 ],
@@ -2451,7 +2451,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Quotes.ListMyQuotesRequest": {
+            "Models.Dto.Quotes.ListMyQuotesRequest": {
                 "required": [
                     "iataNumber",
                     "quoteCreationDateTimeFrom",
@@ -2477,7 +2477,7 @@
                         "type": "string",
                         "description": "Optional filter on the origin of the available quotes. 3 digit airport IATA code.",
                         "nullable": true,
-                        "example": "LUX"
+                        "example": "BNL"
                     },
                     "airportOfDestination": {
                         "pattern": "^[a-zA-Z]{3}$",
@@ -2504,10 +2504,10 @@
                         "nullable": true,
                         "example": "172-43508636"
                     },
-                    "cargoluxBookingOffice": {
+                    "BookingOffice": {
                         "pattern": "^[a-zA-Z]{3}$",
                         "type": "string",
-                        "description": "Cargolux booking office. 3 digit IATA code.",
+                        "description": " booking office. 3 digit IATA code.",
                         "nullable": true,
                         "example": "PAR"
                     },
@@ -2525,13 +2525,13 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Quotes.ListMyQuotesResponse": {
+            "Models.Dto.Quotes.ListMyQuotesResponse": {
                 "type": "object",
                 "properties": {
                     "quotes": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.Quote"
+                            "$ref": "#/components/schemas/Models.Dto.Quotes.Quote"
                         },
                         "description": "List of returned quotes.",
                         "nullable": true
@@ -2539,7 +2539,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Quotes.OtherApplicableCharge": {
+            "Models.Dto.Quotes.OtherApplicableCharge": {
                 "type": "object",
                 "properties": {
                     "chargeCode": {
@@ -2586,7 +2586,7 @@
                 "additionalProperties": false,
                 "description": "Other applicable charges."
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Quotes.Quote": {
+            "Models.Dto.Quotes.Quote": {
                 "type": "object",
                 "properties": {
                     "iataNumber": {
@@ -2599,7 +2599,7 @@
                         "type": "string",
                         "description": "Airport or City code, origin of the quote. 3 digit IATA code.",
                         "nullable": true,
-                        "example": "LUX"
+                        "example": "BNL"
                     },
                     "airportOfDestination": {
                         "type": "string",
@@ -2607,15 +2607,15 @@
                         "nullable": true,
                         "example": "LAX"
                     },
-                    "cargoluxBookingOffice": {
+                    "BookingOffice": {
                         "type": "string",
-                        "description": "IATA Code of the Cargolux booking office.",
+                        "description": "IATA Code of the  booking office.",
                         "nullable": true,
-                        "example": "LUX"
+                        "example": "BNL"
                     },
                     "natureOfGoods": {
                         "type": "string",
-                        "description": "Description of the shipment (Consolidation/GeneralCargo/...).",
+                        "description": "Description of the shipment (Consolidation/Generalpackage/...).",
                         "nullable": true,
                         "example": "Consolidation"
                     },
@@ -2671,7 +2671,7 @@
                     "dimensions": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.QuoteDimensionElement"
+                            "$ref": "#/components/schemas/Models.Dto.Quotes.QuoteDimensionElement"
                         },
                         "description": "List of dimensions of the loose shipment.",
                         "nullable": true
@@ -2679,7 +2679,7 @@
                     "ulds": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Ulds.Uld"
+                            "$ref": "#/components/schemas/Models.Dto.General.Ulds.Uld"
                         },
                         "description": "List of details of the containerized (ULD) shipment.",
                         "nullable": true
@@ -2725,7 +2725,7 @@
                     "quoteOptions": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.QuoteOption"
+                            "$ref": "#/components/schemas/Models.Dto.Quotes.QuoteOption"
                         },
                         "description": "List of options for the quote.",
                         "nullable": true
@@ -2733,7 +2733,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Quotes.QuoteDimensionElement": {
+            "Models.Dto.Quotes.QuoteDimensionElement": {
                 "required": [
                     "height",
                     "length",
@@ -2804,7 +2804,7 @@
                 "additionalProperties": false,
                 "description": "RequestQuoteDimensionElement is based on the generic DimensionElement."
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Quotes.QuoteOption": {
+            "Models.Dto.Quotes.QuoteOption": {
                 "type": "object",
                 "properties": {
                     "quoteOptionId": {
@@ -2814,13 +2814,13 @@
                     },
                     "localLatestAcceptanceTime": {
                         "type": "string",
-                        "description": "Latest local DateTime that the cargo has to be delivered at the origin.\r\nTimezone corresponds to the first route in this option.",
+                        "description": "Latest local DateTime that the package has to be delivered at the origin.\r\nTimezone corresponds to the first route in this option.",
                         "format": "date-time",
                         "nullable": true
                     },
                     "utcLatestAcceptanceTime": {
                         "type": "string",
-                        "description": "Latest DateTime (UTC) that the cargo has to be delivered at the origin.",
+                        "description": "Latest DateTime (UTC) that the package has to be delivered at the origin.",
                         "format": "date-time",
                         "nullable": true
                     },
@@ -2838,7 +2838,7 @@
                         "type": "string",
                         "description": "Information on the route taken in this quote option, including estimated times.",
                         "nullable": true,
-                        "example": "CV1234/01JAN LUX(01:01) - LAX(13:13)"
+                        "example": "CV1234/01JAN BNL(01:01) - LAX(13:13)"
                     },
                     "serviceLevel": {
                         "type": "string",
@@ -2846,9 +2846,9 @@
                         "nullable": true,
                         "example": "SELECT"
                     },
-                    "cargoluxProduct": {
+                    "Product": {
                         "type": "string",
-                        "description": "Cargolux Product identification code of the quote option.",
+                        "description": " Product identification code of the quote option.",
                         "nullable": true,
                         "example": "GEN"
                     },
@@ -2870,7 +2870,7 @@
                     "otherApplicableCharges": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.OtherApplicableCharge"
+                            "$ref": "#/components/schemas/Models.Dto.Quotes.OtherApplicableCharge"
                         },
                         "description": "List of other applicable charges in the quote option.",
                         "nullable": true
@@ -2878,7 +2878,7 @@
                     "routes": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.Route"
+                            "$ref": "#/components/schemas/Models.Dto.Quotes.Route"
                         },
                         "description": "List of routes taken in the quote option.",
                         "nullable": true
@@ -2886,7 +2886,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Quotes.RequestQuoteRequest": {
+            "Models.Dto.Quotes.RequestQuoteRequest": {
                 "required": [
                     "airportOfDestination",
                     "airportOfOrigin",
@@ -2913,7 +2913,7 @@
                         "pattern": "^[a-zA-Z]{3}$",
                         "type": "string",
                         "description": "Origin airport (IATA code) for the requested Quote.",
-                        "example": "LUX"
+                        "example": "BNL"
                     },
                     "airportOfDestination": {
                         "minLength": 1,
@@ -2950,7 +2950,7 @@
                     "natureOfGoods": {
                         "minLength": 1,
                         "type": "string",
-                        "description": "Description of the shipment (Consolidation/GeneralCargo/...).",
+                        "description": "Description of the shipment (Consolidation/Generalpackage/...).",
                         "example": "Consolidation"
                     },
                     "stackable": {
@@ -2988,7 +2988,7 @@
                     "dimensions": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.QuoteDimensionElement"
+                            "$ref": "#/components/schemas/Models.Dto.Quotes.QuoteDimensionElement"
                         },
                         "description": "List of detailed dimensions of the loose shipment for the requested quote.\r\nMandatory if TotalActualWeight exceeds 1 tonne or TotalVolume exceeds 6 cubic meters.",
                         "nullable": true
@@ -3008,7 +3008,7 @@
                     "ulds": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.Ulds.Uld"
+                            "$ref": "#/components/schemas/Models.Dto.General.Ulds.Uld"
                         },
                         "description": "List of details of the containerized (ULD) shipment.",
                         "nullable": true
@@ -3025,16 +3025,16 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Quotes.RequestQuoteResponse": {
+            "Models.Dto.Quotes.RequestQuoteResponse": {
                 "type": "object",
                 "properties": {
                     "quote": {
-                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Quotes.Quote"
+                        "$ref": "#/components/schemas/Models.Dto.Quotes.Quote"
                     }
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Quotes.Route": {
+            "Models.Dto.Quotes.Route": {
                 "type": "object",
                 "properties": {
                     "localScheduledArrivalDateAndTime": {
@@ -3064,13 +3064,13 @@
                         "example": "2020-10-27T20:35:00Z"
                     },
                     "mode": {
-                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.General.RouteMode"
+                        "$ref": "#/components/schemas/Models.Dto.General.RouteMode"
                     },
                     "onload": {
                         "type": "string",
                         "description": "Onload station (IATA code) for this route.",
                         "nullable": true,
-                        "example": "LUX"
+                        "example": "BNL"
                     },
                     "offload": {
                         "type": "string",
@@ -3087,7 +3087,7 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Rates.BulkRateDetail": {
+            "Models.Dto.Rates.BulkRateDetail": {
                 "type": "object",
                 "properties": {
                     "breakEven": {
@@ -3098,7 +3098,7 @@
                     "weightBreaks": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.WeightBreak"
+                            "$ref": "#/components/schemas/Models.Dto.Rates.WeightBreak"
                         },
                         "description": "List of weightbreaks. These are the weight ranges on which a particular unit price applies.",
                         "nullable": true
@@ -3107,7 +3107,7 @@
                 "additionalProperties": false,
                 "description": "The bulk rate detail for the rate definition."
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Rates.ListMyRatesRequest": {
+            "Models.Dto.Rates.ListMyRatesRequest": {
                 "required": [
                     "iataNumber"
                 ],
@@ -3137,7 +3137,7 @@
                         "type": "string",
                         "description": "Can be null or any valid airport code. In IATA format.",
                         "nullable": true,
-                        "example": "LUX"
+                        "example": "BNL"
                     },
                     "airportOfDestination": {
                         "pattern": "^[a-zA-Z]{3}$",
@@ -3167,13 +3167,13 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Rates.ListMyRatesResponse": {
+            "Models.Dto.Rates.ListMyRatesResponse": {
                 "type": "object",
                 "properties": {
                     "rates": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.Rate"
+                            "$ref": "#/components/schemas/Models.Dto.Rates.Rate"
                         },
                         "description": "List of requested Rates.",
                         "nullable": true
@@ -3181,12 +3181,12 @@
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Rates.Rate": {
+            "Models.Dto.Rates.Rate": {
                 "type": "object",
                 "properties": {
                     "rateSequenceNumber": {
                         "type": "string",
-                        "description": "This is the rate sequence identifier that was assigned by Cargolux.",
+                        "description": "This is the rate sequence identifier that was assigned by .",
                         "nullable": true,
                         "example": "50.0"
                     },
@@ -3194,7 +3194,7 @@
                         "type": "string",
                         "description": "The origin airport (IATA code) for which this rate applies.",
                         "nullable": true,
-                        "example": "LUX"
+                        "example": "BNL"
                     },
                     "destination": {
                         "type": "string",
@@ -3240,7 +3240,7 @@
                         "example": true
                     },
                     "bulkRateDetail": {
-                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.BulkRateDetail"
+                        "$ref": "#/components/schemas/Models.Dto.Rates.BulkRateDetail"
                     },
                     "commodityForRating": {
                         "type": "string",
@@ -3255,12 +3255,12 @@
                         "example": "A1"
                     },
                     "uldDetails": {
-                        "$ref": "#/components/schemas/Cv.Sales.DigitalSales.Models.Dto.Rates.UldDetails"
+                        "$ref": "#/components/schemas/Models.Dto.Rates.UldDetails"
                     }
                 },
                 "additionalProperties": false
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Rates.UldDetails": {
+            "Models.Dto.Rates.UldDetails": {
                 "type": "object",
                 "properties": {
                     "minimumChargePerUld": {
@@ -3283,15 +3283,15 @@
                     },
                     "outsideBulkRate": {
                         "type": "number",
-                        "description": "Extra charge for cargo outside the ULD container.",
+                        "description": "Extra charge for package outside the ULD container.",
                         "format": "double",
                         "example": 0
                     }
                 },
                 "additionalProperties": false,
-                "description": "Information on the weight brakes of the rate for ‘containerized’ cargo (empty if bulk rate).\r\nDetail of the UL rate (empty if bulk rate)"
+                "description": "Information on the weight brakes of the rate for ‘containerized’ package (empty if bulk rate).\r\nDetail of the UL rate (empty if bulk rate)"
             },
-            "Cv.Sales.DigitalSales.Models.Dto.Rates.WeightBreak": {
+            "Models.Dto.Rates.WeightBreak": {
                 "type": "object",
                 "properties": {
                     "weightBreak": {

@@ -4,6 +4,8 @@ parameters:
   mocking: true
   defaultJobTimeoutInMinutes: 120
   apiName: ''
+  apiTitle: ''
+  apiDescription: ''
 
 stages:
   - stage: validation
@@ -27,6 +29,8 @@ stages:
           openApiFilePath: '$(openApiPath)'
           currentApiVersion: $(Build.BuildNumber)
           apiName: '${{ parameters.apiName }}'
+          apiTitle: '${{ parameters.apiTitle }}'
+          apiDescription: '${{ parameters.apiDescription }}'
 
   - stage: mocking
     displayName: Publish to API Gateway
