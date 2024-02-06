@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "rocketapi",
-    "version": "1.0.alpha"
+    "version": "1.0.beta"
   },
   "paths": {
     "/rockets": {
@@ -38,6 +38,10 @@
             "type": "string",
             "nullable": true
           },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },          
           "date": {
             "type": "string",
             "format": "date"
