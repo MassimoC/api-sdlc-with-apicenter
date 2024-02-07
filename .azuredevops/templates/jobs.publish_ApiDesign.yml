@@ -53,7 +53,7 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             sudo apt --assume-yes install jq
-            jContent=$(jq -R -s . '${{ parameters.openApiFilePath }}')
+            jContent=$(jq -c . '${{ parameters.openApiFilePath }}')
             echo "##vso[task.setvariable variable=openApiContent;]$jContent"
 
       - bash: |
@@ -90,7 +90,7 @@ jobs:
         displayName: APIC - api import specification
         inputs:
           azureSubscription: ${{ parameters.serviceConnection }}
-          scriptType: pscore
+          scriptType: bash
           scriptLocation: inlineScript
           inlineScript: |
             echo "... Executing command :"
@@ -100,6 +100,6 @@ jobs:
             echo "------------------------------------"
             echo ""
             echo "... Executing command :"
-            echo "az apic api definition import-specification -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name ${{ parameters.currentApiVersion }} --definition-name "xdef006" --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}'"
+            echo "az apic api definition import-specification -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name ${{ parameters.currentApiVersion }} --definition-name "xdef006" --format "inline" --value '..REDACTED..' --specification '{"name":"openapi","version":"3.0.1"}'"
             echo ""
             az apic api definition import-specification -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name ${{ parameters.currentApiVersion }} --definition-name "xdef006" --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}'
