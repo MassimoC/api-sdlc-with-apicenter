@@ -57,7 +57,7 @@ jobs:
             echo "##vso[task.setvariable variable=openApiContent;]$jContent"
 
       - bash: |
-          echo "use macro syntax to read variables: $(openApiContent)"
+          echo 'use macro syntax to read variables: $(openApiContent)'
 
       - task: AzureCLI@2  
         displayName: APIC - api list
