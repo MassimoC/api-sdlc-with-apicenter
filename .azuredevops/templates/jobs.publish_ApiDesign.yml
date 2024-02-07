@@ -90,7 +90,7 @@ jobs:
         displayName: APIC - api import specification
         inputs:
           azureSubscription: ${{ parameters.serviceConnection }}
-          scriptType: bash
+          scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
             echo "... Executing command :"
@@ -102,4 +102,4 @@ jobs:
             echo "... Executing command :"
             echo "az apic api definition import-specification -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name ${{ parameters.currentApiVersion }} --definition-name "xdef006" --format "inline" --value '..REDACTED..' --specification '{"name":"openapi","version":"3.0.1"}'"
             echo ""
-            az apic api definition import-specification -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name ${{ parameters.currentApiVersion }} --definition-name "xdef006" --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}'
+            az apic api definition import-specification -g rg-apicenter -s myapicatalog --api-name 1password-api --version-name 20240207-20 --definition-name xdef006 --file-name '${{ parameters.openApiFilePath }}'
