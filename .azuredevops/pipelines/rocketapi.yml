@@ -19,7 +19,7 @@ trigger:
   paths:
     include:
       - '/.azuredevops/pipelines/rocketapi.yml'
-      - '/.azuredevops/templates/*.yml'
+      #- '/.azuredevops/templates/*.yml'
       - '/design/rocketapi/*'
     exclude:
       - '/**/*.md'
