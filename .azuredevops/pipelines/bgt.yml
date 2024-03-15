@@ -1,0 +1,41 @@
+name: $(Date:yyyyMMdd)-$(Rev:rr)
+
+parameters:
+  - name: staticValidation
+    displayName: Execute static validation
+    type: boolean
+    default: true
+  - name: publishDesign
+    displayName: Publish OpenAPI specification
+    type: boolean
+    default: true
+
+pr: none
+
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - '/.azuredevops/pipelines/bgt.yml'
+      - '/design/bgt/*'
+    exclude:
+      - '/**/*.md'
+
+variables:
+  - template: '../../settings.yml'
+  - name: openApiPath
+    value: '$(azdoWorkDir)/design/bgt/openapi_bgt.json'
+  - name: currentApiVersion
+    value: '1.0.0'
+    
+
+stages:
+  - template: /.azuredevops/templates/stages.module.yml
+    parameters:
+      staticValidation: '${{ parameters.staticValidation }}'
+      publishDesign: '${{ parameters.publishDesign }}'
+      apiName: 'bgt-api'
+      apiTitle: 'BGT API'
+      apiDescription: 'BGT integration'
