@@ -1,13 +1,13 @@
 {
     "openapi": "3.0.1",
     "info": {
-        "title": "igt-public-api-v1",
+        "title": "BGT-public-api-v1",
         "description": "This specification contains <b>V1</b> version of merged publicly exposed Anywhere API and PlayDigital API<br/><br/>To avoid name clash in schemas section duplicated objects in PlayDigital API were prefixed with interactive<br/><br/>For example interactiveErrorDTO",
         "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://ltt01mp-apimprod01.azure-api.net/api/v1"
+            "url": "https://whatdaserver/api/v1"
         }
     ],
     "paths": {
@@ -650,7 +650,7 @@
         "/locations": {
             "get": {
                 "summary": "getLocations",
-                "description": "Gets a page of lottery locations",
+                "description": "Gets a page of bonus locations",
                 "operationId": "getLocations",
                 "parameters": [
                     {
@@ -2483,7 +2483,7 @@
                                     "pageNumber": 0,
                                     "winners": [
                                         {
-                                            "gameName": "Lotto",
+                                            "gameName": "Bonus",
                                             "drawInfo": {
                                                 "drawId": 25,
                                                 "drawDate": 1599575602000
@@ -2694,7 +2694,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "example": "Lotto"
+                        "example": "Bonus"
                     },
                     {
                         "name": "draw-id",
@@ -3235,8 +3235,8 @@
                                             "platform": {
                                                 "id": 10,
                                                 "code": 62,
-                                                "name": "IGT_CASINO",
-                                                "description": "IGT_CASINO"
+                                                "name": "BGT_CASINO",
+                                                "description": "BGT_CASINO"
                                             },
                                             "costToCover": 50,
                                             "iconUrl": "string"
@@ -3409,8 +3409,8 @@
                                             "platform": {
                                                 "id": 10,
                                                 "code": 62,
-                                                "name": "IGT_CASINO",
-                                                "description": "IGT_CASINO"
+                                                "name": "BGT_CASINO",
+                                                "description": "BGT_CASINO"
                                             },
                                             "costToCover": 50,
                                             "iconUrl": "string"
@@ -4052,8 +4052,8 @@
                                             "platform": {
                                                 "id": 10,
                                                 "code": 62,
-                                                "name": "IGT_CASINO",
-                                                "description": "IGT_CASINO"
+                                                "name": "BGT_CASINO",
+                                                "description": "BGT_CASINO"
                                             },
                                             "costToCover": 50,
                                             "iconUrl": "string"
@@ -7455,8 +7455,8 @@
         },
         "/players/self/cards/{id}": {
             "get": {
-                "summary": "Get single lottery card",
-                "description": "Get single lottery card",
+                "summary": "Get single bonus card",
+                "description": "Get single bonus card",
                 "operationId": "getCard",
                 "parameters": [
                     {
@@ -7575,7 +7575,7 @@
                 }
             },
             "put": {
-                "summary": "Update lottery card",
+                "summary": "Update bonus card",
                 "description": "Only used to change the type (financial -> non financial)",
                 "operationId": "updateCard",
                 "parameters": [
@@ -7612,7 +7612,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Updated lottery card",
+                        "description": "Updated bonus card",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -7798,8 +7798,8 @@
         },
         "/players/self/cards": {
             "get": {
-                "summary": "Get player's lottery cards",
-                "description": "Get player's lottery cards",
+                "summary": "Get player's bonus cards",
+                "description": "Get player's bonus cards",
                 "operationId": "getCards",
                 "responses": {
                     "200": {
@@ -7916,8 +7916,8 @@
         },
         "/players/self/cards/{id}/regenerate": {
             "post": {
-                "summary": "Regenerate player's lottery cards",
-                "description": "Regenerate player's lottery cards",
+                "summary": "Regenerate player's bonus cards",
+                "description": "Regenerate player's bonus cards",
                 "operationId": "regenerateCard",
                 "parameters": [
                     {
@@ -8354,7 +8354,7 @@
                                     "id": "string",
                                     "uuid": "I6-**********-12",
                                     "insertTimestamp": 0,
-                                    "type": "application/lotteryTransaction-v1",
+                                    "type": "application/bonusTransaction-v1",
                                     "body": "<balanceTransaction> ... </balanceTransaction>",
                                     "forFun": true,
                                     "jurisdiction": 0,
@@ -8553,7 +8553,7 @@
                                             "id": "string",
                                             "uuid": "I6-**********-12",
                                             "insertTimestamp": 0,
-                                            "type": "application/lotteryTransaction-v1",
+                                            "type": "application/bonusTransaction-v1",
                                             "body": "<balanceTransaction> ... </balanceTransaction>",
                                             "forFun": true,
                                             "jurisdiction": 0,
@@ -11179,8 +11179,8 @@
         },
         "/players/inbound-communications": {
             "post": {
-                "summary": "Sends notification from anonymous player to lottery system",
-                "description": "Sends notification from anonymous player to lottery system",
+                "summary": "Sends notification from anonymous player to bonus system",
+                "description": "Sends notification from anonymous player to bonus system",
                 "operationId": "receiveAnonymousInboundCommunication",
                 "requestBody": {
                     "description": "Message defined by a player",
@@ -11280,8 +11280,8 @@
         },
         "/players/self/inbound-communications": {
             "post": {
-                "summary": "Sends notification from authenticated player to lottery system",
-                "description": "Sends notification from authenticated player to lottery system",
+                "summary": "Sends notification from authenticated player to bonus system",
+                "description": "Sends notification from authenticated player to bonus system",
                 "operationId": "receiveInboundCommunicationFromPlayer",
                 "requestBody": {
                     "description": "Message defined by a player",
@@ -12528,7 +12528,7 @@
                 }
             }
         },
-        "/players/self/transactions/lottery/{id}": {
+        "/players/self/transactions/bonus/{id}": {
             "get": {
                 "summary": "Get transaction by ID",
                 "description": "Allows to fetch transaction by ID.",
@@ -12551,13 +12551,13 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/LotteryTransactionDTO"
+                                    "$ref": "#/components/schemas/bonusTransactionDTO"
                                 },
                                 "example": {
                                     "id": "string",
                                     "uuid": "I6-**********-12",
                                     "insertTimestamp": 0,
-                                    "type": "application/lotteryTransaction-v1",
+                                    "type": "application/bonusTransaction-v1",
                                     "body": "<balanceTransaction> ... </balanceTransaction>",
                                     "forFun": true,
                                     "cdc": 0,
@@ -12569,7 +12569,7 @@
                                     "transactionTimeUTC": 0,
                                     "transactionAmount": 0,
                                     "subscriptionId": 0,
-                                    "lotteryTransactionType": "string",
+                                    "bonusTransactionType": "string",
                                     "startDrawNumber": 0,
                                     "endDrawNumber": 0,
                                     "globalTransId": "string",
@@ -12684,16 +12684,16 @@
                 }
             }
         },
-        "/players/self/transactions/lottery": {
+        "/players/self/transactions/bonus": {
             "get": {
                 "summary": "Get player transactions",
-                "description": "Allows to query player's lottery transactions repository with optional filters. Results pagination is applied.",
+                "description": "Allows to query player's bonus transactions repository with optional filters. Results pagination is applied.",
                 "operationId": "getTransactions_2",
                 "parameters": [
                     {
-                        "name": "lotteryTransactionType",
+                        "name": "bonusTransactionType",
                         "in": "query",
-                        "description": "Type of lottery transaction",
+                        "description": "Type of bonus transaction",
                         "schema": {
                             "enum": [
                                 "CANCELLATION",
@@ -12787,11 +12787,11 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Lottery transactions list",
+                        "description": "bonus transactions list",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/LotteryTransactionsPageDTO"
+                                    "$ref": "#/components/schemas/bonusTransactionsPageDTO"
                                 },
                                 "example": {
                                     "nextPageUrl": "string",
@@ -12804,7 +12804,7 @@
                                             "id": "string",
                                             "uuid": "I6-**********-12",
                                             "insertTimestamp": 0,
-                                            "type": "application/lotteryTransaction-v1",
+                                            "type": "application/bonusTransaction-v1",
                                             "body": "<balanceTransaction> ... </balanceTransaction>",
                                             "forFun": true,
                                             "cdc": 0,
@@ -12816,7 +12816,7 @@
                                             "transactionTimeUTC": 0,
                                             "transactionAmount": 0,
                                             "subscriptionId": 0,
-                                            "lotteryTransactionType": "string",
+                                            "bonusTransactionType": "string",
                                             "startDrawNumber": 0,
                                             "endDrawNumber": 0,
                                             "globalTransId": "string",
@@ -17582,7 +17582,7 @@
                             "example": {
                                 "available": true,
                                 "type": "EMAIL",
-                                "value": "newemail@igt.com"
+                                "value": "newemail@BGT.com"
                             }
                         }
                     }
@@ -22276,7 +22276,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Lottery transaction",
+                        "description": "bonus transaction",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -22434,7 +22434,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Lottery transactions list",
+                        "description": "bonus transactions list",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -22585,9 +22585,9 @@
                         }
                     },
                     {
-                        "name": "lottery-product-id",
+                        "name": "bonus-product-id",
                         "in": "query",
-                        "description": "Id of a lottery product",
+                        "description": "Id of a bonus product",
                         "schema": {
                             "type": "string"
                         }
@@ -22653,7 +22653,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Lottery transactions list",
+                        "description": "bonus transactions list",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -24788,7 +24788,7 @@
                             "INSTANT_WINNER_DRAWS_REMAINING",
                             "CLAIMED",
                             "NOT_WINNER_DRAWS_REMAINING",
-                            "CLAIM_AT_LOTTERY",
+                            "CLAIM_AT_bonus",
                             "CANCELED"
                         ],
                         "type": "string",
@@ -26260,7 +26260,7 @@
                         "type": "integer",
                         "format": "int32"
                     },
-                    "lotteryGridNumber": {
+                    "bonusGridNumber": {
                         "type": "integer",
                         "format": "int32"
                     },
@@ -28280,7 +28280,7 @@
                     "gameName": {
                         "type": "string",
                         "description": "Game name",
-                        "example": "Lotto"
+                        "example": "Bonus"
                     },
                     "betType": {
                         "type": "string",
@@ -28348,7 +28348,7 @@
                     "gameName": {
                         "type": "string",
                         "description": "Game name",
-                        "example": "Lotto"
+                        "example": "Bonus"
                     },
                     "drawInfo": {
                         "$ref": "#/components/schemas/DrawInfoDTO"
@@ -28794,12 +28794,12 @@
                     "name": {
                         "type": "string",
                         "description": "Platform name",
-                        "example": "IGT_CASINO"
+                        "example": "BGT_CASINO"
                     },
                     "description": {
                         "type": "string",
                         "description": "Platform description",
-                        "example": "IGT_CASINO"
+                        "example": "BGT_CASINO"
                     }
                 },
                 "description": "Represents game platform"
@@ -29628,7 +29628,7 @@
                     },
                     "executionDate": {
                         "type": "integer",
-                        "description": "Execution date generated by IGT Command at the time the request is processed",
+                        "description": "Execution date generated by BGT Command at the time the request is processed",
                         "format": "int64"
                     }
                 },
@@ -30369,7 +30369,7 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "description": "Lottery card id (It is an internal id not the lottery card number)",
+                        "description": "bonus card id (It is an internal id not the bonus card number)",
                         "example": "1454432004511"
                     },
                     "status": {
@@ -30377,12 +30377,12 @@
                             "2 - default"
                         ],
                         "type": "string",
-                        "description": "Lottery card status",
+                        "description": "bonus card status",
                         "example": "2"
                     },
                     "number": {
                         "type": "string",
-                        "description": "Lottery card number which is printed on a physical card",
+                        "description": "bonus card number which is printed on a physical card",
                         "example": "44414544320045110259"
                     },
                     "level": {
@@ -30396,7 +30396,7 @@
                     },
                     "preferredCurrency": {
                         "type": "string",
-                        "description": "Preferred currency of the lottery card",
+                        "description": "Preferred currency of the bonus card",
                         "example": "USD"
                     },
                     "requestedPhysicalCard": {
@@ -30405,11 +30405,11 @@
                     },
                     "type": {
                         "enum": [
-                            "444 - Lottery club card",
+                            "444 - bonus club card",
                             "333 - Loyalty club card (only points operations)"
                         ],
                         "type": "string",
-                        "description": "Lottery card type",
+                        "description": "bonus card type",
                         "example": "444"
                     },
                     "requestedWhen": {
@@ -30418,7 +30418,7 @@
                         "format": "int64"
                     }
                 },
-                "description": "Player's lottery card object"
+                "description": "Player's bonus card object"
             },
             "CardReplaceResponseDTO": {
                 "type": "object",
@@ -30589,7 +30589,7 @@
                     "type": {
                         "type": "string",
                         "description": "Transaction type",
-                        "example": "application/lotteryTransaction-v1"
+                        "example": "application/bonusTransaction-v1"
                     },
                     "body": {
                         "type": "string",
@@ -31549,7 +31549,7 @@
                 },
                 "description": "Object representing information about login history"
             },
-            "LotteryTransactionDTO": {
+            "bonusTransactionDTO": {
                 "required": [
                     "cdc",
                     "endDrawNumber",
@@ -31557,7 +31557,7 @@
                     "freeTicket",
                     "insertTimestamp",
                     "jurisdiction",
-                    "lotteryTransactionType",
+                    "bonusTransactionType",
                     "product",
                     "serial",
                     "startDrawNumber",
@@ -31586,7 +31586,7 @@
                     "type": {
                         "type": "string",
                         "description": "Transaction type",
-                        "example": "application/lotteryTransaction-v1"
+                        "example": "application/bonusTransaction-v1"
                     },
                     "body": {
                         "type": "string",
@@ -31640,7 +31640,7 @@
                         "description": "Subscription id if transaction is related with any subscription",
                         "format": "int64"
                     },
-                    "lotteryTransactionType": {
+                    "bonusTransactionType": {
                         "type": "string",
                         "description": "Transaction type "
                     },
@@ -31696,9 +31696,9 @@
                         "description": "Transaction BetType "
                     }
                 },
-                "description": "Represents lottery transaction"
+                "description": "Represents bonus transaction"
             },
-            "LotteryTransactionsPageDTO": {
+            "bonusTransactionsPageDTO": {
                 "required": [
                     "nextItems",
                     "nextPageUrl",
@@ -31738,12 +31738,12 @@
                     "transactions": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/LotteryTransactionDTO"
+                            "$ref": "#/components/schemas/bonusTransactionDTO"
                         },
                         "description": "List of transactions"
                     }
                 },
-                "description": "Container for lottery transactions api response, including paging data"
+                "description": "Container for bonus transactions api response, including paging data"
             },
             "LoyaltyProfileDTO": {
                 "required": [
@@ -32958,7 +32958,7 @@
                     "value": {
                         "type": "string",
                         "description": "value of the parameter to be checked",
-                        "example": "newemail@igt.com"
+                        "example": "newemail@BGT.com"
                     }
                 },
                 "description": "DTO to be used for input and output of the checkAvailability API"
