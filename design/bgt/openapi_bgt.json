@@ -3154,7 +3154,7 @@
                         "name": "sortFields",
                         "in": "query",
                         "schema": {
-                            "type": "array"
+                            "type": "object"
                         }
                     },
                     {
@@ -3328,7 +3328,7 @@
                         "name": "sortFields",
                         "in": "query",
                         "schema": {
-                            "type": "array"
+                            "type": "object"
                         }
                     },
                     {
@@ -3971,7 +3971,7 @@
                         "name": "sortFields",
                         "in": "query",
                         "schema": {
-                            "type": "array"
+                            "type": "object"
                         }
                     },
                     {
@@ -4794,7 +4794,7 @@
                         "in": "query",
                         "description": "List of requested game platform ids",
                         "schema": {
-                            "type": "array"
+                            "type": "object"
                         }
                     },
                     {
@@ -5022,7 +5022,7 @@
                         "in": "query",
                         "description": "List of requested game platform ids",
                         "schema": {
-                            "type": "array"
+                            "type": "object"
                         }
                     }
                 ],
@@ -5453,7 +5453,7 @@
                         "in": "query",
                         "description": "List of requested game platform ids",
                         "schema": {
-                            "type": "array"
+                            "type": "object"
                         }
                     },
                     {
@@ -5760,7 +5760,7 @@
                         "in": "query",
                         "description": "Filtering the winnings to include only the ones of the specified gaming platforms",
                         "schema": {
-                            "type": "array"
+                            "type": "object"
                         }
                     }
                 ],
