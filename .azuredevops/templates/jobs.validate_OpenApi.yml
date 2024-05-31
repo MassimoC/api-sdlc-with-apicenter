@@ -74,11 +74,3 @@ jobs:
           codeAnalysisTool: 'Sarif'
           sarifFiles: '${{ parameters.lintResult }}'
         displayName: 'Publish SARIF results'
-
-	    # - task: PublishTestResults@2
-      #   inputs:
-      #     testResultsFormat: 'JUnit'
-      #     testResultsFiles: '${{ parameters.lintResult }}'
-      #     failTaskOnFailedTests: true
-      #     testRunTitle: 'Spectral Linting Results'
-      #   displayName: 'Publish Test Results'
