@@ -91,13 +91,13 @@ jobs:
           echo $(apicenterResultArmFormatted)
         displayName: 'Show apicenterResultArmFormatted azdo variable'
 
-      - task: PublishBuildArtifacts@1
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish artifact: linting result'
         inputs:
-          PathtoPublish: '$(apiclintResultFilePath)'
-          ArtifactName: 'openapi-validation'
-          publishLocation: 'ApicLintingResults'
+          targetPath: '$(apiclintResultFilePath)'
+          artifact: 'linting'
+          publishLocation: 'pipeline'
         condition: always()
-        displayName: 'Publish ARM file envelope with linting results'
 
       - task: PublishTestResults@2
         inputs:
