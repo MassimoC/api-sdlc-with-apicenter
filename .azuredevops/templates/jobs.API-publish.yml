@@ -137,12 +137,7 @@ jobs:
           scriptType: 'bash'
           scriptLocation: 'inlineScript'
           inlineScript: |
-            apicUri="https://management.azure.com/subscriptions/$(subscriptionId)/" \
-                    "resourceGroups/${{ parameters.rg }}/" \
-                    "providers/Microsoft.ApiCenter/services/${{ parameters.apicName }}/" \
-                    "workspaces/default/apis/${{ parameters.apiName }}/" \
-                    "versions/${{ parameters.currentApiVersion }}/" \
-                    "definitions/${{ parameters.definitionId }}/updateAnalysisState?api-version=2024-03-01"
+            apicUri="https://management.azure.com/subscriptions/$(subscriptionId)/resourceGroups/${{ parameters.rg }}/providers/Microsoft.ApiCenter/services/${{ parameters.apicName }}/workspaces/default/apis/${{ parameters.apiName }}/versions/${{ parameters.currentApiVersion }}/definitions/${{ parameters.definitionId }}/updateAnalysisState?api-version=2024-03-01"
             
             echo $apicUri
 
