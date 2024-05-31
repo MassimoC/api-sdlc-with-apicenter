@@ -85,13 +85,13 @@ jobs:
 
           echo "... save ARM format to $(apiclintResultFilePath)"
           echo "$fromApicToArm" > "$(apiclintResultFilePath)"
-          echo "... write azdo variable"
-          echo "##vso[task.setvariable variable=apicenterResultArmFormatted;]'$fromApicToArm'"
+          # echo "... write azdo variable"
+          # echo "##vso[task.setvariable variable=apicenterResultArmFormatted;]'$fromApicToArm'"
         displayName: 'Show formatted result (APIC and ARM)'
 
       - bash: |
-          echo "$(apicenterResultArmFormatted)"
-        displayName: 'Show apicenterResultArmFormatted azdo variable'
+          cat '$(apiclintResultFilePath)'
+        displayName: 'Show apiclintResultFilePath content'
 
       - task: PublishPipelineArtifact@1
         displayName: 'Publish artifact: linting result'
