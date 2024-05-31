@@ -121,9 +121,15 @@ jobs:
             echo "... Executing command :"
             az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}
 
+      - task: DownloadPipelineArtifact@2
+        inputs:
+          artifact: 'linting'
+          path: '$(Pipeline.Workspace)/drop'
+        displayName: 'Download artifacts'
+
       - bash: |
-          cat '$(apiclintResultFilePath)'
-        displayName: 'Show apiclintResultFilePath content'
+          cat '$(Pipeline.Workspace)/drop/lint-result.json'
+        displayName: 'Cat lint-result.json content'
 
       - task: AzureCLI@2
         inputs:
@@ -139,4 +145,11 @@ jobs:
                     "definitions/${{ parameters.definitionId }}/updateAnalysisState?api-version=2024-03-01"
             
             echo $apicUri
+
+            content=$(jq -c '.' ''$(Pipeline.Workspace)/drop/lint-result.json')
+
+            az rest --method post \
+                    --uri $apicUri \
+                    --headers "Content-Type=application/json" \
+                    --body "$(content)"
         displayName: 'Pulish analysis to API Center'
