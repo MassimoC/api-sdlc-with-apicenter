@@ -67,7 +67,7 @@ jobs:
                   }
               }]
           }' ${{ parameters.lintResult }})
-          echo $lintresults
+          #echo $lintresults
           echo "##vso[task.setvariable variable=lintForApiCenter;]$lintresults"
 
         displayName: 'Show formatted result'
