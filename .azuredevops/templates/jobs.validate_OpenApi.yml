@@ -7,6 +7,7 @@ parameters:
   openApiFilePath: '$(openApiFullPath)'
   rulesetPath: '$(spectralRulesPath)'
   lintResult: '$(lintResult)'
+  lintResultAzDO: '$(lintResultAzDO)'
   # warn, error
   failSeverity: 'error'
 
@@ -100,10 +101,14 @@ jobs:
           publishLocation: 'pipeline'
         condition: always()
 
+      - script: spectral lint "${{ parameters.openApiFilePath }}" --ruleset "${{ parameters.rulesetPath }}" --fail-severity "${{ parameters.failSeverity }}" --output "${{ parameters.lintResultAzDO }}" --format junit
+        continueOnError: true
+        displayName: 'AzDO JUnit format'
+
       - task: PublishTestResults@2
         inputs:
           testResultsFormat: 'JUnit'
-          testResultsFiles: '${{ parameters.lintResult }}'
+          testResultsFiles: '${{ parameters.lintResultAzDO }}'
           failTaskOnFailedTests: true
           testRunTitle: 'Spectral Linting Results'
         displayName: 'Publish Test Results'

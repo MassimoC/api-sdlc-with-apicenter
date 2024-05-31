@@ -27,7 +27,8 @@ variables:
 
   location: 'westeurope' # The default location to test deploy resources to
   spectralRulesPath: '$(azdoWorkDir)/rules/spectral-mycompany.oas.yaml'
-  lintResult: '$(azdoWorkDir)/rules/lint-result.xml'
+  lintResult: '$(azdoWorkDir)/rules/lint-result.sarif'
+  lintResultAzDO: '$(azdoWorkDir)/rules/lint-result.junit'
   apiclintResultFilePath: '$(azdoWorkDir)/rules/lint-result.json'
 
   ###########################################################################################################################
