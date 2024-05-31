@@ -88,7 +88,7 @@ jobs:
         displayName: 'Show formatted result (SARIF to APIC and ARM)'
 
       - bash: |
-          echo $(apicenterResultArmFormatted)
+          echo "$(apicenterResultArmFormatted)"
         displayName: 'Show apicenterResultArmFormatted azdo variable'
 
       - task: PublishPipelineArtifact@1
