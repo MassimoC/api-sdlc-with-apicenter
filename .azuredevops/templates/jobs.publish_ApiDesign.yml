@@ -80,10 +80,11 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             echo "... ****** Print API CREATE command ******"
-            echo "az apic api create --api-id ${{ parameters.apicName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name ${{ parameters.apiName }} --title '${{ parameters.apiTitle }}'  --kind rest --description '${{ parameters.apiDescription }}'  --summary '${{ parameters.apiDescription }}' "
+            echo "az apic api create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --title '${{ parameters.apiTitle }}' --type rest --description '${{ parameters.apiDescription }}' --summary '${{ parameters.apiDescription }}'"
             echo ""
             echo "... Executing command :"
-            az apic api create --api-id ${{ parameters.apicName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name ${{ parameters.apiName }} --title '${{ parameters.apiTitle }}'  --kind rest --description '${{ parameters.apiDescription }}'  --summary '${{ parameters.apiDescription }}' 
+            az apic api create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --title '${{ parameters.apiTitle }}' --type rest --description '${{ parameters.apiDescription }}' --summary '${{ parameters.apiDescription }}'
+            #--custom-properties '{"public-facing":true}'
 
       - task: AzureCLI@2  
         displayName: APIC - api version create
@@ -93,10 +94,11 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             echo "... ****** Print API VERSION CREATE command ******"
-            echo "az apic api version create --api-id ${{ parameters.apicName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --name ${{ parameters.currentApiVersion }} --title '${{ parameters.currentApiVersion }}'"
+            echo "az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --title '${{ parameters.currentApiVersion }}'"
             echo ""
             echo "... Executing command :"
-            az apic api version create --api-id ${{ parameters.apicName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --name ${{ parameters.currentApiVersion }} --title "${{ parameters.currentApiVersion }}"
+            az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --title '${{ parameters.currentApiVersion }}'
+            
 
       - task: AzureCLI@2  
         displayName: APIC - api import specification
