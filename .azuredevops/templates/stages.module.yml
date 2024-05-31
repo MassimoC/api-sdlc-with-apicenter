@@ -65,7 +65,7 @@ stages:
     dependsOn:
       - dev
     jobs:
-      - template: /.azuredevops/templates/jobs.deploy_Api.yml
+      - template: /.azuredevops/templates/jobs.API-deploy.yml
         parameters:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
@@ -80,7 +80,7 @@ stages:
     dependsOn:
       - tst
     jobs:
-      - template: /.azuredevops/templates/jobs.deploy_Api.yml
+      - template: /.azuredevops/templates/jobs.API-deploy.yml
         parameters:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
@@ -95,7 +95,7 @@ stages:
     dependsOn:
       - stg
     jobs:
-      - template: /.azuredevops/templates/jobs.deploy_Api.yml
+      - template: /.azuredevops/templates/jobs.API-deploy.yml
         parameters:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
