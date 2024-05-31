@@ -67,8 +67,7 @@ jobs:
                   }
               }]
           }' ${{ parameters.lintResult }})
-
-          echo $lintresults
+          #echo $lintresults
 
           lintingAnalysis=$(jq -n --argjson value "$lintresults" '{
             body: {
@@ -83,7 +82,7 @@ jobs:
         displayName: 'Show formatted result (SARIF to APIC)'
 
       - bash: |
-          echo $lintForApiCenter
+          echo $(lintForApiCenter)
         displayName: 'lintForApiCenter azdo variable'
 
       - task: PublishBuildArtifacts@1
