@@ -53,8 +53,11 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             sudo apt --assume-yes install jq
-            jContent=$(jq -c . '${{ parameters.openApiFilePath }}')
-            echo "##vso[task.setvariable variable=openApiContent;]$jContent"
+            # jContent=$(jq -c . '${{ parameters.openApiFilePath }}')
+            content=$(cat ${{ parameters.openApiFilePath }})
+            escaped_content=$(echo "$content" | jq -Rs .)
+            echo "##vso[task.setvariable variable=openApiContent;]$escaped_content"
+            # echo "##vso[task.setvariable variable=openApiContent;]$jContent"
 
       - bash: |
           echo 'use macro syntax to read variables: $(openApiContent)'
@@ -94,10 +97,10 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             echo "... ****** Print API VERSION CREATE command ******"
-            echo "az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --title '${{ parameters.currentApiVersion }}'"
+            echo "az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --title '${{ parameters.currentApiVersion }}' --lifecycle-stage design"
             echo ""
             echo "... Executing command :"
-            az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --title '${{ parameters.currentApiVersion }}'
+            az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --title '${{ parameters.currentApiVersion }}' --lifecycle-stage design
             
 
       - task: AzureCLI@2  
@@ -108,14 +111,14 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             echo "... ****** Print DEFINITION CREATE command ******"
-            echo "az apic api definition create --api-id ${{ parameters.apicName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version ${{ parameters.currentApiVersion }} --name 'xdef006' --title 'OpenAPI xdef006'"
+            echo "az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --definition-id 'xdef2024' --title 'OpenAPI xdef2024'"
             echo ""
             echo "... Executing command :"
-            az apic api definition create --api-id ${{ parameters.apicName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version ${{ parameters.currentApiVersion }} --name "xdef006" --title "OpenAPI xdef006"
+            az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --definition-id 'xdef2024' --title 'OpenAPI xdef2024'
             echo "------------------------------------"
             echo ""
             echo "... ****** Print DEFINITION IMPORT-SPECIFICATION command ******"
-            echo "az apic api definition import-specification --api-id ${{ parameters.apicName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name ${{ parameters.currentApiVersion }} --definition-name "xdef006" --format "inline" --value '..REDACTED..' --specification '{"name":"openapi","version":"3.0.1"}'"
+            echo "az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id 'xdef2024' --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}"
             echo ""
             echo "... Executing command :"
-            az apic api definition import-specification --api-id ${{ parameters.apicName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name ${{ parameters.currentApiVersion }} --definition-name "xdef006" --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}'
+            az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id 'xdef2024' --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}
