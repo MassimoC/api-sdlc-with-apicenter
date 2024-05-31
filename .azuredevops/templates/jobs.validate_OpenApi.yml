@@ -51,8 +51,21 @@ jobs:
         continueOnError: true
         displayName: 'Show result'
 
-      - task: PublishCodeAnalysisResults@1
+      - bash: |
+          jq '{
+              results: [.runs[0].results[] | {
+              analyzer: "SpectralAnalyzerName",
+                  description: .message.text,
+              analyzerRuleName: .ruleId,
+              severity: .level
+              }]
+          }' ${{ parameters.lintResult }}
+        displayName: 'Show formatted result'
+
+      - task: PublishTestResults@2
         inputs:
-          codeAnalysisTool: 'Sarif'
-          sarifFiles: '${{ parameters.lintResult }}'
-        displayName: 'Publish SARIF results'
+          testResultsFormat: 'JUnit'
+          testResultsFiles: '${{ parameters.lintResult }}'
+          failTaskOnFailedTests: true
+          testRunTitle: 'Spectral Linting Results'
+        displayName: 'Publish Test Results'
