@@ -70,7 +70,7 @@ jobs:
             echo "... ****** Print API LIST command ******"
             echo "az apic api list -g ${{ parameters.rg }} -s ${{ parameters.apicName }}"
             echo ""
-            echo "... Executing command :"
+            echo "... Executing command"
             az apic api list -g ${{ parameters.rg }} -s ${{ parameters.apicName }}
 
       - task: AzureCLI@2  
@@ -83,7 +83,7 @@ jobs:
             echo "... ****** Print API CREATE command ******"
             echo "az apic api create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --title '${{ parameters.apiTitle }}' --type rest --description '${{ parameters.apiDescription }}' --summary '${{ parameters.apiDescription }}'"
             echo ""
-            echo "... Executing command :"
+            echo "... Executing command"
             az apic api create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --title '${{ parameters.apiTitle }}' --type rest --description '${{ parameters.apiDescription }}' --summary '${{ parameters.apiDescription }}'
             #--custom-properties '{"public-facing":true}'
 
@@ -97,7 +97,7 @@ jobs:
             echo "... ****** Print API VERSION CREATE command ******"
             echo "az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --title '${{ parameters.currentApiVersion }}' --lifecycle-stage design"
             echo ""
-            echo "... Executing command :"
+            echo "... Executing command"
             az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --title '${{ parameters.currentApiVersion }}' --lifecycle-stage design
             
 
@@ -111,14 +111,14 @@ jobs:
             echo "... ****** Print DEFINITION CREATE command ******"
             echo "az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --definition-id '${{ parameters.definitionId }}' --title 'OpenAPI xdef2024'"
             echo ""
-            echo "... Executing command :"
+            echo "... Executing command"
             az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --definition-id '${{ parameters.definitionId }}' --title 'OpenAPI xdef2024'
             echo "------------------------------------"
             echo ""
             echo "... ****** Print DEFINITION IMPORT-SPECIFICATION command ******"
             echo "az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}"
             echo ""
-            echo "... Executing command :"
+            echo "... Executing command"
             az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}
 
       - task: DownloadPipelineArtifact@2
@@ -139,9 +139,10 @@ jobs:
           inlineScript: |
             apicUri="https://management.azure.com/subscriptions/$(subscriptionId)/resourceGroups/${{ parameters.rg }}/providers/Microsoft.ApiCenter/services/${{ parameters.apicName }}/workspaces/default/apis/${{ parameters.apiName }}/versions/${{ parameters.currentApiVersion }}/definitions/${{ parameters.definitionId }}/updateAnalysisState?api-version=2024-03-01"
             
+            echo "... Upload Linting result to APIC"
             echo $apicUri
-
-            content=$(jq -c '.' ''$(Pipeline.Workspace)/drop/lint-result.json')
+            echo "... Reading content from artifact"
+            content=$(jq -c '.' $(Pipeline.Workspace)/drop/lint-result.json)
 
             az rest --method post \
                     --uri $apicUri \
