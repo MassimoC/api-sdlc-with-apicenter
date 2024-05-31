@@ -57,7 +57,14 @@ jobs:
               analyzer: "SpectralAnalyzerName",
                   description: .message.text,
               analyzerRuleName: .ruleId,
-              severity: .level
+              severity: .level,
+              docUrl: .helpUri,
+                  details: {
+                      range: {
+                          start: ((.locations[0].physicalLocation.region.startLine|tostring) + ":" + (.locations[0].physicalLocation.region.startColumn|tostring)),
+                          end: ((.locations[0].physicalLocation.region.endLine|tostring) + ":" + (.locations[0].physicalLocation.region.endColumn|tostring))
+                      }
+                  }
               }]
           }' ${{ parameters.lintResult }}
         displayName: 'Show formatted result'
