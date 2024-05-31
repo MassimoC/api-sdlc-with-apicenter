@@ -52,7 +52,7 @@ jobs:
         displayName: 'Show result'
 
       - bash: |
-          lintresults=$(jq '{
+          fromSarifToApic=$(jq '{
               results: [.runs[0].results[] | {
               analyzer: "SpectralAnalyzerName",
                   description: .message.text,
@@ -67,23 +67,28 @@ jobs:
                   }
               }]
           }' ${{ parameters.lintResult }})
-          #echo $lintresults
 
-          lintingAnalysis=$(jq -n --argjson value "$lintresults" '{
+          echo "... ***** APIC FORMATTED *****"
+          echo $fromSarifToApic
+
+          fromApicToArm=$(jq -n --argjson value "$fromSarifToApic" '{
             body: {
               format: "inline",
               state: "completed",
               value: $value
             }
           }')
-          echo $lintingAnalysis > '$(apiclintResultFilePath)'
+          
+          echo "... ***** ARM FORMATTED *****"
+          echo $fromApicToArm
 
-          echo "##vso[task.setvariable variable=lintForApiCenter;]$lintresults"
+          echo $fromApicToArm > '$(apiclintResultFilePath)'
+          echo "##vso[task.setvariable variable=apicenterResultArmFormatted;]$fromApicToArm"
         displayName: 'Show formatted result (SARIF to APIC)'
 
       - bash: |
-          echo $(lintForApiCenter)
-        displayName: 'lintForApiCenter azdo variable'
+          echo $(apicenterResultArmFormatted)
+        displayName: 'apicenterResultArmFormatted azdo variable'
 
       - task: PublishBuildArtifacts@1
         inputs:
