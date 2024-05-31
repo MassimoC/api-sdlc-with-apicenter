@@ -57,7 +57,7 @@ jobs:
               analyzer: "SpectralAnalyzerName",
                   description: .message.text,
               analyzerRuleName: .ruleId,
-              severity: .level,
+              severity: (if .level == "warning" then "1" elif .level == "error" then "2" else "0" end),
               docUrl: .helpUri,
                   details: {
                       range: {
