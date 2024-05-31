@@ -53,15 +53,7 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             sudo apt --assume-yes install jq
-            sudo apt --assume-yes install yq
-            
-            # jContent=$(jq -c . '${{ parameters.openApiFilePath }}')
-            # echo "##vso[task.setvariable variable=openApiContent;]$jContent"
-
-            ## content=$(cat ${{ parameters.openApiFilePath }})
-            ## escaped_content=$(echo "$content" | jq -Rs .)
-            ## echo "##vso[task.setvariable variable=openApiContent;]$escaped_content"
-            
+            sudo apt --assume-yes install yq           
             json_content=$(yq eval -o=json ${{ parameters.openApiFilePath }})
             escaped_json=$(echo "$json_content" | jq -Rs .)
             echo "##vso[task.setvariable variable=openApiContent;]$escaped_content"
