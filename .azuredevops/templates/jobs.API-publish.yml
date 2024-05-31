@@ -128,8 +128,10 @@ jobs:
         displayName: 'Download artifacts'
 
       - bash: |
-          cat '$(Pipeline.Workspace)/drop/lint-result.json'
-        displayName: 'Cat lint-result.json content'
+          #cat '$(Pipeline.Workspace)/drop/lint-result.json'
+          json_data=$(jq -c '.' $(Pipeline.Workspace)/drop/lint-result.json)
+          echo "$json_data"
+        displayName: 'Show lint-result.json content'
 
       - task: AzureCLI@2
         inputs:
@@ -142,10 +144,10 @@ jobs:
             echo "... Upload Linting result to APIC"
             echo $apicUri
             echo "... Reading content from artifact"
-            content=$(jq -c '.' $(Pipeline.Workspace)/drop/lint-result.json)
-
+            json_data=$(jq -c '.' $(Pipeline.Workspace)/drop/lint-result.json)
+            echo "... az rest command"
             az rest --method post \
                     --uri $apicUri \
                     --headers "Content-Type=application/json" \
-                    --body "$(content)"
+                    --body "$(json_data)"
         displayName: 'Pulish analysis to API Center'
