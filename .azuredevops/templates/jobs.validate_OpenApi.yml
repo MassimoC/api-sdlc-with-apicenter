@@ -69,13 +69,13 @@ jobs:
       #     }' ${{ parameters.lintResult }}
       #   displayName: 'Show formatted result'
 
-    - task: PublishCodeAnalysisResults@1
-      inputs:
-        codeAnalysisTool: 'Sarif'
-        sarifFiles: '${{ parameters.lintResult }}'
-      displayName: 'Publish SARIF results'
+      - task: PublishCodeAnalysisResults@1
+        inputs:
+          codeAnalysisTool: 'Sarif'
+          sarifFiles: '${{ parameters.lintResult }}'
+        displayName: 'Publish SARIF results'
 
-      # - task: PublishTestResults@2
+	    # - task: PublishTestResults@2
       #   inputs:
       #     testResultsFormat: 'JUnit'
       #     testResultsFiles: '${{ parameters.lintResult }}'
