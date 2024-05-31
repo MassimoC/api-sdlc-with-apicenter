@@ -33,7 +33,7 @@ jobs:
         continueOnError: true
         displayName: 'Show OpenAPI spec'
 
-      - script: sudo npm install -g @stoplight/spectral
+      - script: sudo npm install -g @stoplight/spectral --force
         displayName: 'Install Linting Tool (stoplight/spectral)'
 
       - bash: |
