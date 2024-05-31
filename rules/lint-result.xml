@@ -1,1 +1,10 @@
-<none/>
+
+[4mc:/GIT/GitHub/mmcr/api-sdlc-with-apicenter/design/1passwordapi/openapi_1passwordapi.json[24m
+  1:1   [33mwarning[39m  oas3-api-servers       OpenAPI "servers" must be present and non-empty array.
+ 15:13  [33mwarning[39m  operation-description  Operation "description" must be present and non-empty string.  paths./CityWeather.get
+ 17:11  [33mwarning[39m  operation-tag-defined  Operation tags must be defined in global tags.                 paths./CityWeather.get.tags[0]
+ 28:13  [33mwarning[39m  operation-description  Operation "description" must be present and non-empty string.  paths./WeatherForecast.get
+ 30:11  [33mwarning[39m  operation-tag-defined  Operation tags must be defined in global tags.                 paths./WeatherForecast.get.tags[0]
+
+[33m[1m✖ 5 problems (0 errors, 5 warnings, 0 infos, 0 hints)[22m[39m
+[33m[1m[22m[39m

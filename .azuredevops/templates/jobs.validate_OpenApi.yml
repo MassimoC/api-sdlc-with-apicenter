@@ -37,12 +37,13 @@ jobs:
         displayName: 'Install Linting Tool (stoplight/spectral)'
 
       - bash: |
+          spectral --version
           echo '... linting :: ${{ parameters.openApiFilePath }}'
           echo '... ruleset :: ${{ parameters.rulesetPath }}'
           echo '... failSeverity :: ${{ parameters.failSeverity }}'
         displayName: 'spectral parameters'
 
-      - script: spectral lint "${{ parameters.openApiFilePath }}" --ruleset "${{ parameters.rulesetPath }}" --fail-severity "${{ parameters.failSeverity }}" --output "${{ parameters.lintResult }}" --format junit
+      - script: spectral lint "${{ parameters.openApiFilePath }}" --ruleset "${{ parameters.rulesetPath }}" --fail-severity "${{ parameters.failSeverity }}" --output "${{ parameters.lintResult }}" --format sarif
         continueOnError: true
         displayName: 'Lint OpenAPI specs'
 
