@@ -52,7 +52,7 @@ jobs:
         displayName: 'Show result'
 
       - bash: |
-          jq '{
+          lintresults=$(jq '{
               results: [.runs[0].results[] | {
               analyzer: "SpectralAnalyzerName",
                   description: .message.text,
@@ -66,8 +66,16 @@ jobs:
                       }
                   }
               }]
-          }' ${{ parameters.lintResult }}
+          }' ${{ parameters.lintResult }})
+          echo $lintresults
+          echo "##vso[task.setvariable variable=lintForApiCenter;]$lintresults"
+
         displayName: 'Show formatted result'
+
+      - bash: |
+          echo '$(lintForApiCenter)'
+          echo $(lintForApiCenter)
+        displayName: 'lintForApiCenter'
 
       - task: PublishTestResults@2
         inputs:
