@@ -16,6 +16,8 @@ parameters:
   apiDescription: ''
   currentApiVersion: ''
 
+variables:
+  definitionId: 'xdef2024'
 ##---------------------------------------------##
 ## TEMPLATE LOGIC                              ##
 ##---------------------------------------------##
@@ -108,14 +110,34 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             echo "... ****** Print DEFINITION CREATE command ******"
-            echo "az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --definition-id 'xdef2024' --title 'OpenAPI xdef2024'"
+            echo "az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --definition-id '$(definitionId)' --title 'OpenAPI xdef2024'"
             echo ""
             echo "... Executing command :"
-            az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --definition-id 'xdef2024' --title 'OpenAPI xdef2024'
+            az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --definition-id '$(definitionId)' --title 'OpenAPI xdef2024'
             echo "------------------------------------"
             echo ""
             echo "... ****** Print DEFINITION IMPORT-SPECIFICATION command ******"
-            echo "az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id 'xdef2024' --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}"
+            echo "az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '$(definitionId)' --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}"
             echo ""
             echo "... Executing command :"
-            az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id 'xdef2024' --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}
+            az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '$(definitionId)' --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}
+
+      - bash: |
+          cat '$(apiclintResultFilePath)'
+        displayName: 'Show apiclintResultFilePath content'
+
+      - task: AzureCLI@2
+        inputs:
+          azureSubscription: ${{ parameters.serviceConnection }}
+          scriptType: 'bash'
+          scriptLocation: 'inlineScript'
+          inlineScript: |
+            apicUri="https://management.azure.com/subscriptions/$(subscriptionId)/" \
+                    "resourceGroups/${{ parameters.rg }}/" \
+                    "providers/Microsoft.ApiCenter/services/${{ parameters.apicName }}/" \
+                    "workspaces/default/apis/${{ parameters.apiName }}/" \
+                    "versions/${{ parameters.currentApiVersion }}/" \
+                    "definitions/$(definitionId)/updateAnalysisState?api-version=2024-03-01"
+            
+            echo $apicUri
+        displayName: 'Pulish analysis to API Center'
