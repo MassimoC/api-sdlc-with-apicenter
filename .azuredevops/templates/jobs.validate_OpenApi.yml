@@ -85,7 +85,7 @@ jobs:
           echo "... save ARM format to $(apiclintResultFilePath)"
           echo "$fromApicToArm" > "$(apiclintResultFilePath)"
           echo "... write azdo variable"
-          echo "##vso[task.setvariable variable=apicenterResultArmFormatted;]$fromApicToArm"
+          echo "##vso[task.setvariable variable=apicenterResultArmFormatted;]'$fromApicToArm'"
         displayName: 'Show formatted result (APIC and ARM)'
 
       - bash: |
