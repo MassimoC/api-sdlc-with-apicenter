@@ -82,7 +82,8 @@ jobs:
           echo "... ***** ARM FORMATTED *****"
           echo $fromApicToArm
 
-          echo $fromApicToArm > '$(apiclintResultFilePath)'
+          echo "... save ARM format to $(apiclintResultFilePath)"
+          echo "$fromApicToArm" > "$(apiclintResultFilePath)"
           echo "##vso[task.setvariable variable=apicenterResultArmFormatted;]$fromApicToArm"
         displayName: 'Show formatted result (SARIF to APIC)'
 
