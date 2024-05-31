@@ -73,8 +73,6 @@ jobs:
         displayName: 'Show formatted result'
 
       - bash: |
-          echo '$(lintForApiCenter)'
-          echo $(lintForApiCenter)
           json_string=$(jq -c '.' "$lintForApiCenter")
           echo $json_string
         displayName: 'lintForApiCenter'
