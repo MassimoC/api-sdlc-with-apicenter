@@ -66,6 +66,10 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
+            echo "... ****** Print API LIST command ******"
+            echo "az apic api list -g ${{ parameters.rg }} -s ${{ parameters.apicName }}"
+            echo ""
+            echo "... Executing command :"
             az apic api list -g ${{ parameters.rg }} -s ${{ parameters.apicName }}
 
       - task: AzureCLI@2  
@@ -75,7 +79,11 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            az apic api create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name ${{ parameters.apiName }} --title '${{ parameters.apiTitle }}'  --kind rest --description '${{ parameters.apiDescription }}'  --summary '${{ parameters.apiDescription }}' 
+            echo "... ****** Print API CREATE command ******"
+            echo "az apic api create --api-id ${{ parameters.apicName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name ${{ parameters.apiName }} --title '${{ parameters.apiTitle }}'  --kind rest --description '${{ parameters.apiDescription }}'  --summary '${{ parameters.apiDescription }}' "
+            echo ""
+            echo "... Executing command :"
+            az apic api create --api-id ${{ parameters.apicName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name ${{ parameters.apiName }} --title '${{ parameters.apiTitle }}'  --kind rest --description '${{ parameters.apiDescription }}'  --summary '${{ parameters.apiDescription }}' 
 
       - task: AzureCLI@2  
         displayName: APIC - api version create
@@ -84,7 +92,11 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            az apic api version create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --name ${{ parameters.currentApiVersion }} --title "${{ parameters.currentApiVersion }}"
+            echo "... ****** Print API VERSION CREATE command ******"
+            echo "az apic api version create --api-id ${{ parameters.apicName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --name ${{ parameters.currentApiVersion }} --title '${{ parameters.currentApiVersion }}'"
+            echo ""
+            echo "... Executing command :"
+            az apic api version create --api-id ${{ parameters.apicName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --name ${{ parameters.currentApiVersion }} --title "${{ parameters.currentApiVersion }}"
 
       - task: AzureCLI@2  
         displayName: APIC - api import specification
@@ -94,14 +106,14 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             echo "... ****** Print DEFINITION CREATE command ******"
-            echo "az apic api definition create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version ${{ parameters.currentApiVersion }} --name 'xdef006' --title 'OpenAPI xdef006'"
+            echo "az apic api definition create --api-id ${{ parameters.apicName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version ${{ parameters.currentApiVersion }} --name 'xdef006' --title 'OpenAPI xdef006'"
             echo ""
             echo "... Executing command :"
-            az apic api definition create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version ${{ parameters.currentApiVersion }} --name "xdef006" --title "OpenAPI xdef006"
+            az apic api definition create --api-id ${{ parameters.apicName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version ${{ parameters.currentApiVersion }} --name "xdef006" --title "OpenAPI xdef006"
             echo "------------------------------------"
             echo ""
             echo "... ****** Print DEFINITION IMPORT-SPECIFICATION command ******"
-            echo "az apic api definition import-specification -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name ${{ parameters.currentApiVersion }} --definition-name "xdef006" --format "inline" --value '..REDACTED..' --specification '{"name":"openapi","version":"3.0.1"}'"
+            echo "az apic api definition import-specification --api-id ${{ parameters.apicName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name ${{ parameters.currentApiVersion }} --definition-name "xdef006" --format "inline" --value '..REDACTED..' --specification '{"name":"openapi","version":"3.0.1"}'"
             echo ""
             echo "... Executing command :"
-            az apic api definition import-specification -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name ${{ parameters.currentApiVersion }} --definition-name "xdef006" --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}'
+            az apic api definition import-specification --api-id ${{ parameters.apicName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name ${{ parameters.currentApiVersion }} --definition-name "xdef006" --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}'
