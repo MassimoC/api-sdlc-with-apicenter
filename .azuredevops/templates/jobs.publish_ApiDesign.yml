@@ -93,13 +93,15 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            echo "... Executing command :"
+            echo "... ****** Print DEFINITION CREATE command ******"
             echo "az apic api definition create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version ${{ parameters.currentApiVersion }} --name 'xdef006' --title 'OpenAPI xdef006'"
             echo ""
+            echo "... Executing command :"
             az apic api definition create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version ${{ parameters.currentApiVersion }} --name "xdef006" --title "OpenAPI xdef006"
             echo "------------------------------------"
             echo ""
-            echo "... Executing command :"
+            echo "... ****** Print DEFINITION IMPORT-SPECIFICATION command ******"
             echo "az apic api definition import-specification -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name ${{ parameters.currentApiVersion }} --definition-name "xdef006" --format "inline" --value '..REDACTED..' --specification '{"name":"openapi","version":"3.0.1"}'"
             echo ""
+            echo "... Executing command :"
             az apic api definition import-specification -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --version-name ${{ parameters.currentApiVersion }} --definition-name "xdef006" --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}'
