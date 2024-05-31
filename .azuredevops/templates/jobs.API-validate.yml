@@ -55,8 +55,8 @@ jobs:
       - bash: |
           fromSarifToApic=$(jq '{
               results: [.runs[0].results[] | {
-              analyzer: "SpectralAnalyzerName",
-                  description: .message.text,
+              analyzer: "spectral",
+              description: .message.text,
               analyzerRuleName: .ruleId,
               severity: (if .level == "warning" then "1" elif .level == "error" then "2" else "0" end),
               docUrl: .helpUri,
@@ -75,7 +75,7 @@ jobs:
           fromApicToArm=$(jq -n --argjson value "$fromSarifToApic" '{
               format: "inline",
               state: "completed",
-              value: "$value"
+              value: $value
           }')
           
           echo "... ***** ARM FORMATTED *****"
