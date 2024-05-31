@@ -1,0 +1,47 @@
+extends: spectral:oas
+rules:
+  # Enable/disable out of the box rules
+  # For a complete list, see https://meta.stoplight.io/docs/spectral/docs/reference/openapi-rules.md
+  openapi-tags: info
+  oas3-api-servers: info
+  info-contact: info
+  # We are disabling this because HealthReport which contains exception information that has an invalid enum.
+  duplicated-entry-in-enum: info
+  operation-operationId: error
+  oas3-operation-security-defined: error
+
+  # Organization's rules
+  # To learn how to add one, see https://meta.stoplight.io/docs/spectral/docs/guides/4-custom-rulesets.md
+  tag-get-description:
+    description: Tags should have a description.
+    given: $.tags[*]
+    severity: warn
+    recommended: true
+    then:
+      field: description
+      function: truthy
+  correlation-operation-headers-response-documented:
+    description: RequestId header is not documented in the response.
+    given: $.paths[*].[*].responses.[*].headers
+    severity: error
+    recommended: true
+    then:
+      field: RequestId
+      function: truthy
+  correlation-transaction-headers-response-documented:
+    description: X-Transaction-Id header is not documented in the response.
+    given: $.paths[*].[*].responses.[*].headers
+    severity: error
+    recommended: true
+    then:
+      field: X-Transaction-Id
+      function: truthy
+  naming-operation-id:
+    description: OperationId does not respect the {0}_{1} convention.
+    given: $..operationId
+    severity: warn
+    recommended: true
+    then:
+      function: pattern
+      functionOptions:
+        match: '^([a-zA-Z0-9]+)_([a-zA-Z0-9]+)'
