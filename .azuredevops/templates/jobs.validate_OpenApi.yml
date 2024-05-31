@@ -9,6 +9,7 @@ parameters:
   lintResult: '$(lintResult)'
   # warn, error
   failSeverity: 'error'
+  serviceConnection: '$(serviceConnection)'
 
 ##---------------------------------------------##
 ## TEMPLATE LOGIC                              ##
@@ -73,9 +74,23 @@ jobs:
         displayName: 'Show formatted result'
 
       - bash: |
-          json_string=$(jq -c '.' "$lintForApiCenter")
-          echo $json_string
+          #json_string=$(jq -c '.' "$lintForApiCenter")
+          echo $lintForApiCenter
         displayName: 'lintForApiCenter'
+
+      - task: AzureCLI@2
+        inputs:
+          azureSubscription: ${{ parameters.serviceConnection }}
+          scriptType: 'bash'
+          scriptLocation: 'inlineScript'
+          inlineScript: |
+            //"started" | "completed" | "failed" | "none";
+
+            az rest --method post \
+                    --uri "https://management.azure.com/subscriptions/$(subscriptionId)/resourceGroups/$(resourceGroup)/providers/Microsoft.Web/sites/$(appServiceName)/config/web?api-version=$(apiVersion)" \
+                    --headers "Content-Type=application/json" \
+                    --body "$(lintForApiCenter)"
+        displayName: 'Pulish results to API Center'
 
       - task: PublishTestResults@2
         inputs:
