@@ -51,24 +51,6 @@ jobs:
         continueOnError: true
         displayName: 'Show result'
 
-      # - bash: |
-      #     jq '{
-      #         results: [.runs[0].results[] | {
-      #             analyzer: "SpectralAnalyzerName",
-      #             description: .message.text,
-      #             analyzerRuleName: .ruleId,
-      #             severity: if .level == "warning" then "medium" elif .level == "error" then "high" else "low" end,
-      #             docUrl: (.helpUri // null),
-      #             details: {
-      #                 range: {
-      #                     start: (.locations[0].physicalLocation.region.startLine|tostring) + ":" + (.locations[0].physicalLocation.region.startColumn|tostring),
-      #                     end: (.locations[0].physicalLocation.region.endLine|tostring) + ":" + (.locations[0].physicalLocation.region.endColumn|tostring)
-      #                 }
-      #             }
-      #         }]
-      #     }' ${{ parameters.lintResult }}
-      #   displayName: 'Show formatted result'
-
       - task: PublishCodeAnalysisResults@1
         inputs:
           codeAnalysisTool: 'Sarif'
