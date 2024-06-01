@@ -165,6 +165,7 @@ jobs:
             
             echo "... Adding operationId to json"
             enriched_json_data=$(echo "$json_data" | jq --arg operationId "$operation_id" '. + {operationId: $operationId}')
+            echo '$enriched_json_data'
 
             echo "... az rest for upload"
             uploadResponse=$(az rest --method post \
