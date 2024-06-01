@@ -72,8 +72,10 @@ jobs:
 
           echo "... ***** APIC FORMATTED *****"
           echo $fromSarifToApic
+          echo "... escaping json"
+          escaped_json=$(echo "$fromSarifToApic" | jq -Rs '.' | jq @json)
 
-          fromApicToArm=$(jq -n --argjson value "$fromSarifToApic" '{
+          fromApicToArm=$(jq -n --argjson value "$escaped_json" '{
               format: "inline",
               state: "completed",
               value: $value
