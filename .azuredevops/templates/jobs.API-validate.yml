@@ -52,13 +52,14 @@ jobs:
         continueOnError: true
         displayName: 'Show linting result (SARIF)'
 
+      #Severity = "error" | "warning" | "information" | "hint";
       - bash: |
           fromSarifToApic=$(jq '{
               results: [.runs[0].results[] | {
               analyzer: "spectral",
               description: .message.text,
               analyzerRuleName: .ruleId,
-              severity: (if .level == "warning" then "1" elif .level == "error" then "2" else "0" end),
+              severity: (if .level == "warning" then "1" elif .level == "error" then "0" else "2" end),
               docUrl: .helpUri,
                   details: {
                       range: {
