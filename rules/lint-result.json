@@ -1,5 +1,6 @@
 {
   "format": "inline",
   "state": "completed",
+  "operationId": "ec6c0ff0_e50de859948d6df247cc849a2266ced7e6f088b15434ddbc42dd56017d7d426a",
   "value": "{\"results\":[{\"analyzer\":\"spectral\",\"description\":\"OpenAPI servers must be present and non-empty array.\",\"analyzerRuleName\":\"oas3-api-servers\",\"severity\":\"1\",\"details\":{\"range\":{\"start\":\"1:1\",\"end\":\"133:38\"}}}]}"
 }

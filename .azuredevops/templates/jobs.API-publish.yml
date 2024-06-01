@@ -141,16 +141,34 @@ jobs:
           scriptLocation: 'inlineScript'
           inlineScript: |
             apicUri="https://management.azure.com/subscriptions/$(subscriptionId)/resourceGroups/${{ parameters.rg }}/providers/Microsoft.ApiCenter/services/${{ parameters.apicName }}/workspaces/default/apis/${{ parameters.apiName }}/versions/${{ parameters.currentApiVersion }}/definitions/${{ parameters.definitionId }}/updateAnalysisState?api-version=2024-03-01"
-            
             echo "... Upload Linting result to APIC"
             echo $apicUri
             
-            echo "... Reading content from artifact"
-            json_data=$(jq -c '.' $(Pipeline.Workspace)/drop/lint-result.json)
+            echo "... Init APIC analysis"
+            jsonInit=$(jq -n \
+              --arg format "inline" \
+              --arg state "started" \
+              --arg value "" \
+              '{format: $format, state: $state, value: $value}')
 
-            echo "... az rest command"
-            az rest --method post \
+            echo "... az rest for init"
+            initResponse=$(az rest --method post \
                     --uri $apicUri \
                     --headers "Content-Type=application/json" \
-                    --body "$json_data"
+                    --body "$json_data")
+
+            operation_id=$(echo "$initResponse" | jq -r '.operationId')
+            echo "... OperationId is $operation_id"
+           
+            echo "... Reading content from artifact"
+            json_data=$(jq -c '.' $(Pipeline.Workspace)/drop/lint-result.json)
+            
+            echo "... Adding operationId to json"
+            enriched_json_data=$(echo "$json_data" | jq --arg operationId "$operation_id" '. + {operationId: $operationId}')
+
+            echo "... az rest for upload"
+            uploadResponse=$(az rest --method post \
+                    --uri $apicUri \
+                    --headers "Content-Type=application/json" \
+                    --body "$json_data")
         
