@@ -164,7 +164,7 @@ jobs:
             json_data=$(jq -c '.' $(Pipeline.Workspace)/drop/lint-result.json)
             
             echo "... Adding operationId to json"
-            enriched_json_data=$(echo "$json_data" | jq --arg operationId "$operation_id" '. + {operationId: $operationId}')
+            enriched_json_data=$(echo "$json_data" | jq --arg operationId "$operation_id" '. + {operationId: $operation_id}')
 
             echo "... az rest for upload"
             uploadResponse=$(az rest --method post \
