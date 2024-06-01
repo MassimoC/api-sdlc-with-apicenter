@@ -145,7 +145,7 @@ jobs:
             echo $apicUri
             
             echo "... Init APIC analysis"
-            jsonInit=$(jq -n \
+            json_init=$(jq -n \
               --arg format "inline" \
               --arg state "started" \
               --arg value "" \
@@ -155,7 +155,7 @@ jobs:
             initResponse=$(az rest --method post \
                     --uri $apicUri \
                     --headers "Content-Type=application/json" \
-                    --body "$json_data")
+                    --body "$json_init")
 
             operation_id=$(echo "$initResponse" | jq -r '.operationId')
             echo "... OperationId is $operation_id"
