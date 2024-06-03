@@ -76,20 +76,18 @@ jobs:
           echo "... escaped json"
           escaped_json=$(echo "$fromSarifToApic" | tr -d '\n' | jq -c '.' | jq -Rs '.' | tr -d '\n')
 
-          echo "... building message formatted for ARM endpoint"
-          # fromApicToArm=$(jq -n --argjson value "$escaped_json" '{
-          #     format: "inline",
-          #     state: "completed",
-          #     value: $value
-          # }')
-
-          baseApicArm='{
-            "format": "inline",
-            "state": "completed"
-          }'
-          echo "... Adding value to json"
-          fromApicToArm=$(echo "$baseApicArm" | jq --argjson resValue "$escaped_json" '. + {value: $resValue}')
+          echo "... save to temp file"
+          echo "$escaped_json" > "$(apiclintResultFilePathTemp)"
           
+          fromApicToArm=$(jq -n --argfile value $(apiclintResultFilePathTemp) '{
+            format: "inline",
+            state: "completed",
+            value: $value
+          }')
+
+          echo "... delete temp file"
+          rm $(apiclintResultFilePathTemp)
+
           echo "... ***** ARM FORMATTED *****"
           echo $fromApicToArm
 

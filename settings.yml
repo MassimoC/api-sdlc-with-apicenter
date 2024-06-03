@@ -30,6 +30,7 @@ variables:
   lintResult: '$(azdoWorkDir)/rules/lint-result.sarif'
   lintResultAzDO: '$(azdoWorkDir)/rules/lint-result.junit'
   apiclintResultFilePath: '$(azdoWorkDir)/rules/lint-result.json'
+  apiclintResultFilePathTemp: '$(azdoWorkDir)/rules/temp.json'
 
   ###########################################################################################################################
   ################################################## Azure DevOps Only ######################################################
