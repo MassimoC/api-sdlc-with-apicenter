@@ -13,7 +13,6 @@ rules:
     description: "Ensure the version number follows semantic versioning."
     given: "$.version"
     then:
-      field: "$"
       function: pattern
       functionOptions:
         match: "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(-[0-9A-Za-z-.]+)?(\\+[0-9A-Za-z-.]+)?$"
