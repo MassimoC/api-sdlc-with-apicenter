@@ -81,11 +81,16 @@ jobs:
           escaped_json=$(echo "$compact_json" | jq -Rs '.' | tr -d '\n')
 
           echo "... building message formatted for ARM endpoint"
-          fromApicToArm=$(jq -n --argjson value "$escaped_json" '{
-              format: "inline",
-              state: "completed",
-              value: $value
-          }')
+          # fromApicToArm=$(jq -n --argjson value "$escaped_json" '{
+          #     format: "inline",
+          #     state: "completed",
+          #     value: $value
+          # }')
+          fromApicToArm='{
+            "format": "inline",
+            "state": "completed",
+            "value": "$escaped_json"
+          }'
           
           echo "... ***** ARM FORMATTED *****"
           echo $fromApicToArm
