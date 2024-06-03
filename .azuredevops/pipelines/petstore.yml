@@ -1,0 +1,41 @@
+name: $(Date:yyyyMMdd)-$(Rev:rr)
+
+parameters:
+  - name: staticValidation
+    displayName: Execute static validation
+    type: boolean
+    default: true
+  - name: publishDesign
+    displayName: Publish OpenAPI specification
+    type: boolean
+    default: true
+
+pr: none
+
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - '/.azuredevops/pipelines/petstore.yml'
+      - '/design/petstore/*'
+    exclude:
+      - '/**/*.md'
+
+variables:
+  - template: '../../settings.yml'
+  - name: openApiPath
+    value: '$(azdoWorkDir)/design/petstore/openapi_petstore.json'
+  - name: currentApiVersion
+    value: 'v3'
+    
+
+stages:
+  - template: /.azuredevops/templates/stages.module.yml
+    parameters:
+      staticValidation: '${{ parameters.staticValidation }}'
+      publishDesign: '${{ parameters.publishDesign }}'
+      apiName: 'petstore-api'
+      apiTitle: 'Petstore API'
+      apiDescription: 'Everything about your Pets'
