@@ -88,7 +88,7 @@ jobs:
             "state": "completed"
           }'
           echo "... Adding value to json"
-          fromApicToArm=$(echo "$baseApicArm" | jq --arg resValue "$escaped_json" '. + {value: $resValue}')
+          fromApicToArm=$(echo "$baseApicArm" | jq --argjson resValue "$escaped_json" '. + {value: $resValue}')
           
           echo "... ***** ARM FORMATTED *****"
           echo $fromApicToArm
