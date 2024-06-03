@@ -1,0 +1,19 @@
+extends: spectral:oas
+rules:
+  # Enable/disable out of the box rules
+  openapi-tags: info
+  oas3-api-servers: info
+  info-contact: info
+  duplicated-entry-in-enum: warning
+  operation-operationId: error
+  oas3-operation-security-defined: error
+
+  # MY ORGANIZATION's rules
+  valid-version:
+    description: "Ensure the version number follows semantic versioning."
+    given: "$.version"
+    then:
+      field: "$"
+      function: pattern
+      functionOptions:
+        match: "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"

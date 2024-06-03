@@ -3,7 +3,7 @@
     "info": {
         "title": "BGT-public-api-v1",
         "description": "This specification contains <b>V1</b> version of merged publicly exposed Anywhere API and PlayDigital API<br/><br/>To avoid name clash in schemas section duplicated objects in PlayDigital API were prefixed with interactive<br/><br/>For example interactiveErrorDTO",
-        "version": "1.0"
+        "version": "1.0.1234567"
     },
     "servers": [
         {

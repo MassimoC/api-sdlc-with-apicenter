@@ -8,7 +8,7 @@
       "name": "Julia Kasper",
       "email": "jukasper@microsoft.com"
     },
-    "version": "v1"
+    "version": "0.20.3"
   },
   "paths": {
     "/CityWeather": {
