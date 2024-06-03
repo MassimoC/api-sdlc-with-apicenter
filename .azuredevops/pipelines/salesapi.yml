@@ -40,3 +40,6 @@ stages:
       apiName: 'sales-api'
       apiTitle: 'Sales API'
       apiDescription: 'digitalize the sales'
+      currentApiVersion: ${{variables.currentApiVersion}}
+
+

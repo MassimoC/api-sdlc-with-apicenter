@@ -40,3 +40,4 @@ stages:
       apiName: 'rocket-api'
       apiTitle: 'Rocket API'
       apiDescription: 'to the clouds and beyond'
+      currentApiVersion: ${{variables.currentApiVersion}}

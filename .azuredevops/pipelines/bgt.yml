@@ -39,3 +39,4 @@ stages:
       apiName: 'bgt-api'
       apiTitle: 'BGT API'
       apiDescription: 'BGT integration'
+      currentApiVersion: ${{variables.currentApiVersion}}

@@ -11,7 +11,7 @@ rules:
   # MY ORGANIZATION's rules
   valid-version:
     description: "Ensure the version number follows semantic versioning."
-    given: "$.version"
+    given: "$.info.version"
     then:
       function: pattern
       functionOptions:

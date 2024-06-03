@@ -39,3 +39,4 @@ stages:
       apiName: 'petstore-api'
       apiTitle: 'Petstore API'
       apiDescription: 'Everything about your Pets'
+      currentApiVersion: ${{variables.currentApiVersion}}
