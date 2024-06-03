@@ -44,7 +44,7 @@ jobs:
           echo '... failSeverity :: ${{ parameters.failSeverity }}'
         displayName: 'spectral parameters'
 
-      - script: spectral lint "${{ parameters.openApiFilePath }}" --ruleset "${{ parameters.rulesetPath }}" --fail-severity "${{ parameters.failSeverity }}" --output "${{ parameters.lintResult }}" --format sarif
+      - script: spectral lint "${{ parameters.openApiFilePath }}" --ruleset "${{ parameters.rulesetPath }}" --fail-severity "${{ parameters.failSeverity }}" --output "${{ parameters.lintResult }}" --format sarif --verbose
         continueOnError: true
         displayName: 'Lint OpenAPI file'
 
