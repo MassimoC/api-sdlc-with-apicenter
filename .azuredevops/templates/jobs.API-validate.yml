@@ -86,12 +86,13 @@ jobs:
           #     state: "completed",
           #     value: $value
           # }')
-          
-          fromApicToArm='{
+
+          baseApicArm='{
             "format": "inline",
-            "state": "completed",
-            "value": "$escaped_json"
+            "state": "completed"
           }'
+          echo "... Adding value to json"
+          fromApicToArm=$(echo "$baseApicArm" | jq --arg resValue "$escaped_json" '. + {value: $resValue}')
           
           echo "... ***** ARM FORMATTED *****"
           echo $fromApicToArm
