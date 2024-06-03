@@ -86,6 +86,7 @@ jobs:
           #     state: "completed",
           #     value: $value
           # }')
+          
           fromApicToArm='{
             "format": "inline",
             "state": "completed",
