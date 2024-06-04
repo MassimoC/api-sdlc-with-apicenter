@@ -4,6 +4,11 @@
     "title": "rocketapi",
     "version": "1.0.beta"
   },
+  "servers": [
+    {
+      "url": "https://apis.company.com/products/v1"
+    }
+  ],
   "paths": {
     "/rockets": {
       "get": {

@@ -1,0 +1,37 @@
+extends: spectral:oas
+rules:
+  # Enable/disable out of the box rules, configure custom rules
+  openapi-tags: off
+  oas3-api-servers: info
+  info-contact: info
+  duplicated-entry-in-enum: info
+  operation-operationId: error
+  oas3-operation-security-defined: error
+  operation-tag-defined: info
+
+  # Organization's rules
+  tag-get-description:
+    description: Tags should have a description.
+    given: $.tags[*]
+    severity: info
+    recommended: true
+    then:
+      field: description
+      function: truthy
+  naming-operation-id:
+    description: OperationId does not respect the {0}_{1} convention.
+    given: $..operationId
+    severity: warn
+    recommended: true
+    then:
+      function: pattern
+      functionOptions:
+        match: '^([a-zA-Z0-9]+)_([a-zA-Z0-9]+)'
+  semver-required:
+    description: "Ensure the API description document version number follows semantic versioning."
+    severity: error
+    given: "$.info.version"
+    then:
+      function: pattern
+      functionOptions:
+        match: '^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-[0-9A-Za-z-.]+)?(\+[0-9A-Za-z-.]+)?$'

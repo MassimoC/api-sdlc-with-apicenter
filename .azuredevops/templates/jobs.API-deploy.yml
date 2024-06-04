@@ -62,9 +62,9 @@ jobs:
                   echo "... definitionResource"
                   echo $definitionResource
                   echo "------------EXECUTE------------"
-                  echo "... Print command :"
+                  echo "... ****** Print DEPLOYMENT CREATE command ******"
                   echo "az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name $deploymentName  --title $deploymentName --description $deploymentName --api ${{ parameters.apiName }} --environment-id '$environmentResource' --definition-id '$definitionResource' --server runtime-uri[0]='${{ parameters.azdoRunId }}'"
-                  echo "... Executing command :"
+                  echo "... Executing command"
                   az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --name $deploymentName  --title $deploymentName --description $deploymentName --api "${{ parameters.apiName }}" --environment-id "$environmentResource" --definition-id "$definitionResource" --server runtime-uri[0]="${{ parameters.azdoRunId }}"
 
             - task: AzureCLI@2  
@@ -75,4 +75,7 @@ jobs:
                 scriptLocation: inlineScript
                 inlineScript: |
                   echo "------------UPDATE-LIFECYCLE------------"
+                  echo "... ****** Print VERSION UPDATE command ******"
+                  echo "az apic api version update -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --name ${{ parameters.apiVersion }}  --lifecycle-stage ${{ parameters.lifecycleStage }} -w default"
+                  echo "... Executing command"
                   az apic api version update -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --name ${{ parameters.apiVersion }}  --lifecycle-stage ${{ parameters.lifecycleStage }} -w default

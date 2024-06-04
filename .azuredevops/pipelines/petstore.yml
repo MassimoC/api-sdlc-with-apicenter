@@ -18,17 +18,17 @@ trigger:
       - main
   paths:
     include:
-      - '/.azuredevops/pipelines/bgt.yml'
-      - '/design/bgt/*'
+      - '/.azuredevops/pipelines/petstore.yml'
+      - '/design/petstore/*'
     exclude:
       - '/**/*.md'
 
 variables:
   - template: '../../settings.yml'
   - name: openApiPath
-    value: '$(azdoWorkDir)/design/bgt/openapi_bgt.json'
+    value: '$(azdoWorkDir)/design/petstore/openapi_petstore.json'
   - name: currentApiVersion
-    value: '1.0.0'
+    value: 'v3'
     
 
 stages:
@@ -36,7 +36,7 @@ stages:
     parameters:
       staticValidation: '${{ parameters.staticValidation }}'
       publishDesign: '${{ parameters.publishDesign }}'
-      apiName: 'bgt-api'
-      apiTitle: 'BGT API'
-      apiDescription: 'BGT integration'
+      apiName: 'petstore-api'
+      apiTitle: 'Petstore API'
+      apiDescription: 'Everything about your Pets'
       currentApiVersion: ${{variables.currentApiVersion}}

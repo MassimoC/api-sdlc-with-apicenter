@@ -1,0 +1,122 @@
+parameters:
+  # Pipeline-related parameters
+  poolName: '$(poolName)'
+  vmImage: '$(vmImage)'
+  defaultJobTimeoutInMinutes: 120
+  # Logic-related parameters
+  openApiFilePath: '$(openApiFullPath)'
+  rulesetPath: '$(spectralRulesPath)'
+  lintResult: '$(lintResult)'
+  lintResultAzDO: '$(lintResultAzDO)'
+  # warn, error
+  failSeverity: 'error'
+
+##---------------------------------------------##
+## TEMPLATE LOGIC                              ##
+##---------------------------------------------##
+jobs:
+  - job:
+    displayName: Spectral
+    timeoutInMinutes: ${{ parameters.defaultJobTimeoutInMinutes }}
+    pool:
+      ${{ if ne(parameters.vmImage, '') }}:
+        vmImage: ${{ parameters.vmImage }}
+      ${{ if ne(parameters.poolName, '') }}:
+        name: ${{ parameters.poolName }}
+    steps:
+      - checkout: self
+
+      - script: cat ${{ parameters.rulesetPath }}
+        continueOnError: true
+        displayName: 'Show OpenAPI rules'
+
+      - script: cat ${{ parameters.openApiFilePath }}
+        continueOnError: true
+        displayName: 'Show OpenAPI spec'
+
+      - script: sudo npm install -g @stoplight/spectral-cli --force
+        displayName: 'Install Linting Tool (stoplight/spectral)'
+
+      - bash: |
+          spectral --version
+          echo '... linting :: ${{ parameters.openApiFilePath }}'
+          echo '... ruleset :: ${{ parameters.rulesetPath }}'
+          echo '... failSeverity :: ${{ parameters.failSeverity }}'
+        displayName: 'spectral parameters'
+
+      - script: spectral lint "${{ parameters.openApiFilePath }}" --ruleset "${{ parameters.rulesetPath }}" --fail-severity "${{ parameters.failSeverity }}" --output "${{ parameters.lintResult }}" --format sarif --verbose
+        continueOnError: true
+        displayName: 'Lint OpenAPI file'
+
+      - script: cat ${{ parameters.lintResult }}
+        continueOnError: true
+        displayName: 'Show linting result (SARIF)'
+
+      #Severity = "error" | "warning" | "information" | "hint";
+      - bash: |
+          fromSarifToApic=$(jq '{
+              results: [.runs[0].results[] | {
+              analyzer: "spectral",
+              description: .message.text,
+              analyzerRuleName: .ruleId,
+              severity: (if .level == "warning" then "1" elif .level == "error" then "0" else "2" end),
+              docUrl: .helpUri,
+                  details: {
+                      range: {
+                          start: ((.locations[0].physicalLocation.region.startLine|tostring) + ":" + (.locations[0].physicalLocation.region.startColumn|tostring)),
+                          end: ((.locations[0].physicalLocation.region.endLine|tostring) + ":" + (.locations[0].physicalLocation.region.endColumn|tostring))
+                      }
+                  }
+              }]
+          }' ${{ parameters.lintResult }})
+
+          echo "... ***** APIC FORMATTED *****"
+          echo $fromSarifToApic
+         
+          echo "... escaped json"
+          escaped_json=$(echo "$fromSarifToApic" | tr -d '\n' | jq -c '.' | jq -Rs '.' | tr -d '\n')
+
+          echo "... save to temp file"
+          echo "$escaped_json" > "$(apiclintResultFilePathTemp)"
+          
+          fromApicToArm=$(jq -n --argfile value $(apiclintResultFilePathTemp) '{
+            format: "inline",
+            state: "completed",
+            value: $value
+          }')
+
+          echo "... delete temp file"
+          rm $(apiclintResultFilePathTemp)
+
+          echo "... ***** ARM FORMATTED *****"
+          echo $fromApicToArm
+
+          echo "... save ARM format to $(apiclintResultFilePath)"
+          echo "$fromApicToArm" > "$(apiclintResultFilePath)"
+          # echo "... write azdo variable"
+          # echo "##vso[task.setvariable variable=apicenterResultArmFormatted;]'$fromApicToArm'"
+        displayName: 'Show formatted result (APIC and ARM)'
+
+      - bash: |
+          cat '$(apiclintResultFilePath)'
+        displayName: 'Show apiclintResultFilePath content'
+
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish artifact: linting result'
+        inputs:
+          targetPath: '$(apiclintResultFilePath)'
+          artifact: 'linting'
+          publishLocation: 'pipeline'
+        condition: always()
+
+      - script: spectral lint "${{ parameters.openApiFilePath }}" --ruleset "${{ parameters.rulesetPath }}" --fail-severity "${{ parameters.failSeverity }}" --output "${{ parameters.lintResultAzDO }}" --format junit
+        continueOnError: true
+        displayName: 'AzDO JUnit format'
+
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: '${{ parameters.lintResultAzDO }}'
+          failTaskOnFailedTests: true
+          testRunTitle: 'Spectral Linting Results'
+        displayName: 'Publish Test Results'
