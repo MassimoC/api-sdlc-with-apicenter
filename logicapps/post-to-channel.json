@@ -1,0 +1,156 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Init_versionId": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "versionId",
+                            "type": "string",
+                            "value": "@{substring(triggerBody()?['subject'],add(lastIndexOf(triggerBody()?['subject'], '/versions/') , 10),sub(length(triggerBody()?['subject']), add(lastIndexOf(triggerBody()?['subject'], '/versions/') , 10)))}"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Initialize_apiId": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "Initialize_apiId": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "apiId",
+                            "type": "string",
+                            "value": "@{substring(triggerBody()?['subject'],add(indexOf(triggerBody()?['subject'], '/apis/') , 6),sub(lastIndexOf(triggerBody()?['subject'], '/versions/'), add(indexOf(triggerBody()?['subject'], '/apis/') , 6)))\r\n}"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Initialize_eventTime": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "Initialize_eventTime": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "eventTime",
+                            "type": "string",
+                            "value": "@triggerBody()?['eventTime']"
+                        }
+                    ]
+                },
+                "runAfter": {},
+                "type": "InitializeVariable"
+            },
+            "Initialize_variable": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "eventType",
+                            "type": "string",
+                            "value": "@triggerBody()?['eventType']"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Init_versionId": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "Post_a_message_to_Microsoft_Teams_channel": {
+                "inputs": {
+                    "body": {
+                        "messageBody": "{\n    \"type\": \"AdaptiveCard\",\n    \"body\": [\n        {\n            \"type\": \"Container\",\n            \"items\": [\n                {\n                    \"type\": \"TextBlock\",\n                    \"size\": \"Medium\",\n                    \"weight\": \"Bolder\",\n                    \"text\": \"NEW API defition - @{variables('eventTime')}\"\n                }\n            ]\n        },\n        {\n            \"type\": \"Container\",\n            \"items\": [\n                {\n                    \"type\": \"TextBlock\",\n                    \"text\": \"Please validate compliancy and assign to a reviewer\",\n                    \"wrap\": true\n                },\n                {\n                    \"type\": \"FactSet\",\n                    \"facts\": [\n                        {\n                            \"title\": \"API Id:\",\n                            \"value\": \"@{variables('apiId')}\"\n                        },\n                        {\n                            \"title\": \"Version Id:\",\n                            \"value\": \"@{variables('versionId')}\"\n                        },\n                        {\n                            \"title\": \"EventType:\",\n                            \"value\": \"@{variables('eventType')}\"\n                        },\n                        {\n                            \"title\": \"Compliancestatus:\",\n                            \"value\": \"N/A\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"type\": \"ColumnSet\",\n            \"columns\": 2\n        }\n    ],\n    \"actions\": [\n        {\n            \"type\": \"Action.ShowCard\",\n            \"title\": \"What'snext?\",\n            \"card\": {\n                \"type\": \"AdaptiveCard\",\n                \"style\": \"emphasis\",\n                \"body\": [\n                    {\n                        \"type\": \"Container\",\n                        \"items\": [\n                            {\n                                \"type\": \"FactSet\",\n                                \"facts\": [\n                                    {\n                                        \"title\": \"CompanyRules\",\n                                        \"value\": \"eventually\"\n                                    },\n                                    {\n                                        \"title\": \"Compliancylevelrequired\",\n                                        \"value\": \"L1\"\n                                    }\n                                ]\n                            }\n                        ]\n                    }\n                ],\n                \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\"\n            }\n        },\n        {\n            \"type\": \"Action.OpenUrl\",\n            \"title\": \"Go to API\",\n            \"url\": \"https://apimhotrod.cloud\"\n        },\n        {\n            \"type\": \"Action.OpenUrl\",\n            \"title\": \"API Analysis reports\",\n            \"url\": \"https://portal.azure.com/#@codit.eu/resource/subscriptions/c1537527-c126-428d-8f72-1ac9f2c63c1f/resourceGroups/rg-apicenter/providers/Microsoft.ApiCenter/services/myapicatalog/analysis\n        }\n    ],\n    \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\",\n    \"version\": \"1.0\"\n}",
+                        "recipient": {
+                            "channelId": "19:e28eddaaa5b740f4ba4807ed9bc30bbe@thread.tacv2",
+                            "groupId": "c72c6377-e016-4699-b5d2-b850777ab088"
+                        }
+                    },
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['teams']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/flowbot/actions/adaptivecard/recipienttypes/channel",
+                    "queries": {
+                        "groupId": "c72c6377-e016-4699-b5d2-b850777ab088"
+                    }
+                },
+                "runAfter": {
+                    "Initialize_variable": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ApiConnection"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "When_a_resource_event_occurs": {
+                "inputs": {
+                    "body": {
+                        "properties": {
+                            "destination": {
+                                "endpointType": "webhook",
+                                "properties": {
+                                    "endpointUrl": "@{listCallbackUrl()}"
+                                }
+                            },
+                            "filter": {
+                                "includedEventTypes": [
+                                    "Microsoft.ApiCenter.ApiDefinitionAdded",
+                                    "Microsoft.ApiCenter.ApiDefinitionUpdated"
+                                ]
+                            },
+                            "topic": "/subscriptions/c1537527-c126-428d-8f72-1ac9f2c63c1f/resourceGroups/rg-apicenter/providers/Microsoft.ApiCenter/services/myapicatalog"
+                        }
+                    },
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['azureeventgrid_1']['connectionId']"
+                        }
+                    },
+                    "path": "/subscriptions/{topicSubscriptionId}/providers/@{encodeURIComponent('Microsoft.ApiCenter.Services')}/resource/eventSubscriptions",
+                    "queries": {
+                        "x-ms-api-version": "2017-09-15-preview"
+                    }
+                },
+                "splitOn": "@triggerBody()",
+                "type": "ApiConnectionWebhook"
+            }
+        }
+    },
+    "parameters": {
+        "$connections": {
+            "value": {
+                "azureeventgrid_1": {
+                    "connectionId": "/subscriptions/c1537527-c126-428d-8f72-1ac9f2c63c1f/resourceGroups/rg-apicenter/providers/Microsoft.Web/connections/azureeventgrid",
+                    "connectionName": "azureeventgrid",
+                    "id": "/subscriptions/c1537527-c126-428d-8f72-1ac9f2c63c1f/providers/Microsoft.Web/locations/westeurope/managedApis/azureeventgrid"
+                },
+                "teams": {
+                    "connectionId": "/subscriptions/c1537527-c126-428d-8f72-1ac9f2c63c1f/resourceGroups/rg-apicenter/providers/Microsoft.Web/connections/teams",
+                    "connectionName": "teams",
+                    "id": "/subscriptions/c1537527-c126-428d-8f72-1ac9f2c63c1f/providers/Microsoft.Web/locations/westeurope/managedApis/teams"
+                }
+            }
+        }
+    }
+}
