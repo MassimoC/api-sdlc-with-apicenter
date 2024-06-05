@@ -2,28 +2,45 @@
     "definition": {
         "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
         "actions": {
-            "Http_PUT": {
+            "ApiId": {
+                "inputs": "@triggerOutputs()['queries']['apiId']",
+                "runAfter": {
+                    "VersionId": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Compose"
+            },
+            "CreatePUTobject": {
+                "inputs": {
+                    "properties": {
+                        "customProperties": {
+                            "reviewer": "@{outputs('Reviewer')}"
+                        },
+                        "description": "@{body('Parse_JSON')?['properties']?['description']}",
+                        "kind": "@{body('Parse_JSON')?['properties']?['kind']}",
+                        "lifecycleStage": "@{body('Parse_JSON')?['properties']?['lifecycleStage']}",
+                        "summary": "@{body('Parse_JSON')?['properties']?['summary']}",
+                        "title": "@body('Parse_JSON')?['properties']?['title']"
+                    }
+                },
+                "runAfter": {
+                    "Parse_JSON": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Compose"
+            },
+            "Http_GET": {
                 "inputs": {
                     "authentication": {
                         "type": "ManagedServiceIdentity"
                     },
-                    "body": {
-                        "properties": {
-                            "customProperties": {
-                                "reviewer": "John Doe"
-                            },
-                            "description": "Everything about your Pets",
-                            "kind": "rest",
-                            "lifecycleStage": "design",
-                            "summary": "Everything about your Pets",
-                            "title": "petstore-api"
-                        }
-                    },
                     "headers": {
                         "Content-Type": "application/json"
                     },
-                    "method": "PUT",
-                    "uri": "https://management.azure.com/subscriptions/c1537527-c126-428d-8f72-1ac9f2c63c1f/resourceGroups/rg-apicenter/providers/Microsoft.ApiCenter/services/myapicatalog/workspaces/default/apis/petstore-api?api-version=2024-03-01"
+                    "method": "GET",
+                    "uri": "https://management.azure.com/subscriptions/c1537527-c126-428d-8f72-1ac9f2c63c1f/resourceGroups/rg-apicenter/providers/Microsoft.ApiCenter/services/myapicatalog/workspaces/default/apis/@{outputs('ApiId')}?api-version=2024-03-01"
                 },
                 "runAfter": {
                     "Reviewer": [
@@ -31,6 +48,275 @@
                     ]
                 },
                 "type": "Http"
+            },
+            "Http_PUT": {
+                "inputs": {
+                    "authentication": {
+                        "type": "ManagedServiceIdentity"
+                    },
+                    "body": "@outputs('CreatePUTobject')",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "method": "PUT",
+                    "uri": "https://management.azure.com/subscriptions/c1537527-c126-428d-8f72-1ac9f2c63c1f/resourceGroups/rg-apicenter/providers/Microsoft.ApiCenter/services/myapicatalog/workspaces/default/apis/@{outputs('ApiId')}?api-version=2024-03-01"
+                },
+                "runAfter": {
+                    "CreatePUTobject": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Http"
+            },
+            "Parse_JSON": {
+                "inputs": {
+                    "content": "@body('Http_GET')",
+                    "schema": {
+                        "$schema": "http://json-schema.org/draft-07/schema#",
+                        "properties": {
+                            "CatalogName": {
+                                "type": "string"
+                            },
+                            "CatalogNameTypeSafe": {
+                                "additionalProperties": false,
+                                "properties": {
+                                    "Name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "Contacts": {
+                                "items": {
+                                    "properties": {
+                                        "email": {
+                                            "description": "Email address for the contact.",
+                                            "format": "email",
+                                            "maxLength": 100,
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "description": "Name of the contact.",
+                                            "maxLength": 100,
+                                            "type": "string"
+                                        },
+                                        "url": {
+                                            "description": "URL for the contact.",
+                                            "format": "uri",
+                                            "maxLength": 200,
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "Created": {
+                                "format": "date-time",
+                                "type": "string"
+                            },
+                            "CreatedBy": {
+                                "type": "string"
+                            },
+                            "CustomPropertiesData": {},
+                            "Description": {
+                                "type": "string"
+                            },
+                            "ETag": {
+                                "type": "string"
+                            },
+                            "ExternalDocumentation": {
+                                "items": {
+                                    "properties": {
+                                        "description": {
+                                            "description": "Description of the documentation.",
+                                            "maxLength": 1000,
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "description": "Title of the documentation.",
+                                            "maxLength": 50,
+                                            "type": "string"
+                                        },
+                                        "url": {
+                                            "description": "URL pointing to the documentation.",
+                                            "format": "uri",
+                                            "maxLength": 200,
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "Id": {
+                                "type": "string"
+                            },
+                            "Kind": {
+                                "type": "string"
+                            },
+                            "License": {
+                                "properties": {
+                                    "identifier": {
+                                        "description": "SPDX license information for the API. The identifier field is mutually exclusive of the URL field.",
+                                        "format": "uri",
+                                        "maxLength": 200,
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "description": "Name of the license.",
+                                        "maxLength": 50,
+                                        "type": "string"
+                                    },
+                                    "url": {
+                                        "description": "URL pointing to the license details. The URL field is mutually exclusive of the identifier field.",
+                                        "format": "uri",
+                                        "maxLength": 200,
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "LifecycleStage": {
+                                "enum": [
+                                    "design",
+                                    "development",
+                                    "testing",
+                                    "preview",
+                                    "production",
+                                    "deprecated",
+                                    "retired"
+                                ],
+                                "type": "string"
+                            },
+                            "Name": {
+                                "type": "string"
+                            },
+                            "ResourceGroupName": {
+                                "type": "string"
+                            },
+                            "ResourceGroupNameTypeSafe": {
+                                "additionalProperties": false,
+                                "properties": {
+                                    "Name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "SubscriptionId": {
+                                "type": "string"
+                            },
+                            "SubscriptionIdTypeSafe": {
+                                "type": "string"
+                            },
+                            "Summary": {
+                                "type": "string"
+                            },
+                            "TermsOfService": {
+                                "properties": {
+                                    "url": {
+                                        "description": "URL pointing to the terms of service.",
+                                        "format": "uri",
+                                        "maxLength": 200,
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "Title": {
+                                "type": "string"
+                            },
+                            "Updated": {
+                                "format": "date-time",
+                                "type": "string"
+                            },
+                            "UpdatedBy": {
+                                "type": "string"
+                            },
+                            "WorkspaceName": {
+                                "type": "string"
+                            },
+                            "customProperties": {
+                                "properties": {
+                                    "compliance": {
+                                        "description": "Compliance assessment passed",
+                                        "title": "Compliance",
+                                        "type": "boolean"
+                                    },
+                                    "dependencies": {
+                                        "description": "Dependency Tracking Object",
+                                        "properties": {
+                                            "dependson": {
+                                                "description": "name of the service it depends on",
+                                                "maxLength": 20,
+                                                "minLength": 5,
+                                                "title": "dependson",
+                                                "type": "string"
+                                            },
+                                            "motivation": {
+                                                "description": "description of the dependency",
+                                                "maxLength": 50,
+                                                "minLength": 10,
+                                                "title": "motivation",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "dependson",
+                                            "motivation"
+                                        ],
+                                        "title": "Dependencies",
+                                        "type": "object"
+                                    },
+                                    "impactanalysis": {
+                                        "description": "Array of objects",
+                                        "items": {
+                                            "properties": {
+                                                "dependson": {
+                                                    "title": "DependsOn",
+                                                    "type": "string"
+                                                },
+                                                "motivation": {
+                                                    "title": "Motivation",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "dependson",
+                                                "motivation"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "title": "ImpactAnalysis",
+                                        "type": "array",
+                                        "uniqueItems": true
+                                    },
+                                    "reviewer": {
+                                        "description": "The reviewer that will assess the API compliancy",
+                                        "examples": [
+                                            "John Doe"
+                                        ],
+                                        "maxLength": 30,
+                                        "minLength": 5,
+                                        "title": "Reviewer",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [],
+                                "type": "object",
+                                "unevaluatedProperties": false
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "runAfter": {
+                    "Http_GET": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ParseJson"
             },
             "Return_response": {
                 "inputs": {
@@ -46,6 +332,15 @@
             },
             "Reviewer": {
                 "inputs": "@triggerOutputs()['queries']['reviewer']",
+                "runAfter": {
+                    "ApiId": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Compose"
+            },
+            "VersionId": {
+                "inputs": "@triggerOutputs()['queries']['versionId']",
                 "runAfter": {},
                 "type": "Compose"
             }
