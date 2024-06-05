@@ -48,6 +48,10 @@ jobs:
         continueOnError: true
         displayName: 'Lint OpenAPI file'
 
+      - script: spectral lint "${{ parameters.openApiFilePath }}" --ruleset "${{ parameters.rulesetPath }}" --fail-severity "${{ parameters.failSeverity }}" --output "${{ parameters.lintResult }}"
+        continueOnError: true
+        displayName: 'Lint OpenAPI pretty print'
+
       - script: cat ${{ parameters.lintResult }}
         continueOnError: true
         displayName: 'Show linting result (SARIF)'
