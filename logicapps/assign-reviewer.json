@@ -1,0 +1,77 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Http_PUT": {
+                "inputs": {
+                    "authentication": {
+                        "type": "ManagedServiceIdentity"
+                    },
+                    "body": {
+                        "properties": {
+                            "customProperties": {
+                                "reviewer": "John Doe"
+                            },
+                            "description": "Everything about your Pets",
+                            "kind": "rest",
+                            "lifecycleStage": "design",
+                            "summary": "Everything about your Pets",
+                            "title": "petstore-api"
+                        }
+                    },
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "method": "PUT",
+                    "uri": "https://management.azure.com/subscriptions/c1537527-c126-428d-8f72-1ac9f2c63c1f/resourceGroups/rg-apicenter/providers/Microsoft.ApiCenter/services/myapicatalog/workspaces/default/apis/petstore-api?api-version=2024-03-01"
+                },
+                "runAfter": {
+                    "Reviewer": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Http"
+            },
+            "Return_response": {
+                "inputs": {
+                    "statusCode": 200
+                },
+                "kind": "Http",
+                "runAfter": {
+                    "Http_PUT": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Response"
+            },
+            "Reviewer": {
+                "inputs": "@triggerOutputs()['queries']['reviewer']",
+                "runAfter": {},
+                "type": "Compose"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "manual": {
+                "inputs": {
+                    "method": "GET",
+                    "schema": {}
+                },
+                "kind": "Http",
+                "type": "Request"
+            }
+        }
+    },
+    "parameters": {
+        "$connections": {
+            "value": {}
+        }
+    }
+}
