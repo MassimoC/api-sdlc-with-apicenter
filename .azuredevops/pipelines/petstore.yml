@@ -1,7 +1,5 @@
 name: $(Date:yyyyMMdd)-$(Rev:rr)
 
-trigger: none
-
 parameters:
   - name: staticValidation
     displayName: Execute static validation
@@ -20,7 +18,6 @@ trigger:
       - main
   paths:
     include:
-      - '/.azuredevops/pipelines/petstore.yml'
       - '/design/petstore/*'
     exclude:
       - '/**/*.md'
