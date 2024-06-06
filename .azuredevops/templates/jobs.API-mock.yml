@@ -5,7 +5,7 @@ parameters:
   defaultJobTimeoutInMinutes: 120
   serviceConnection: '$(serviceConnection)'
   # Logic-related parameters
-  openApiFilePath: '$(openApiFullPath)'
+  openApiFilePath: ''
   apiName: ''
 
 
