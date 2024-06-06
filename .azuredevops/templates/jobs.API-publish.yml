@@ -117,7 +117,7 @@ jobs:
             echo "------------------------------------"
             echo ""
             echo "... ****** Print DEFINITION IMPORT-SPECIFICATION command ******"
-            echo "az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "link" --value '$(openApiUrl)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}"
+            echo "$(openApiUrl)"
             echo ""
             echo "... Executing command"
             az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "link" --value '$(openApiUrl)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}
