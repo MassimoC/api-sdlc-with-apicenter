@@ -54,7 +54,7 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             sudo apt --assume-yes install jq
-            jContent=$(jq -Rs . '${{ parameters.openApiFilePath }}')
+            jContent=$(jq -c . '${{ parameters.openApiFilePath }}')
             echo "##vso[task.setvariable variable=openApiContent;]$jContent"
 
       - bash: |
