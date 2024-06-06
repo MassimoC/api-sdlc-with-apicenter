@@ -27,6 +27,7 @@ stages:
       - template: /.azuredevops/templates/jobs.API-publish.yml
         parameters:
           openApiFilePath: '$(openApiPath)'
+          openApiUrl: '$(openApiUrl)'
           currentApiVersion: $(Build.BuildNumber)
           apiName: '${{ parameters.apiName }}'
           apiTitle: '${{ parameters.apiTitle }}'

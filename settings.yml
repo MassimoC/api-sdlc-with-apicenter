@@ -6,6 +6,8 @@ variables:
 
   azdoWorkDir: '$(System.DefaultWorkingDirectory)'
   azdoRunId: '$(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)'
+  ghRepo: 'https://raw.githubusercontent.com/MassimoC/api-sdlc-with-apicenter/main'
+  
   ########################
   ##   Agent settings   ##
   ########################
