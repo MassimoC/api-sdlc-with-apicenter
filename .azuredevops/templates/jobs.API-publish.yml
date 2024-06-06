@@ -117,11 +117,12 @@ jobs:
             echo "------------------------------------"
             echo ""
             echo "... ****** Print DEFINITION IMPORT-SPECIFICATION command ******"
-            echo "az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}"
+            #echo "az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}"
+            echo "az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "link" --value '$(openApiUrl)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}"
             echo ""
             echo "... Executing command"
-            #az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}
             az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "link" --value '$(openApiUrl)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}
+            #az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "inline" --value '$(openApiContent)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}
 
       - task: DownloadPipelineArtifact@2
         inputs:
