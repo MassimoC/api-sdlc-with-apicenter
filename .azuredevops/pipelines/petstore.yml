@@ -27,6 +27,8 @@ variables:
   - template: '../../settings.yml'
   - name: openApiPath
     value: '$(azdoWorkDir)/design/petstore/openapi_petstore.json'
+  - name: openApiUrl
+    value: '$(ghRepo)/design/petstore/openapi_petstore.json'
   - name: currentApiVersion
     value: 'v3'
     
