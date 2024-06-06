@@ -27,6 +27,8 @@ variables:
   - template: '../../settings.yml'
   - name: openApiPath
     value: '$(azdoWorkDir)/design/bgt/openapi_bgt.json'
+  - name: openApiUrl
+    value: '$(ghRepo)/design/bgt/openapi_bgt.json'
   - name: currentApiVersion
     value: '1.0.0'
     

@@ -7,7 +7,7 @@ parameters:
   # Logic-related parameters
   spectralRulesFullPath: '$(spectralRulesFullPath)'
   failSeverity: 'warn'
-  openApiFilePath: '$(openApiFullPath)'
+  openApiFilePath: '$(openApiFilePath)'
   openApiUrl: '$(openApiUrl)'
   # APIC parameters
   rg: 'rg-apicenter'

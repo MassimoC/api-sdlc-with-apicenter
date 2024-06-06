@@ -28,6 +28,8 @@ variables:
   - template: '../../settings.yml'
   - name: openApiPath
     value: '$(azdoWorkDir)/design/rocketapi/openapi_rocketapi.json'
+  - name: openApiUrl
+    value: '$(ghRepo)/design/rocketapi/openapi_rocketapi.json'
   - name: currentApiVersion
     value: '1.0.alpha'
     

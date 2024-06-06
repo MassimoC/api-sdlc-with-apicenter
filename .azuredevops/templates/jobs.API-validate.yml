@@ -4,7 +4,7 @@ parameters:
   vmImage: '$(vmImage)'
   defaultJobTimeoutInMinutes: 120
   # Logic-related parameters
-  openApiFilePath: '$(openApiFullPath)'
+  openApiFilePath: '$(openApiFilePath)'
   rulesetPath: '$(spectralRulesPath)'
   lintResult: '$(lintResult)'
   lintResultAzDO: '$(lintResultAzDO)'
