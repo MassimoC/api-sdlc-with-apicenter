@@ -1,5 +1,7 @@
 name: $(Date:yyyyMMdd)-$(Rev:rr)
 
+trigger: none
+
 parameters:
   - name: staticValidation
     displayName: Execute static validation
