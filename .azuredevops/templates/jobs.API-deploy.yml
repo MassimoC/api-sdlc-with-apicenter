@@ -76,6 +76,6 @@ jobs:
                 inlineScript: |
                   echo "------------UPDATE-LIFECYCLE------------"
                   echo "... ****** Print VERSION UPDATE command ******"
-                  echo "az apic api version update -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --name ${{ parameters.apiVersion }}  --lifecycle-stage ${{ parameters.lifecycleStage }} -w default"
+                  echo "az apic api version update -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --version-id ${{ parameters.apiVersion }}  --lifecycle-stage ${{ parameters.lifecycleStage }}"
                   echo "... Executing command"
-                  az apic api version update -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-name ${{ parameters.apiName }} --name ${{ parameters.apiVersion }}  --lifecycle-stage ${{ parameters.lifecycleStage }} -w default
+                  az apic api version update -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --version-id ${{ parameters.apiVersion }}  --lifecycle-stage ${{ parameters.lifecycleStage }}
