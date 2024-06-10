@@ -54,7 +54,7 @@ jobs:
                   echo "------------DEPLOYMENT------------"
                   $deploymentName="${{ parameters.environmentCode }}-${{ parameters.releaseDate }}"
                   $environmentResource="/workspaces/default/environments/${{ parameters.environmentId }}"
-                  $definitionResource="/workspaces/default/apis/${{ parameters.apiName }}/versions/${{ parameters.apiVersion }}/definitions/xdef006"
+                  $definitionResource="/workspaces/default/apis/${{ parameters.apiName }}/versions/${{ parameters.apiVersion }}/definitions/xdef2024"
                   echo "... deploymentName"
                   echo $deploymentName
                   echo "... environmentResource"
@@ -65,7 +65,7 @@ jobs:
                   echo "... ****** Print DEPLOYMENT CREATE command ******"
                   echo "az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --deployment-id $deploymentName  --title $deploymentName --description $deploymentName --api-id '${{ parameters.apiName }}' --environment-id '$environmentResource' --definition-id '$definitionResource' --server runtime-uri[0]='${{ parameters.azdoRunId }}'"
                   echo "... Executing command"
-                  az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --deployment-id $deploymentName  --title $deploymentName --description $deploymentName --api-id "${{ parameters.apiName }}" --environment-id "$environmentResource" --definition-id "$definitionResource" --server '{"runtimeUri":["{{ parameters.azdoRunId }}"]}'
+                  az apic api deployment create -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --deployment-id $deploymentName  --title $deploymentName --description $deploymentName --api-id "${{ parameters.apiName }}" --environment-id "$environmentResource" --definition-id "$definitionResource" --server runtime-uri[0]='${{ parameters.azdoRunId }}'
 
             - task: AzureCLI@2  
               displayName: APIC - Lifecycle
