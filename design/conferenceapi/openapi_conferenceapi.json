@@ -1,0 +1,904 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "ConferenceApiApp",
+      "version": "2024-06-01"
+    },
+    "servers": [
+      {
+        "url": "https://apim-conf.azurewebsites.net:443/"
+      }
+    ],
+    "paths": {
+      "/days": {
+        "get": {
+          "tags": [
+            "Days"
+          ],
+          "operationId": "Days_Get",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/": {
+        "get": {
+          "tags": [
+            "Home"
+          ],
+          "operationId": "Home_Get",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/session/{id}": {
+        "get": {
+          "tags": [
+            "Session"
+          ],
+          "operationId": "Session_GetById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/session/{id}/topics": {
+        "get": {
+          "tags": [
+            "Session"
+          ],
+          "operationId": "Session_GetTopicsBySessionById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/sessions": {
+        "get": {
+          "tags": [
+            "Sessions"
+          ],
+          "operationId": "Sessions_Get",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/sessions/byspeakerid": {
+        "get": {
+          "tags": [
+            "Sessions"
+          ],
+          "operationId": "Sessions_GetSessionsBySpeakerBySpeakerid",
+          "parameters": [
+            {
+              "name": "speakerId",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/sessions/byspeakername": {
+        "get": {
+          "tags": [
+            "Sessions"
+          ],
+          "operationId": "Sessions_GetSessionsBySpeakerNameBySpeakername",
+          "parameters": [
+            {
+              "name": "speakername",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/sessions/byday": {
+        "get": {
+          "tags": [
+            "Sessions"
+          ],
+          "operationId": "Sessions_GetSessionsByDayByDayno",
+          "parameters": [
+            {
+              "name": "dayno",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/sessions/bykeyword": {
+        "get": {
+          "tags": [
+            "Sessions"
+          ],
+          "operationId": "Sessions_GetSessionsByKeywordByKeyword",
+          "parameters": [
+            {
+              "name": "keyword",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/speaker/{id}": {
+        "get": {
+          "tags": [
+            "Speaker"
+          ],
+          "operationId": "Speaker_GetSpeakerById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/speaker/{id}/sessions": {
+        "get": {
+          "tags": [
+            "Speaker"
+          ],
+          "operationId": "Speaker_GetSessionsBySpeakerById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/speaker/{id}/topics": {
+        "get": {
+          "tags": [
+            "Speaker"
+          ],
+          "operationId": "Speaker_GetTopicsBySpeakerById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/speakers": {
+        "get": {
+          "tags": [
+            "Speakers"
+          ],
+          "operationId": "Speakers_Get",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/speakers/byday": {
+        "get": {
+          "tags": [
+            "Speakers"
+          ],
+          "operationId": "Speakers_GetByDayno",
+          "parameters": [
+            {
+              "name": "dayno",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/speakers/byspeakername": {
+        "get": {
+          "tags": [
+            "Speakers"
+          ],
+          "operationId": "Speakers_GetBySpeakername",
+          "parameters": [
+            {
+              "name": "speakername",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/topic/{id}": {
+        "get": {
+          "tags": [
+            "Topic"
+          ],
+          "operationId": "Topic_GetTopicById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/topic/{id}/sessions": {
+        "get": {
+          "tags": [
+            "Topic"
+          ],
+          "operationId": "Topic_GetSessionsByTopicById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/topic/{id}/speakers": {
+        "get": {
+          "tags": [
+            "Topic"
+          ],
+          "operationId": "Topic_GetSpeakersByTopicById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/topics": {
+        "get": {
+          "tags": [
+            "Topics"
+          ],
+          "operationId": "Topics_Get",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/topics/byday": {
+        "get": {
+          "tags": [
+            "Topics"
+          ],
+          "operationId": "Topics_GetByDayno",
+          "parameters": [
+            {
+              "name": "dayno",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                },
+                "text/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Object": {
+          "type": "object"
+        }
+      }
+    },
+    "x-original-swagger-version": "2.0"
+  }
