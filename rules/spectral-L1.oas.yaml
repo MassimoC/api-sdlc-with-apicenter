@@ -27,11 +27,11 @@ rules:
       function: pattern
       functionOptions:
         match: '^([a-zA-Z0-9]+)_([a-zA-Z0-9]+)'
-  semver-required:
-    description: "Ensure the API description document version number follows semantic versioning."
+  document-version-format:
+    description: "Ensure the API description document version number follows YYYYMMMDD-* versioning."
     severity: error
     given: "$.info.version"
     then:
       function: pattern
       functionOptions:
-        match: '^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-[0-9A-Za-z-.]+)?(\+[0-9A-Za-z-.]+)?$'
+        match: '^\d{8}-\d{2}$'
