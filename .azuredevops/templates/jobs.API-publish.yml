@@ -82,10 +82,10 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             echo "... ****** Print API CREATE command ******"
-            echo "az apic api create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --title '${{ parameters.apiTitle }}' --type rest --description '${{ parameters.apiDescription }}' --summary '${{ parameters.apiDescription }}'"
+            echo "az apic api create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --title '${{ parameters.apiTitle }}' --type rest --description '${{ parameters.apiDescription }}' --summary '${{ parameters.apiDescription }}' --custom-properties '{"compliancy":true}'"
             echo ""
             echo "... Executing command"
-            az apic api create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --title '${{ parameters.apiTitle }}' --type rest --description '${{ parameters.apiDescription }}' --summary '${{ parameters.apiDescription }} --custom-properties '{"compliancy":true}''
+            az apic api create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --title '${{ parameters.apiTitle }}' --type rest --description '${{ parameters.apiDescription }}' --summary '${{ parameters.apiDescription }}' --custom-properties '{"compliancy":true}'
             #--custom-properties '{"public-facing":true}'
 
       - task: AzureCLI@2  
