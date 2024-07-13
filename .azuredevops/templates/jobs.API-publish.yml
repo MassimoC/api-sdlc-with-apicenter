@@ -69,10 +69,10 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             echo "... ****** Print API LIST command ******"
-            echo "az apic api list -g ${{ parameters.rg }} -s ${{ parameters.apicName }}"
+            echo "az apic api list -g ${{ parameters.rg }} -n ${{ parameters.apicName }}"
             echo ""
             echo "... Executing command"
-            az apic api list -g ${{ parameters.rg }} -s ${{ parameters.apicName }}
+            az apic api list -g ${{ parameters.rg }} -n ${{ parameters.apicName }}
 
       - task: AzureCLI@2  
         displayName: APIC - api create
@@ -82,10 +82,10 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             echo "... ****** Print API CREATE command ******"
-            echo "az apic api create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --title '${{ parameters.apiTitle }}' --type rest --description '${{ parameters.apiDescription }}' --summary '${{ parameters.apiDescription }}'"
+            echo "az apic api create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --title '${{ parameters.apiTitle }}' --type rest --description '${{ parameters.apiDescription }}' --summary '${{ parameters.apiDescription }}'"
             echo ""
             echo "... Executing command"
-            az apic api create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --title '${{ parameters.apiTitle }}' --type rest --description '${{ parameters.apiDescription }}' --summary '${{ parameters.apiDescription }}'
+            az apic api create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --title '${{ parameters.apiTitle }}' --type rest --description '${{ parameters.apiDescription }}' --summary '${{ parameters.apiDescription }} --custom-properties '{"compliancy":true}''
             #--custom-properties '{"public-facing":true}'
 
       - task: AzureCLI@2  
@@ -96,10 +96,10 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             echo "... ****** Print API VERSION CREATE command ******"
-            echo "az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --title '${{ parameters.currentApiVersion }}' --lifecycle-stage design"
+            echo "az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --title '${{ parameters.currentApiVersion }}' --lifecycle-stage design"
             echo ""
             echo "... Executing command"
-            az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --title '${{ parameters.currentApiVersion }}' --lifecycle-stage design
+            az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --title '${{ parameters.currentApiVersion }}' --lifecycle-stage design
             
 
       - task: AzureCLI@2  
@@ -110,17 +110,17 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             echo "... ****** Print DEFINITION CREATE command ******"
-            echo "az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --definition-id '${{ parameters.definitionId }}' --title 'OpenAPI xdef2024'"
+            echo "az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --definition-id '${{ parameters.definitionId }}' --title 'OpenAPI xdef2024'"
             echo ""
             echo "... Executing command"
-            az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --definition-id '${{ parameters.definitionId }}' --title 'OpenAPI xdef2024'
+            az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --definition-id '${{ parameters.definitionId }}' --title 'OpenAPI xdef2024'
             echo "------------------------------------"
             echo ""
             echo "... ****** Print DEFINITION IMPORT-SPECIFICATION command ******"
-            echo "az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "link" --value '$(openApiUrl)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}"
+            echo "az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "link" --value '$(openApiUrl)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }}"
             echo ""
             echo "... Executing command"
-            az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "link" --value '$(openApiUrl)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -s ${{ parameters.apicName }}
+            az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "link" --value '$(openApiUrl)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }}
 
       - task: DownloadPipelineArtifact@2
         inputs:
