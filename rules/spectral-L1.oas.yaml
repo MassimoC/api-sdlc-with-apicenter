@@ -28,10 +28,11 @@ rules:
       functionOptions:
         match: '^([a-zA-Z0-9]+)_([a-zA-Z0-9]+)'
   document-version-format:
-    description: "Ensure the API description document version number follows YYYYMMMDD-* versioning."
+    description: "Ensure the API description document version number follows {major}.{minor}.{patch} versioning."
     severity: error
     given: "$.info.version"
     then:
       function: pattern
       functionOptions:
-        match: '^\d{8}-\d{2}$'
+        match: '^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-[0-9A-Za-z-.]+)?(\+[0-9A-Za-z-.]+)?$'
+       
