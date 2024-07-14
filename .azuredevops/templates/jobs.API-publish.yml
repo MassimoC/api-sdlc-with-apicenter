@@ -43,7 +43,7 @@ jobs:
             echo "... Open API Path"
             cat ${{ parameters.openApiFilePath }}
             echo ""
-            echo "... API version"
+            echo "... API version (from pipeline)"
             echo ${{ parameters.currentApiVersion }}
 
 
@@ -57,6 +57,9 @@ jobs:
             sudo apt --assume-yes install jq
             jContent=$(jq -c . '${{ parameters.openApiFilePath }}')
             echo "##vso[task.setvariable variable=openApiContent;]$jContent"
+            descriptionVersion=$(jq -r '.info.version' '${{ parameters.openApiFilePath }}')
+            echo $descriptionVersion
+            echo "##vso[task.setvariable variable=descriptionVersion;]$descriptionVersion"
 
       - bash: |
           echo 'use macro syntax to read variables: $(openApiContent)'
@@ -96,10 +99,10 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             echo "... ****** Print API VERSION CREATE command ******"
-            echo "az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --title '${{ parameters.currentApiVersion }}' --lifecycle-stage design"
+            echo "az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id $(descriptionVersion) --title '$(descriptionVersion)' --lifecycle-stage design"
             echo ""
             echo "... Executing command"
-            az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --title '${{ parameters.currentApiVersion }}' --lifecycle-stage design
+            az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id $(descriptionVersion) --title '$(descriptionVersion)' --lifecycle-stage design
             
 
       - task: AzureCLI@2  
@@ -110,17 +113,17 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             echo "... ****** Print DEFINITION CREATE command ******"
-            echo "az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --definition-id '${{ parameters.definitionId }}' --title 'OpenAPI xdef2024'"
+            echo "az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id $(descriptionVersion) --definition-id '${{ parameters.definitionId }}' --title 'OpenAPI xdef2024'"
             echo ""
             echo "... Executing command"
-            az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id ${{ parameters.currentApiVersion }} --definition-id '${{ parameters.definitionId }}' --title 'OpenAPI xdef2024'
+            az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id $(descriptionVersion) --definition-id '${{ parameters.definitionId }}' --title 'OpenAPI xdef2024'
             echo "------------------------------------"
             echo ""
             echo "... ****** Print DEFINITION IMPORT-SPECIFICATION command ******"
-            echo "az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "link" --value '$(openApiUrl)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }}"
+            echo "az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "link" --value '$(openApiUrl)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id $(descriptionVersion) -g ${{ parameters.rg }} -n ${{ parameters.apicName }}"
             echo ""
             echo "... Executing command"
-            az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "link" --value '$(openApiUrl)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id ${{ parameters.currentApiVersion }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }}
+            az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "link" --value '$(openApiUrl)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id $(descriptionVersion) -g ${{ parameters.rg }} -n ${{ parameters.apicName }}
 
       - task: DownloadPipelineArtifact@2
         inputs:
@@ -141,7 +144,7 @@ jobs:
           scriptType: 'bash'
           scriptLocation: 'inlineScript'
           inlineScript: |
-            apicUri="https://management.azure.com/subscriptions/$(subscriptionId)/resourceGroups/${{ parameters.rg }}/providers/Microsoft.ApiCenter/services/${{ parameters.apicName }}/workspaces/default/apis/${{ parameters.apiName }}/versions/${{ parameters.currentApiVersion }}/definitions/${{ parameters.definitionId }}/updateAnalysisState?api-version=2024-03-01"
+            apicUri="https://management.azure.com/subscriptions/$(subscriptionId)/resourceGroups/${{ parameters.rg }}/providers/Microsoft.ApiCenter/services/${{ parameters.apicName }}/workspaces/default/apis/${{ parameters.apiName }}/versions/$(descriptionVersion)/definitions/${{ parameters.definitionId }}/updateAnalysisState?api-version=2024-03-01"
             echo "... Upload Linting result to APIC"
             echo $apicUri
             
