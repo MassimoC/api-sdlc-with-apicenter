@@ -22,7 +22,7 @@ parameters:
 ## TEMPLATE LOGIC                              ##
 ##---------------------------------------------##
 jobs:
-  - job:
+  - job: publishToApic
     displayName: Azure API Center
     timeoutInMinutes: ${{ parameters.defaultJobTimeoutInMinutes }}
     pool:

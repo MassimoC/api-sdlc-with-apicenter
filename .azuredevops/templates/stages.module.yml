@@ -55,7 +55,7 @@ stages:
       - mocking
       - discovery
     variables:
-        apicVersionId: $[ dependencies.discovery.outputs['setOutputs.apicVersionId'] ]
+        apicVersionId: $[ dependencies.discovery.publishToApic.outputs['setOutputs.apicVersionId'] ]
     jobs:
       - template: /.azuredevops/templates/jobs.API-deploy.yml
         parameters:
