@@ -29,7 +29,7 @@ variables:
   - name: openApiUrl
     value: '$(ghRepo)/design/salesapi/openapi_salesapi.json'
   - name: currentApiVersion
-    value: '2.0.1'
+    value: 'v2'
     
 
 stages:
