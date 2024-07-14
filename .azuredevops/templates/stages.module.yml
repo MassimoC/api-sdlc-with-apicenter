@@ -53,12 +53,15 @@ stages:
     condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.SourceBranch'], 'refs/heads/master')))
     dependsOn:
       - mocking
+      - discovery
+    variables:
+        apicVersionId: $[ dependencies.discovery.outputs['setOutputs.apicVersionId'] ]
     jobs:
       - template: /.azuredevops/templates/jobs.API-deploy.yml
         parameters:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
-          apiVersion: $(Build.BuildNumber)
+          apiVersion: '$(apicVersionId)'
           environmentCode : 'development'
           lifecycleStage: 'development'
 
@@ -72,7 +75,7 @@ stages:
         parameters:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
-          apiVersion: $(Build.BuildNumber)
+          apiVersion: '${{ parameters.currentApiVersion }}'
           environmentCode : 'testing'
           environmentId: 'tst001xyz'
           lifecycleStage: 'testing'
@@ -87,7 +90,7 @@ stages:
         parameters:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
-          apiVersion: $(Build.BuildNumber)
+          apiVersion: '${{ parameters.currentApiVersion }}'
           environmentCode : 'staging'
           environmentId: 'acc001xyz'
           lifecycleStage: 'preview'
@@ -102,7 +105,7 @@ stages:
         parameters:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
-          apiVersion: $(Build.BuildNumber)
+          apiVersion: '${{ parameters.currentApiVersion }}'
           environmentCode : 'production'
           environmentId: 'prd001xyz'
           lifecycleStage: 'production'
