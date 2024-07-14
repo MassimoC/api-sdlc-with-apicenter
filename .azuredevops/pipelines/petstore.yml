@@ -37,7 +37,7 @@ stages:
     parameters:
       staticValidation: '${{ parameters.staticValidation }}'
       publishDesign: '${{ parameters.publishDesign }}'
-      apiName: 'petstore-api'
-      apiTitle: 'Petstore API'
+      apiName: 'petstore-api-v3'
+      apiTitle: 'Petstore API v3'
       apiDescription: 'Everything about your Pets'
       currentApiVersion: ${{variables.currentApiVersion}}

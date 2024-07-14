@@ -29,7 +29,7 @@ variables:
   - name: openApiUrl
     value: '$(ghRepo)/design/rocketapi/openapi_rocketapi.json'
   - name: currentApiVersion
-    value: '1.0.alpha'
+    value: 'v1'
     
 
 stages:
