@@ -61,7 +61,7 @@ stages:
         parameters:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
-          apiVersion: '$(apicVersionId)'
+          apiVersion: $(apicVersionId)
           environmentCode : 'development'
           lifecycleStage: 'development'
 

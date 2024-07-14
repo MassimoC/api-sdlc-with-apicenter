@@ -72,7 +72,9 @@ jobs:
       - bash: |
           echo $(concatenatedVersions)
           echo "##vso[task.setvariable variable=apicVersionId;isOutput=true]$(concatenatedVersions)"
+          echo $(apicVersionId)
         name: 'setOutputs'
+        displayName: 'Set output variables'
 
       - task: AzureCLI@2  
         displayName: APIC - api list
