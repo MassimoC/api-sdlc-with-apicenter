@@ -6,6 +6,7 @@ parameters:
   apiName: ''
   apiTitle: ''
   apiDescription: ''
+  currentApiVersion: ''
 
 stages:
   - stage: validation
@@ -28,7 +29,8 @@ stages:
         parameters:
           openApiFilePath: '$(openApiPath)'
           openApiUrl: '$(openApiUrl)'
-          currentApiVersion: $(Build.BuildNumber)
+          #currentApiVersion: $(Build.BuildNumber)
+          currentApiVersion: '${{ parameters.currentApiVersion }}'
           apiName: '${{ parameters.apiName }}'
           apiTitle: '${{ parameters.apiTitle }}'
           apiDescription: '${{ parameters.apiDescription }}'
@@ -43,7 +45,7 @@ stages:
       - template: /.azuredevops/templates/jobs.API-mock.yml
         parameters:
           openApiFilePath: '$(openApiPath)'
-          currentApiVersion: $(Build.BuildNumber)
+          currentApiVersion: '${{ parameters.currentApiVersion }}'
           apiName: '${{ parameters.apiName }}'
 
   - stage: dev

@@ -58,6 +58,7 @@ jobs:
             jContent=$(jq -c . '${{ parameters.openApiFilePath }}')
             echo "##vso[task.setvariable variable=openApiContent;]$jContent"
             descriptionVersion=$(jq -r '.info.version' '${{ parameters.openApiFilePath }}')
+            descriptionVersion=$(echo "$descriptionVersion" | tr '.' '-')
             echo $descriptionVersion
             echo "##vso[task.setvariable variable=descriptionVersion;]$descriptionVersion"
 
