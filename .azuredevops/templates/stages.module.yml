@@ -70,12 +70,15 @@ stages:
     condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.SourceBranch'], 'refs/heads/master')))
     dependsOn:
       - dev
+      - discovery
+    variables:
+        apicVersionId: $[ stageDependencies.discovery.publishToApic.outputs['setOutputs.apicVersionId'] ]
     jobs:
       - template: /.azuredevops/templates/jobs.API-deploy.yml
         parameters:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
-          apiVersion: '${{ parameters.currentApiVersion }}'
+          apiVersion: $(apicVersionId)
           environmentCode : 'testing'
           environmentId: 'tst001xyz'
           lifecycleStage: 'testing'
@@ -85,12 +88,15 @@ stages:
     condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.SourceBranch'], 'refs/heads/master')))
     dependsOn:
       - tst
+      - discovery
+    variables:
+        apicVersionId: $[ stageDependencies.discovery.publishToApic.outputs['setOutputs.apicVersionId'] ]
     jobs:
       - template: /.azuredevops/templates/jobs.API-deploy.yml
         parameters:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
-          apiVersion: '${{ parameters.currentApiVersion }}'
+          apiVersion: $(apicVersionId)
           environmentCode : 'staging'
           environmentId: 'acc001xyz'
           lifecycleStage: 'preview'
@@ -100,12 +106,15 @@ stages:
     condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.SourceBranch'], 'refs/heads/master')))
     dependsOn:
       - stg
+      - discovery
+    variables:
+        apicVersionId: $[ stageDependencies.discovery.publishToApic.outputs['setOutputs.apicVersionId'] ]
     jobs:
       - template: /.azuredevops/templates/jobs.API-deploy.yml
         parameters:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
-          apiVersion: '${{ parameters.currentApiVersion }}'
+          apiVersion: $(apicVersionId)
           environmentCode : 'production'
           environmentId: 'prd001xyz'
           lifecycleStage: 'production'
