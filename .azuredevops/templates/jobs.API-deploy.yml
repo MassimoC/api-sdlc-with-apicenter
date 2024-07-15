@@ -53,12 +53,13 @@ jobs:
                 scriptLocation: inlineScript
                 inlineScript: |
                   echo "------------DEPLOYMENT------------"
-                  $deploymentName="${{ parameters.environmentCode }}-${{ parameters.releaseDate }}-${{ parameters.apicVersionName }}"
+                  deploymentName="${{ parameters.environmentCode }}-${{ parameters.releaseDate }}-${{ parameters.apicVersionName }}"
                   deploymentId=$(echo "$deploymentName" | tr '.' '-')
                   deploymentId=$(echo "$deploymentId" | tr '_' '-')
 
-                  $environmentResource="/workspaces/default/environments/${{ parameters.environmentId }}"
-                  $definitionResource="/workspaces/default/apis/${{ parameters.apiName }}/versions/${{ parameters.apiVersion }}/definitions/xdef2024"
+                  environmentResource="/workspaces/default/environments/${{ parameters.environmentId }}"
+                  definitionResource="/workspaces/default/apis/${{ parameters.apiName }}/versions/${{ parameters.apiVersion }}/definitions/xdef2024"
+                  
                   echo "... deploymentName"
                   echo $deploymentName
                   echo "... environmentResource"
