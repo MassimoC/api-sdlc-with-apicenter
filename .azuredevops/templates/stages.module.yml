@@ -56,12 +56,14 @@ stages:
       - discovery
     variables:
         apicVersionId: $[ stageDependencies.discovery.publishToApic.outputs['setOutputs.apicVersionId'] ]
+        apicVersionName: $[ stageDependencies.discovery.publishToApic.outputs['setOutputs.apicVersionName'] ]
     jobs:
       - template: /.azuredevops/templates/jobs.API-deploy.yml
         parameters:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
           apiVersion: $(apicVersionId)
+          apicVersionName: $(apicVersionName)
           environmentCode : 'development'
           lifecycleStage: 'development'
 
@@ -73,12 +75,14 @@ stages:
       - discovery
     variables:
         apicVersionId: $[ stageDependencies.discovery.publishToApic.outputs['setOutputs.apicVersionId'] ]
+        apicVersionName: $[ stageDependencies.discovery.publishToApic.outputs['setOutputs.apicVersionName'] ]
     jobs:
       - template: /.azuredevops/templates/jobs.API-deploy.yml
         parameters:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
           apiVersion: $(apicVersionId)
+          apicVersionName: $(apicVersionName)
           environmentCode : 'testing'
           environmentId: 'tst001xyz'
           lifecycleStage: 'testing'
@@ -91,12 +95,14 @@ stages:
       - discovery
     variables:
         apicVersionId: $[ stageDependencies.discovery.publishToApic.outputs['setOutputs.apicVersionId'] ]
+        apicVersionName: $[ stageDependencies.discovery.publishToApic.outputs['setOutputs.apicVersionName'] ]
     jobs:
       - template: /.azuredevops/templates/jobs.API-deploy.yml
         parameters:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
           apiVersion: $(apicVersionId)
+          apicVersionName: $(apicVersionName)
           environmentCode : 'staging'
           environmentId: 'acc001xyz'
           lifecycleStage: 'preview'
@@ -109,12 +115,14 @@ stages:
       - discovery
     variables:
         apicVersionId: $[ stageDependencies.discovery.publishToApic.outputs['setOutputs.apicVersionId'] ]
+        apicVersionName: $[ stageDependencies.discovery.publishToApic.outputs['setOutputs.apicVersionName'] ]
     jobs:
       - template: /.azuredevops/templates/jobs.API-deploy.yml
         parameters:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
           apiVersion: $(apicVersionId)
+          apicVersionName: $(apicVersionName)
           environmentCode : 'production'
           environmentId: 'prd001xyz'
           lifecycleStage: 'production'

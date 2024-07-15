@@ -57,14 +57,18 @@ jobs:
             sudo apt --assume-yes install jq
             jContent=$(jq -c . '${{ parameters.openApiFilePath }}')
             echo "##vso[task.setvariable variable=openApiContent;]$jContent"
-            descriptionVersion=$(jq -r '.info.version' '${{ parameters.openApiFilePath }}')
+            descriptionVersionOriginal=$(jq -r '.info.version' '${{ parameters.openApiFilePath }}')
             
-            descriptionVersion=$(echo "$descriptionVersion" | tr '.' '-')
+            descriptionVersion=$(echo "$descriptionVersionOriginal" | tr '.' '-')
             apiVersion=$(echo ${{ parameters.currentApiVersion }} | tr '.' '-')
             
             concatenatedVersions=$(printf "%s---%s" "$apiVersion" "$descriptionVersion")
             echo $concatenatedVersions
             echo "##vso[task.setvariable variable=concatenatedVersions;]$concatenatedVersions"
+
+            concatenatedVersionsName=$(printf "%s_%s" "$apiVersion" "$descriptionVersionOriginal")
+            echo $concatenatedVersionsName
+            echo "##vso[task.setvariable variable=concatenatedVersionsName;]$concatenatedVersionsName"
 
       - bash: |
           echo 'use macro syntax to read variables: $(openApiContent)'
@@ -72,7 +76,8 @@ jobs:
       - bash: |
           echo $(concatenatedVersions)
           echo "##vso[task.setvariable variable=apicVersionId;isOutput=true]$(concatenatedVersions)"
-          echo $(apicVersionId)
+          echo "##vso[task.setvariable variable=apicVersionName;isOutput=true]$(concatenatedVersionsName)"
+
         name: 'setOutputs'
         displayName: 'Set output variables'
 
@@ -111,10 +116,10 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: |
             echo "... ****** Print API VERSION CREATE command ******"
-            echo "az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id $(concatenatedVersions) --title '$(concatenatedVersions)' --lifecycle-stage design"
+            echo "az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id $(concatenatedVersions) --title '$(concatenatedVersionsName)' --lifecycle-stage design"
             echo ""
             echo "... Executing command"
-            az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id $(concatenatedVersions) --title '$(concatenatedVersions)' --lifecycle-stage design
+            az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id $(concatenatedVersions) --title '$(concatenatedVersionsName)' --lifecycle-stage design
             
 
       - task: AzureCLI@2  

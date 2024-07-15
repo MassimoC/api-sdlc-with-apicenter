@@ -10,6 +10,7 @@ parameters:
   apiName: ''
   releaseDate: ''
   apiVersion: ''
+  apicVersionName: ''
   environmentCode : ''
   environmentId: 'dev001xyz'
   lifecycleStage: 'development'
@@ -52,7 +53,7 @@ jobs:
                 scriptLocation: inlineScript
                 inlineScript: |
                   echo "------------DEPLOYMENT------------"
-                  $deploymentName="${{ parameters.environmentCode }}-${{ parameters.releaseDate }}"
+                  $deploymentName="${{ parameters.environmentCode }}-${{ parameters.releaseDate }}-${{ parameters.apicVersionName }}"
                   $environmentResource="/workspaces/default/environments/${{ parameters.environmentId }}"
                   $definitionResource="/workspaces/default/apis/${{ parameters.apiName }}/versions/${{ parameters.apiVersion }}/definitions/xdef2024"
                   echo "... deploymentName"
