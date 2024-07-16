@@ -88,7 +88,7 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            echo "... ****** Print API LIST command ******"
+            echo "... ****** az cli :: API LIST command ******"
             echo "az apic api list -g ${{ parameters.rg }} -n ${{ parameters.apicName }}"
             echo ""
             echo "... Executing command"
@@ -101,7 +101,7 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            echo "... ****** Print API CREATE command ******"
+            echo "... ****** az cli :: API CREATE command ******"
             echo "az apic api create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --title '${{ parameters.apiTitle }}' --type rest --description '${{ parameters.apiDescription }}' --summary '${{ parameters.apiDescription }}' --custom-properties '{"compliancy":true}'"
             echo ""
             echo "... Executing command"
@@ -115,7 +115,7 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            echo "... ****** Print API VERSION CREATE command ******"
+            echo "... ****** az cli :: API VERSION CREATE command ******"
             echo "az apic api version create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id $(concatenatedVersions) --title '$(concatenatedVersionsName)' --lifecycle-stage design"
             echo ""
             echo "... Executing command"
@@ -129,14 +129,14 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            echo "... ****** Print DEFINITION CREATE command ******"
+            echo "... ****** az cli :: DEFINITION CREATE command ******"
             echo "az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id $(concatenatedVersions) --definition-id '${{ parameters.definitionId }}' --title 'OpenAPI xdef2024'"
             echo ""
             echo "... Executing command"
             az apic api definition create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --version-id $(concatenatedVersions) --definition-id '${{ parameters.definitionId }}' --title 'OpenAPI xdef2024'
             echo "------------------------------------"
             echo ""
-            echo "... ****** Print DEFINITION IMPORT-SPECIFICATION command ******"
+            echo "... ****** az cli :: DEFINITION IMPORT-SPECIFICATION command ******"
             echo "az apic api definition import-specification --api-id ${{ parameters.apiName }} --definition-id '${{ parameters.definitionId }}' --format "link" --value '$(openApiUrl)' --specification '{"name":"openapi","version":"3.0.1"}' --version-id $(concatenatedVersions) -g ${{ parameters.rg }} -n ${{ parameters.apicName }}"
             echo ""
             echo "... Executing command"

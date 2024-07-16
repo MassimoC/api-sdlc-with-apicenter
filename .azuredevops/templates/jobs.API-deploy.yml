@@ -67,7 +67,7 @@ jobs:
                   echo "... definitionResource"
                   echo $definitionResource
                   echo "------------EXECUTE------------"
-                  echo "... ****** Print DEPLOYMENT CREATE command ******"
+                  echo "... ****** az cli :: DEPLOYMENT CREATE command ******"
                   echo "az apic api deployment create -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --deployment-id $deploymentId  --title $deploymentName --description $deploymentName --api-id '${{ parameters.apiName }}' --environment-id '$environmentResource' --definition-id '$definitionResource' --server runtime-uri[0]='${{ parameters.azdoRunId }}'"
                   echo "... Executing command"
                   az apic api deployment create -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --deployment-id $deploymentId  --title $deploymentName --description $deploymentName --api-id "${{ parameters.apiName }}" --environment-id "$environmentResource" --definition-id "$definitionResource" --server runtime-uri[0]='${{ parameters.azdoRunId }}'
@@ -80,7 +80,7 @@ jobs:
                 scriptLocation: inlineScript
                 inlineScript: |
                   echo "------------UPDATE-LIFECYCLE------------"
-                  echo "... ****** Print VERSION UPDATE command ******"
+                  echo "... ****** az cli :: VERSION UPDATE command ******"
                   echo "az apic api version update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --version-id ${{ parameters.apiVersion }}  --lifecycle-stage ${{ parameters.lifecycleStage }}"
                   echo "... Executing command"
                   az apic api version update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --version-id ${{ parameters.apiVersion }}  --lifecycle-stage ${{ parameters.lifecycleStage }}
