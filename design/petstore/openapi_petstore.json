@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Swagger Petstore - OpenAPI 3.0",
+    "title": "Swagger PetStore - api specification",
     "description": "This is a sample Pet Store Server based on the OpenAPI 3.0 specification.",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
@@ -11,7 +11,7 @@
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "3.20.171"
+    "version": "3.20.225"
   },
   "externalDocs": {
     "description": "Find out more about Swagger",
@@ -25,15 +25,15 @@
   "tags": [
     {
       "name": "pet",
-      "description": "Everything about your Pets",
+      "description": "Everything about your lovely Pets",
       "externalDocs": {
-        "description": "Find out more",
+        "description": "Find out more checking our extensive documentation",
         "url": "http://swagger.io"
       }
     },
     {
       "name": "store",
-      "description": "Access to Petstore orders",
+      "description": "Access to PetStore orders",
       "externalDocs": {
         "description": "Find out more about our store",
         "url": "http://swagger.io"
