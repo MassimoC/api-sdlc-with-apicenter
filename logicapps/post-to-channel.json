@@ -2,6 +2,49 @@
     "definition": {
         "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
         "actions": {
+            "Condition": {
+                "actions": {
+                    "Reply_with_an_adaptive_card_in_a_channel": {
+                        "inputs": {
+                            "body": {
+                                "messageBody": "    {\n        \"type\": \"AdaptiveCard\",\n        \"body\": [\n            {\n                \"type\": \"ColumnSet\",\n                \"columns\": [\n                    {\n                        \"type\": \"Column\",\n                        \"items\": [\n                            {\n                                \"type\": \"Image\",\n                                \"style\": \"Person\",\n                                \"url\": \"https://github.com/MassimoC/apimhotrod/blob/main/imgs/security.png?raw=true\",\n                                \"size\": \"Small\"\n                            }\n                        ],\n                        \"width\": \"auto\"\n                    },\n                    {\n                        \"type\": \"Column\",\n                        \"items\": [\n                            {\n                                \"type\": \"TextBlock\",\n                                \"weight\": \"Bolder\",\n                                \"text\": \"Security checks : mandatory \",\n                                \"wrap\": true\n                            },\n                            {\n                                \"type\": \"TextBlock\",\n                                \"spacing\": \"None\",\n                                \"text\": \"@{variables('eventTime')}\",\n                                \"isSubtle\": true,\n                                \"wrap\": true\n                            }\n                        ],\n                        \"width\": \"stretch\"\n                    }\n                ]\n            },\t\t\n            {\n                \"type\": \"Container\",\n                \"items\": [\n                    {\n                        \"type\": \"TextBlock\",\n                        \"text\": \"This API has been categorized SEC012\",\n                        \"wrap\": true\n                    },\n                    {\n                        \"type\": \"FactSet\",\n                        \"facts\": [\n                            {\n                                \"title\": \"API Id:\",\n                                \"value\": \"@{variables('apiId')}\"\n                            },\n                            {\n                                \"title\": \"Version Id:\",\n                                \"value\": \"@{variables('versionId')}\"\n                            },\n                            {\n                                \"title\": \"EventType:\",\n                                \"value\": \"Manual action required\"\n                            },\n                            {\n                                \"title\": \"Compliant:\",\n                                \"value\": \"Yes\"\n                            },\n                            {\n                                \"title\": \"Assigned to:\",\n                                \"value\": \"@{variables('initReviewer')}\"\n                            }\n                        ]\n                    }\n                ]\n            },\n            {\n                \"type\": \"ColumnSet\",\n                \"columns\": 2\n            }\n        ],\n        \"actions\": [\n            {\n                \"type\": \"Action.OpenUrl\",\n                \"title\": \"Run the security stage\",\n                \"url\": \"https://dev.azure.com/massimocrippa/ApiCenter/_build/results?buildId=853&view=results\"\n            }\n        ],\n        \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\",\n        \"version\": \"1.0\"\n    }\n\n",
+                                "parentMessageId": "1720901163671",
+                                "recipient": {
+                                    "channelId": "19:6cab104799074cd68b9fb514fa5d11a0@thread.tacv2",
+                                    "groupId": "c72c6377-e016-4699-b5d2-b850777ab088"
+                                }
+                            },
+                            "host": {
+                                "connection": {
+                                    "name": "@parameters('$connections')['teams']['connectionId']"
+                                }
+                            },
+                            "method": "post",
+                            "path": "/v1.0/teams/conversation/replyWithAdaptivecard/poster/Flow bot/location/@{encodeURIComponent('Channel')}"
+                        },
+                        "type": "ApiConnection"
+                    }
+                },
+                "else": {
+                    "actions": {}
+                },
+                "expression": {
+                    "and": [
+                        {
+                            "equals": [
+                                "@variables('initReviewer')",
+                                "@variables('initReviewer')"
+                            ]
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "HTTP": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "If"
+            },
             "HTTP": {
                 "inputs": {
                     "method": "GET",
