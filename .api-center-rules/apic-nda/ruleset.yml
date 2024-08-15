@@ -1,0 +1,43 @@
+extends: [[spectral:oas, all]]
+functions:
+  - greeting
+rules:
+  # FILE NAME : ruleset.yml
+  openapi-tags: off
+  oas3-api-servers: error
+  info-contact: error
+  duplicated-entry-in-enum: error
+  operation-operationId: error
+  oas3-operation-security-defined: error
+  operation-tag-defined: error
+  
+  greetingRule:
+    message: "{{error}}"
+    given: "$.greeting.firstName"
+    then:
+      function: greeting
+  tag-get-description:
+    description: Tags should have a description.
+    given: $.tags[*]
+    severity: info
+    recommended: true
+    then:
+      field: description
+      function: truthy
+  naming-operation-id:
+    description: OperationId does not respect the {0}_{1} convention.
+    given: $..operationId
+    severity: warn
+    recommended: true
+    then:
+      function: pattern
+      functionOptions:
+        match: '^([a-zA-Z0-9]+)_([a-zA-Z0-9]+)'
+  document-version-format:
+    description: "Ensure the API description document version number follows {major}.{minor}.{patch} versioning."
+    severity: error
+    given: "$.info.version"
+    then:
+      function: pattern
+      functionOptions:
+        match: '^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-[0-9A-Za-z-.]+)?(\+[0-9A-Za-z-.]+)?$'

@@ -11,7 +11,7 @@
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "3.20.225"
+    "version": "3.20.280"
   },
   "externalDocs": {
     "description": "Find out more about Swagger",
@@ -27,7 +27,7 @@
       "name": "pet",
       "description": "Everything about your lovely Pets",
       "externalDocs": {
-        "description": "Find out more checking our extensive documentation",
+        "description": "Find out more checking our extensive docs",
         "url": "http://swagger.io"
       }
     },

@@ -1,0 +1,18 @@
+extends: [[spectral:oas, all]]
+functions:
+  - greeting
+rules:
+  # FILE NAME : 5711
+  openapi-tags: off
+  oas3-api-servers: info
+  info-contact: info
+  duplicated-entry-in-enum: info
+  operation-operationId: error
+  oas3-operation-security-defined: error
+  operation-tag-defined: info
+  
+  greetingRule:
+    message: "{{error}}"
+    given: "$.greeting.firstName"
+    then:
+      function: greeting
