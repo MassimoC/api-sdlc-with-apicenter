@@ -79,7 +79,7 @@ jobs:
                 scriptType: 'bash'
                 scriptLocation: inlineScript
                 inlineScript: |
-                  echo "------------UPDATE-LIFECYCLE------------"
+                  echo "------------UPDATE-VERSION-LIFECYCLE------------"
                   echo "... ****** az cli :: VERSION UPDATE command ******"
                   echo "az apic api version update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --version-id ${{ parameters.apiVersion }}  --lifecycle-stage ${{ parameters.lifecycleStage }}"
                   echo "... Executing command"
