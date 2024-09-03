@@ -162,7 +162,7 @@ jobs:
         displayName: 'Breaking Changes check'
 
 
-      - script: oasdiff changelog "$(azdoWorkDir)/currentversion.json" "${{ parameters.openApiFilePath }} --color always"
+      - script: oasdiff changelog "$(azdoWorkDir)/currentversion.json" "${{ parameters.openApiFilePath }}" --color always
         continueOnError: true
         displayName: 'ChangeLog output'
 
