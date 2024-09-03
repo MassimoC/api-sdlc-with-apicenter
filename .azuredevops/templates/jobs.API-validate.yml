@@ -135,14 +135,15 @@ jobs:
     steps:
       - checkout: self
 
-      - script: cat ${{ parameters.openApiFilePath }}
-        continueOnError: true
-        displayName: 'Show path'
-
       - script: sudo curl -fsSL https://raw.githubusercontent.com/tufin/oasdiff/main/install.sh | sh
-        displayName: 'Install Linting Tool (stoplight/spectral)'
+        displayName: 'Install ChangeLog Tool'
 
       - bash: |
           oasdiff --version
+          echo 'oasdiff changelog currentversion newversion'
           echo '... linting :: ${{ parameters.openApiFilePath }}'
         displayName: 'changelog parameters'
+
+      - script: oasdiff changelog "${{ parameters.openApiFilePath }}" "${{ parameters.openApiFilePath }}"
+        continueOnError: true
+        displayName: 'ChangeLog output'
