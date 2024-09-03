@@ -155,13 +155,9 @@ jobs:
           scriptLocation: 'inlineScript'
           inlineScript: |
             echo "command"
-            cat /dev/null > '$(azdoWorkDir)/v3---3-20-171.json'
-            echo "az apic api definition export-specification -g rg-apicenter -n myapicatalog --api-id petstore-api-v3 --version-id v3---3-20-171 --definition-id xdef2024 --file-name '$(azdoWorkDir)/v3---3-20-171.json'"
             az apic api definition export-specification -g rg-apicenter -n myapicatalog --api-id petstore-api-v3 --version-id v3---3-20-171 --definition-id xdef2024 --file-name "$(azdoWorkDir)/v3---3-20-171.json"
-            cat '$(azdoWorkDir)/v3---3-20-171.json'
 
-
-      - script: oasdiff changelog "$(Pipeline.Workspace)/v3---3-20-171.json" "${{ parameters.openApiFilePath }}"
+      - script: oasdiff changelog "$(azdoWorkDir)/v3---3-20-171.json" "${{ parameters.openApiFilePath }}"
         continueOnError: true
         displayName: 'ChangeLog output'
 
