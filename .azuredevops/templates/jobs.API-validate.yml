@@ -124,3 +124,25 @@ jobs:
           failTaskOnFailedTests: true
           testRunTitle: 'Spectral Linting Results'
         displayName: 'Publish Test Results'
+  - job:
+    displayName: ChangeLog
+    timeoutInMinutes: ${{ parameters.defaultJobTimeoutInMinutes }}
+    pool:
+      ${{ if ne(parameters.vmImage, '') }}:
+        vmImage: ${{ parameters.vmImage }}
+      ${{ if ne(parameters.poolName, '') }}:
+        name: ${{ parameters.poolName }}
+    steps:
+      - checkout: self
+
+      - script: cat ${{ parameters.openApiFilePath }}
+        continueOnError: true
+        displayName: 'Show path'
+
+      - script: sudo curl -fsSL https://raw.githubusercontent.com/tufin/oasdiff/main/install.sh | sh
+        displayName: 'Install Linting Tool (stoplight/spectral)'
+
+      - bash: |
+          oasdiff --version
+          echo '... linting :: ${{ parameters.openApiFilePath }}'
+        displayName: 'changelog parameters'
