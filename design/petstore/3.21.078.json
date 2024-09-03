@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Swagger Petstore - OpenAPI 3.0",
+    "title": "Swagger PetStore - api specification",
     "description": "This is a sample Pet Store Server based on the OpenAPI 3.0 specification.",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
@@ -14,7 +14,7 @@
     "version": "3.21.078"
   },
   "externalDocs": {
-    "description": "Find out more about something",
+    "description": "Find out more about Swagger",
     "url": "http://swagger.io"
   },
   "servers": [
@@ -25,15 +25,15 @@
   "tags": [
     {
       "name": "pet",
-      "description": "Everything about your Pets",
+      "description": "Everything about your lovely Pets",
       "externalDocs": {
-        "description": "Find out more",
+        "description": "Find out more checking our extensive docs",
         "url": "http://swagger.io"
       }
     },
     {
       "name": "store",
-      "description": "Access to Petstore orders",
+      "description": "Access to PetStore orders",
       "externalDocs": {
         "description": "Find out more about our store",
         "url": "http://swagger.io"
@@ -170,19 +170,19 @@
         ]
       }
     },
-    "/pet/findByFamily": {
+    "/pet/findByCategory": {
       "get": {
         "tags": [
           "pet"
         ],
-        "summary": "Finds Pets by family",
-        "description": "Multiple family values can be provided with comma separated strings",
-        "operationId": "findPetsByStatus",
+        "summary": "Finds Pets by category",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "operationId": "findByCategory",
         "parameters": [
           {
-            "name": "family",
+            "name": "category",
             "in": "query",
-            "description": "Family values that need to be considered for filter",
+            "description": "Category values that need to be considered for filter",
             "required": false,
             "explode": true,
             "schema": {
@@ -219,7 +219,7 @@
             }
           },
           "400": {
-            "description": "Invalid family value"
+            "description": "Invalid status value"
           }
         },
         "security": [
