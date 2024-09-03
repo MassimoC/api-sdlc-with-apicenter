@@ -153,7 +153,7 @@ jobs:
           scriptType: 'bash'
           scriptLocation: 'inlineScript'
           inlineScript: |
-            az apic api definition export-specification -g rg-apicenter -n myapicatalog --api-id petstore-api-v3 --version-id v3---3-20-171 --definition-id xdef2024 --file-name $(Pipeline.Workspace)/v3---3-20-171.json
+            az apic api definition export-specification -g rg-apicenter -n myapicatalog --api-id petstore-api-v3 --version-id v3---3-20-171 --definition-id xdef2024 --file-name "$(azdoWorkDir)/v3---3-20-171.json"
 
 
       - script: oasdiff changelog "$(Pipeline.Workspace)/v3---3-20-171.json" "${{ parameters.openApiFilePath }}"
