@@ -126,7 +126,7 @@ jobs:
           testRunTitle: 'Spectral Linting Results'
         displayName: 'Publish Test Results'
   - job:
-    displayName: ChangeLog
+    displayName: BreakingChanges
     timeoutInMinutes: ${{ parameters.defaultJobTimeoutInMinutes }}
     dependsOn:
       - spectral
@@ -157,7 +157,12 @@ jobs:
             echo "command"
             az apic api definition export-specification -g rg-apicenter -n myapicatalog --api-id petstore-api-v3 --version-id v3---3-20-171 --definition-id xdef2024 --file-name "$(azdoWorkDir)/v3---3-20-171.json"
 
-      - script: oasdiff changelog "$(azdoWorkDir)/v3---3-20-171.json" "${{ parameters.openApiFilePath }}"
+      - script: oasdiff breaking --fail-on ERR "$(azdoWorkDir)/v3---3-20-171.json" "${{ parameters.openApiFilePath }}"
+        continueOnError: true
+        displayName: 'ChangeLog output'
+
+
+      - script: oasdiff changelog "$(azdoWorkDir)/v3---3-20-171.json" "${{ parameters.openApiFilePath }} --color always"
         continueOnError: true
         displayName: 'ChangeLog output'
 
