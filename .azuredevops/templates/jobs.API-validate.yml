@@ -15,8 +15,7 @@ parameters:
 ## TEMPLATE LOGIC                              ##
 ##---------------------------------------------##
 jobs:
-  - job:
-    name: 'spectral'
+  - job: Spectral
     displayName: Spectral
     timeoutInMinutes: ${{ parameters.defaultJobTimeoutInMinutes }}
     pool:
