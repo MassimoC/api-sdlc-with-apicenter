@@ -127,6 +127,8 @@ jobs:
   - job:
     displayName: ChangeLog
     timeoutInMinutes: ${{ parameters.defaultJobTimeoutInMinutes }}
+    dependsOn:
+      - spectral
     pool:
       ${{ if ne(parameters.vmImage, '') }}:
         vmImage: ${{ parameters.vmImage }}
@@ -144,6 +146,17 @@ jobs:
           echo '... linting :: ${{ parameters.openApiFilePath }}'
         displayName: 'changelog parameters'
 
-      - script: oasdiff changelog "${{ parameters.openApiFilePath }}" "${{ parameters.openApiFilePath }}"
+      - task: AzureCLI@2
+        displayName: 'Get the N-1 version'
+        inputs:
+          azureSubscription: ${{ parameters.serviceConnection }}
+          scriptType: 'bash'
+          scriptLocation: 'inlineScript'
+          inlineScript: |
+            az apic api definition export-specification -g rg-apicenter -n myapicatalog --api-id petstore-api-v3 --version-id v3---3-20-171 --definition-id xdef2024 --file-name $(Pipeline.Workspace)/v3---3-20-171.json
+
+
+      - script: oasdiff changelog "$(Pipeline.Workspace)/v3---3-20-171.json" "${{ parameters.openApiFilePath }}"
         continueOnError: true
         displayName: 'ChangeLog output'
+
