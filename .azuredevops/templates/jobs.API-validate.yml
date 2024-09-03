@@ -16,6 +16,7 @@ parameters:
 ##---------------------------------------------##
 jobs:
   - job:
+    name: 'spectral'
     displayName: Spectral
     timeoutInMinutes: ${{ parameters.defaultJobTimeoutInMinutes }}
     pool:
