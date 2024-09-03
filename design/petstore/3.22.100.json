@@ -173,7 +173,7 @@
     "/pet/findByStatus": {
       "get": {
         "deprecated": true,
-        "x-sunset": "2022-12-31",
+        "x-sunset": "2025-02-15",
         "tags": [
           "pet"
         ],
