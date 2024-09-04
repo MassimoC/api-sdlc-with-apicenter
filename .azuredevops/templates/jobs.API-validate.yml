@@ -153,6 +153,28 @@ jobs:
         displayName: 'changelog parameters'
 
       - task: AzureCLI@2
+        displayName: 'concatenatedVersions'
+        inputs:
+          azureSubscription: ${{ parameters.serviceConnection }}
+          scriptType: 'bash'
+          scriptLocation: inlineScript
+          inlineScript: |
+            jContent=$(jq -c . '${{ parameters.openApiFilePath }}')
+            echo "##vso[task.setvariable variable=openApiContent;]$jContent"
+            descriptionVersionOriginal=$(jq -r '.info.version' '${{ parameters.openApiFilePath }}')
+            
+            descriptionVersion=$(echo "$descriptionVersionOriginal" | tr '.' '-')
+            apiVersion=$(echo ${{ parameters.currentApiVersion }} | tr '.' '-')
+            
+            concatenatedVersions=$(printf "%s---%s" "$apiVersion" "$descriptionVersion")
+            echo $concatenatedVersions
+            echo "##vso[task.setvariable variable=concatenatedVersions;]$concatenatedVersions"
+
+            concatenatedVersionsName=$(printf "%s_%s" "$apiVersion" "$descriptionVersionOriginal")
+            echo $concatenatedVersionsName
+            echo "##vso[task.setvariable variable=concatenatedVersionsName;]$concatenatedVersionsName"
+
+      - task: AzureCLI@2
         displayName: 'Get the N-1 version'
         inputs:
           azureSubscription: ${{ parameters.serviceConnection }}
