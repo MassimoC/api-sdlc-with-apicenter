@@ -213,13 +213,11 @@ jobs:
             az apic api definition export-specification -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --version-id $previousVersionId --definition-id xdef2024 --file-name "$(azdoWorkDir)/previousversion.json"
 
             echo "... Get the azdo timeline via $(azdoTimelineApi)"
-            echo "... $(azdoPAT)"
-            echo "My secret is: $MY_PAT"
+            curl -u massimocrippa:$MY_PAT -X GET $(azdoTimelineApi)
+            sudo curl -u massimocrippa:$MY_PAT -X GET $(azdoTimelineApi) | jq -r '.records[] | select(.name=="ChangeLog output") | {jobId: .parentId, stepId: .id}' > "$(azdoWorkDir)/stepdetails.json"
 
-            curl -u massimocrippa:$(azdoPAT) -X GET $(azdoTimelineApi) | jq -r '.records[] | select(.name=="ChangeLog output") | {jobId: .parentId, stepId: .id}' > stepdetails.json
-
-            jobId=$(jq -r '.jobId' stepdetails.json)
-            stepId=$(jq -r '.stepId' stepdetails.json)
+            jobId=$(jq -r '.jobId' "$(azdoWorkDir)/stepdetails.json")
+            stepId=$(jq -r '.stepId' "$(azdoWorkDir)/stepdetails.json")
 
             echo "... AZDO jobid : $jobId ... stepId : $stepId"
 
