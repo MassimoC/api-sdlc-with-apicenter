@@ -217,11 +217,12 @@ jobs:
             changeLogURL="$(azdoRunId)&view=logs&j=$jobId&t=$stepId"
             echo "... AZDO changelog : $changeLogURL"
             json_customprop=$(jq -n --arg urlchangelog $changeLogURL '{changelog: $urlchangelog}')
+            echo"$json_customprop"
 
             echo "... ****** az cli :: API UPDATE command ******"
             echo "apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties '{changelog: ...)}'"
             echo ""
             echo "... Executing command"
-            az apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties $json_customprop
+            az apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties '$json_customprop'
         env:
           MY_PAT: $(azdoPAT) 
