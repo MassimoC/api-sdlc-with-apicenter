@@ -190,7 +190,7 @@ jobs:
           oasdiff --version
           echo 'oasdiff changelog currentversion newversion'
           echo 'oasdiff changelog $(previousVersionId) $(concatenatedVersions)'
-        displayName: 'changelog parameters'
+        displayName: 'ChangeLog Parameters'
 
       - script: oasdiff breaking --fail-on ERR "$(azdoWorkDir)/previousversion.json" "${{ parameters.openApiFilePath }}"
         continueOnError: false

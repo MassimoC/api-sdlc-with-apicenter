@@ -202,15 +202,6 @@ jobs:
           scriptType: 'bash'
           scriptLocation: 'inlineScript'
           inlineScript: |
-            echo "... Given the current version $(concatenatedVersions)"
-            az apic api version list -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} > input.json 
-
-            previousVersionId=$(jq -r 'map(select(.name != "$(concatenatedVersions)")) | max_by(.name).name' input.json)
-            echo "... The previous version id is $previousVersionId"
-
-            echo "... Download the previous version"
-            az apic api definition export-specification -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --version-id $previousVersionId --definition-id xdef2024 --file-name "$(azdoWorkDir)/previousversion.json"
-
             echo "... Get the azdo timeline via $(azdoTimelineApi)"
             curl -u massimocrippa:$MY_PAT -X GET "$(azdoTimelineApi)" | jq -r '.records[] | select(.name=="ChangeLog output") | {jobId: .parentId, stepId: .id}' > "$(azdoWorkDir)/stepdetails.json"
 
@@ -230,6 +221,6 @@ jobs:
             echo "apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties '{changelog: $(changeLogURL)}'"
             echo ""
             echo "... Executing command"
-            az apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties '{"changelog": "$changeLogURL"}'
+            az apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties '{"changelog": "$(changeLogURL)"}'
         env:
           MY_PAT: $(azdoPAT) 
