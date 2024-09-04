@@ -213,7 +213,7 @@ jobs:
             az apic api definition export-specification -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --version-id $previousVersionId --definition-id xdef2024 --file-name "$(azdoWorkDir)/previousversion.json"
 
             echo "... Get the azdo timeline via $(azdoTimelineApi)"
-            echo $(azdoPAT)
+            echo "... $(azdoPAT)""
 
             curl -u massimocrippa:$(azdoPAT) -X GET $(azdoTimelineApi) | jq -r '.records[] | select(.name=="ChangeLog output") | {jobId: .parentId, stepId: .id}' > stepdetails.json
 
