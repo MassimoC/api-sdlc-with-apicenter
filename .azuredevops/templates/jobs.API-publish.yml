@@ -107,7 +107,6 @@ jobs:
             echo ""
             echo "... Executing command"
             az apic api create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --title '${{ parameters.apiTitle }}' --type rest --description '${{ parameters.apiDescription }}' --summary '${{ parameters.apiDescription }}' --custom-properties '{"compliancy":true}'
-            #--custom-properties '{"public-facing":true}'
 
       - task: AzureCLI@2  
         displayName: APIC - api version create
@@ -231,6 +230,6 @@ jobs:
             echo "apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties '{changelog: $(changeLogURL)}'"
             echo ""
             echo "... Executing command"
-            az apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties '{"changelog": "$changeLogURL"}'            
+            az apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties '{"changelog": "$changeLogURL"}'
         env:
           MY_PAT: $(azdoPAT) 
