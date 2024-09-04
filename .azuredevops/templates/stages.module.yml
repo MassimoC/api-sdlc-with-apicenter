@@ -17,6 +17,8 @@ stages:
         parameters:
           openApiFilePath: '$(openApiPath)'
           rulesetPath: '$(spectralRulesPath)'
+          currentApiVersion: '${{ parameters.currentApiVersion }}'
+          apiName: '${{ parameters.apiName }}'
 
   - stage: discovery
     displayName: Publish Open API design

@@ -11,6 +11,12 @@ parameters:
   lintResultAzDO: '$(lintResultAzDO)'
   # warn, error
   failSeverity: 'error'
+  # APIC parameters
+  rg: 'rg-apicenter'
+  apicName: 'myapicatalog'
+  apiName: ''
+  definitionId: 'xdef2024'
+  azdoRunId: '$(azdoRunId)'
 
 ##---------------------------------------------##
 ## TEMPLATE LOGIC                              ##
@@ -153,15 +159,22 @@ jobs:
           scriptType: 'bash'
           scriptLocation: 'inlineScript'
           inlineScript: |
-            echo "command"
-            az apic api definition export-specification -g rg-apicenter -n myapicatalog --api-id petstore-api-v3 --version-id v3---3-20-171 --definition-id xdef2024 --file-name "$(azdoWorkDir)/currentversion.json"
+            echo "... Given the current version $(concatenatedVersions)"
+            az apic api version list -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} > input.json 
 
-      - script: oasdiff breaking --fail-on ERR "$(azdoWorkDir)/currentversion.json" "${{ parameters.openApiFilePath }}"
+            previousVersionId=$(jq -r 'map(select(.name != "$(concatenatedVersions)")) | max_by(.name).name' input.json)
+            echo "... The previous version id is $previousVersionId"
+
+            echo "... Download the previous version"
+            az apic api definition export-specification -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --version-id $previousVersionId --definition-id ${{ parameters.definitionId }} --file-name "$(azdoWorkDir)/previousversion.json"
+
+
+      - script: oasdiff breaking --fail-on ERR "$(azdoWorkDir)/previousversion.json" "${{ parameters.openApiFilePath }}"
         continueOnError: false
         displayName: 'Breaking Changes check'
 
 
-      - script: oasdiff changelog "$(azdoWorkDir)/currentversion.json" "${{ parameters.openApiFilePath }}" --color always
+      - script: oasdiff changelog "$(azdoWorkDir)/previousversion.json" "${{ parameters.openApiFilePath }}" --color always
         continueOnError: true
         displayName: 'ChangeLog output'
 

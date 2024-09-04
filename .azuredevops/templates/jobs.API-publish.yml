@@ -206,7 +206,7 @@ jobs:
             echo "... Given the current version $(concatenatedVersions)"
             az apic api version list -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} > input.json 
 
-            previousVersionId=$(jq -r 'map(select(.name != "v3---3-22-100")) | max_by(.name).name' input.json)
+            previousVersionId=$(jq -r 'map(select(.name != "$(concatenatedVersions)")) | max_by(.name).name' input.json)
             echo "... The previous version id is $previousVersionId"
 
             echo "... Download the previous version"
@@ -224,13 +224,13 @@ jobs:
 
             echo "... AZDO jobid : $jobId ... stepId : $stepId"
 
-            changeLogURL="$azdoRunId&view=logs&j=$jobId&t=$stepId"
+            changeLogURL="$(azdoRunId)&view=logs&j=$jobId&t=$stepId"
             echo "... AZDO changelog : $changeLogURL"
 
             echo "... ****** az cli :: API UPDATE command ******"
             echo "apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties '{changelog: $(changeLogURL)}'"
             echo ""
             echo "... Executing command"
-            az apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties '{"changelog": "$(changeLogURL)"}'            
+            az apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties '{"changelog": "$changeLogURL"}'            
         env:
           MY_PAT: $(azdoPAT) 
