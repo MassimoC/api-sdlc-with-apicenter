@@ -215,6 +215,7 @@ jobs:
             echo "... AZDO jobid : $jobId ... stepId : $stepId"
 
             changeLogURL="$(azdoRunId)&view=logs&j=$jobId&t=$stepId"
+            echo "... AZDO changelog : $changeLogURL"
             changeLogURL="https://dev.azure.com/massimocrippa/ApiCenter/_build/results?buildId=924&view=logs&j=5b85417e-54cb-5f6d-80b3-4ff34773e92d&t=7de9e788-5faa-594d-bfe3-13f0d074554b"
             echo "... AZDO changelog : $changeLogURL"
             json_customprop=$(jq -c -n --arg urlchangelog $changeLogURL '{changelog: $urlchangelog}')
