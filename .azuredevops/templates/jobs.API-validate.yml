@@ -147,11 +147,6 @@ jobs:
       - script: sudo curl -fsSL https://raw.githubusercontent.com/tufin/oasdiff/main/install.sh | sh
         displayName: 'Install ChangeLog Tool'
 
-      - bash: |
-          oasdiff --version
-          echo 'oasdiff changelog currentversion newversion'
-        displayName: 'changelog parameters'
-
       - task: AzureCLI@2
         displayName: 'concatenatedVersions'
         inputs:
@@ -186,10 +181,16 @@ jobs:
 
             previousVersionId=$(jq -r 'map(select(.name != "$(concatenatedVersions)")) | max_by(.name).name' input.json)
             echo "... The previous version id is $previousVersionId"
+            echo "##vso[task.setvariable variable=previousVersionId;]$previousVersionId"
 
             echo "... Download the previous version"
             az apic api definition export-specification -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --version-id $previousVersionId --definition-id ${{ parameters.definitionId }} --file-name "$(azdoWorkDir)/previousversion.json"
 
+      - bash: |
+          oasdiff --version
+          echo 'oasdiff changelog currentversion newversion'
+          echo 'oasdiff changelog $(previousVersionId) $(concatenatedVersions)'
+        displayName: 'changelog parameters'
 
       - script: oasdiff breaking --fail-on ERR "$(azdoWorkDir)/previousversion.json" "${{ parameters.openApiFilePath }}"
         continueOnError: false
