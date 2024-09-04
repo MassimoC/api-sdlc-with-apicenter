@@ -30,6 +30,7 @@ variables:
     value: '$(ghRepo)/design/petstore/openapi_petstore.json'
   - name: currentApiVersion
     value: 'v3'
+  - group: MyGreatSecrets
     
 
 stages:

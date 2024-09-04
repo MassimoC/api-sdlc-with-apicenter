@@ -17,6 +17,7 @@ parameters:
   apiDescription: ''
   currentApiVersion: ''
   definitionId: 'xdef2024'
+  azdoRunId: '$(azdoRunId)'
   
 ##---------------------------------------------##
 ## TEMPLATE LOGIC                              ##
@@ -194,4 +195,29 @@ jobs:
                     --uri $apicUri \
                     --headers "Content-Type=application/json" \
                     --body "$enriched_json_data")
-        
+
+      - task: AzureCLI@2
+        displayName: 'Publish change log'
+        inputs:
+          azureSubscription: ${{ parameters.serviceConnection }}
+          scriptType: 'bash'
+          scriptLocation: 'inlineScript'
+          inlineScript: |
+            az apic api version list -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} > input.json 
+            previousVersionId=$(jq -r --arg version "$concatenatedVersions" 'map(select(.title != $version)) | max_by(.title)' input.json)
+            echo "... Given the current version $concatenatedVersions"
+            echo "... The previous version id is $previousVersionId"
+
+            echo "... Download the previous version"
+            az apic api definition export-specification -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --version-id $(previousVersionId) --definition-id xdef2024 --file-name "$(azdoWorkDir)/previousversion.json"
+
+            echo "... Get the azdo timeline"
+            curl -u massimocrippa:$(azdoPAT) -X GET $azdoTimelineApi | jq -r '.records[] | select(.name=="ChangeLog output") | {jobId: .parentId, stepId: .id}' > stepdetails.json
+
+            jobId=$(jq -r '.jobId' stepdetails.json)
+            stepId=$(jq -r '.stepId' stepdetails.json)
+
+            echo "... AZDO jobid : $jobId ... stepId : $stepId"
+
+            changeLogURL="$azdoRunId&view=logs&j=$jobId&t=$stepId"
+            echo "... AZDO changelog : changeLogURL"
