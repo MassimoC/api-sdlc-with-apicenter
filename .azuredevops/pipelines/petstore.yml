@@ -31,7 +31,6 @@ variables:
   - name: currentApiVersion
     value: 'v3'
   - group: MyGreatSecrets
-    
 
 stages:
   - template: /.azuredevops/templates/stages.module.yml
