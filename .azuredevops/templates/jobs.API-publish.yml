@@ -216,7 +216,7 @@ jobs:
 
             changeLogURL="$(azdoRunId)&view=logs&j=$jobId&t=$stepId"
             echo "... AZDO changelog : $changeLogURL"
-            json_customprop=$(jq -R -s -n --arg urlchangelog $changeLogURL '{changelog: $urlchangelog}')
+            json_customprop=$(jq -R -s -n --arg urlchangelog $changeLogURL '{changelog: $urlchangelog}'| jq '@json')
             echo $json_customprop
 
             echo "... ****** az cli :: API UPDATE command ******"
