@@ -205,11 +205,11 @@ jobs:
           inlineScript: |
             echo "... Given the current version $(concatenatedVersions)"
             az apic api version list -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} > input.json 
-            cat input.json
 
-            jq -r 'map(select(.name != "v3---3-22-100")) | max_by(.name).name' input.json
+            jq -r --arg version $concatenatedVersions 'map(select(.name != $version)) | max_by(.name).name' input.json
             previousVersionId=$(jq -r --arg version "$concatenatedVersions" 'map(select(.name != $version)) | max_by(.name).name' input.json)
-            echo "... The previous version id is $(previousVersionId)"
+            echo $previousVersionId
+            echo "... The previous version id is $previousVersionId"
 
             echo "... Download the previous version"
             az apic api definition export-specification -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --version-id $(previousVersionId) --definition-id xdef2024 --file-name "$(azdoWorkDir)/previousversion.json"
