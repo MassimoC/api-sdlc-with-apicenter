@@ -17,6 +17,7 @@ parameters:
   apiDescription: ''
   currentApiVersion: ''
   definitionId: 'xdef2024'
+  azdoRunId: '$(azdoRunId)'
   
 ##---------------------------------------------##
 ## TEMPLATE LOGIC                              ##
@@ -106,7 +107,6 @@ jobs:
             echo ""
             echo "... Executing command"
             az apic api create --api-id ${{ parameters.apiName }} -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --title '${{ parameters.apiTitle }}' --type rest --description '${{ parameters.apiDescription }}' --summary '${{ parameters.apiDescription }}' --custom-properties '{"compliancy":true}'
-            #--custom-properties '{"public-facing":true}'
 
       - task: AzureCLI@2  
         displayName: APIC - api version create
@@ -194,4 +194,36 @@ jobs:
                     --uri $apicUri \
                     --headers "Content-Type=application/json" \
                     --body "$enriched_json_data")
-        
+
+      - task: AzureCLI@2
+        displayName: 'Publish change log'
+        inputs:
+          azureSubscription: ${{ parameters.serviceConnection }}
+          scriptType: 'bash'
+          scriptLocation: 'inlineScript'
+          inlineScript: |
+            echo "... Get the azdo timeline via $(azdoTimelineApi)"
+            curl -u massimocrippa:$MY_PAT -X GET "$(azdoTimelineApi)" | jq -r '.records[] | select(.name=="ChangeLog output") | {jobId: .parentId, stepId: .id}' > "$(azdoWorkDir)/stepdetails.json"
+
+            echo "... cat stepdetails.json"
+            cat "$(azdoWorkDir)/stepdetails.json"
+
+            echo "... get run details"
+            jobId=$(jq -r '.jobId' "$(azdoWorkDir)/stepdetails.json" | tr -d '\n' )
+            stepId=$(jq -r '.stepId' "$(azdoWorkDir)/stepdetails.json" | tr -d '\n' )
+
+            echo "... AZDO jobid : $jobId ... stepId : $stepId"
+
+            changeLogURL="$(azdoRunId)&view=logs&j=$jobId&t=$stepId"
+            echo "... AZDO changelog : $changeLogUR1L"           
+
+            json_customprop=$(jq -c -n --arg urlchangelog $changeLogURL '{changelog: $urlchangelog}')
+            echo $json_customprop
+
+            echo "... ****** az cli :: API UPDATE command ******"
+            echo "az apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties '$json_customprop'"
+            echo ""
+            echo "... Executing command"
+            az apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties $json_customprop
+        env:
+          MY_PAT: $(azdoPAT) 
