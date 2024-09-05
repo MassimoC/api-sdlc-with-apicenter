@@ -229,5 +229,8 @@ jobs:
             echo ""
             echo "... Executing command"
             az apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties $json_customprop
+
+            echo "... Executing command"
+            az apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties $json_customprop1
         env:
           MY_PAT: $(azdoPAT) 
