@@ -214,13 +214,9 @@ jobs:
 
             echo "... AZDO jobid : $jobId ... stepId : $stepId"
 
-            changeLogURL1="$(azdoRunId)&view=logs&j=$jobId&t=$stepId"
+            changeLogURL="$(azdoRunId)&view=logs&j=$jobId&t=$stepId"
             echo "... AZDO changelog : $changeLogUR1L"           
-            changeLogURL="https://dev.azure.com/massimocrippa/ApiCenter/_build/results?buildId=924&view=logs&j=5b85417e-54cb-5f6d-80b3-4ff34773e92d&t=7de9e788-5faa-594d-bfe3-13f0d074554b"
-            echo "... AZDO changelog : $changeLogURL"
 
-            json_customprop1=$(jq -c -n --arg urlchangelog $changeLogURL1 '{changelog: $urlchangelog}')
-            echo $json_customprop1
             json_customprop=$(jq -c -n --arg urlchangelog $changeLogURL '{changelog: $urlchangelog}')
             echo $json_customprop
 
@@ -229,8 +225,5 @@ jobs:
             echo ""
             echo "... Executing command"
             az apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties $json_customprop
-
-            echo "... Executing command"
-            az apic api update -g ${{ parameters.rg }} -n ${{ parameters.apicName }} --api-id ${{ parameters.apiName }} --custom-properties $json_customprop1
         env:
           MY_PAT: $(azdoPAT) 
