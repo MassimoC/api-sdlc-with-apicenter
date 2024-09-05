@@ -11,7 +11,7 @@
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "3.20.280"
+    "version": "3.21.178"
   },
   "externalDocs": {
     "description": "Find out more about Swagger",
@@ -170,19 +170,19 @@
         ]
       }
     },
-    "/pet/findByStatus": {
+    "/pet/findByCategory": {
       "get": {
         "tags": [
           "pet"
         ],
-        "summary": "Finds Pets by status",
+        "summary": "Finds Pets by category",
         "description": "Multiple status values can be provided with comma separated strings",
-        "operationId": "findPetsByStatus",
+        "operationId": "findByCategory",
         "parameters": [
           {
-            "name": "status",
+            "name": "category",
             "in": "query",
-            "description": "Status values that need to be considered for filter",
+            "description": "Category values that need to be considered for filter",
             "required": false,
             "explode": true,
             "schema": {
