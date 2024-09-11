@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Swagger PetStore - api specification",
+    "title": "Swagger Beetlejuice - api specification",
     "description": "This is a sample Pet Store Server based on the OpenAPI 3.0 specification.",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
@@ -11,7 +11,7 @@
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "3.22.100"
+    "version": "3.22.101"
   },
   "externalDocs": {
     "description": "Find out more about Swagger",
