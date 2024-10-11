@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Swagger PetStore - api specification",
-    "description": "This is a sample PetStore based on the OpenAPI 3.0 specification.",
+    "description": "This is a sample Pet Store Server based on the OpenAPI 3.0 specification.",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
       "email": "apiteam@swagger.io"
@@ -11,7 +11,7 @@
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version": "3.20.225"
+    "version": "3.22.100"
   },
   "externalDocs": {
     "description": "Find out more about Swagger",
@@ -27,7 +27,7 @@
       "name": "pet",
       "description": "Everything about your lovely Pets",
       "externalDocs": {
-        "description": "Find out more checking our extensive documentation",
+        "description": "Find out more checking our extensive docs",
         "url": "http://swagger.io"
       }
     },
@@ -172,6 +172,8 @@
     },
     "/pet/findByStatus": {
       "get": {
+        "deprecated": true,
+        "x-sunset": "2025-02-15",
         "tags": [
           "pet"
         ],
@@ -183,6 +185,68 @@
             "name": "status",
             "in": "query",
             "description": "Status values that need to be considered for filter",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "default": "available",
+              "enum": [
+                "available",
+                "pending",
+                "sold"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      }
+    },    
+    "/pet/findByCategory": {
+      "get": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "Finds Pets by category",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "operationId": "findByCategory",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Category values that need to be considered for filter",
             "required": false,
             "explode": true,
             "schema": {
