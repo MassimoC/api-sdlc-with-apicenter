@@ -52,7 +52,7 @@
         ],
         "summary": "Update an existing pet",
         "description": "Update an existing pet by Id",
-        "operationId": "updatePet",
+        "operationId": "update_pet",
         "requestBody": {
           "description": "Update an existent pet in the store",
           "content": {
@@ -115,7 +115,7 @@
         ],
         "summary": "Add a new pet to the store",
         "description": "Add a new pet to the store",
-        "operationId": "addPet",
+        "operationId": "add_pet",
         "requestBody": {
           "description": "Create a new pet in the store",
           "content": {
@@ -177,7 +177,7 @@
         ],
         "summary": "Finds Pets by status",
         "description": "Multiple status values can be provided with comma separated strings",
-        "operationId": "findPetsByStatus",
+        "operationId": "find_PetsByStatus",
         "parameters": [
           {
             "name": "status",
@@ -239,7 +239,7 @@
         ],
         "summary": "Finds Pets by tags",
         "description": "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
-        "operationId": "findPetsByTags",
+        "operationId": "find_PetsByTags",
         "parameters": [
           {
             "name": "tags",
@@ -298,7 +298,7 @@
         ],
         "summary": "Find pet by ID",
         "description": "Returns a single pet",
-        "operationId": "getPetById",
+        "operationId": "get_PetById",
         "parameters": [
           {
             "name": "petId",
@@ -352,7 +352,7 @@
         ],
         "summary": "Updates a pet in the store with form data",
         "description": "",
-        "operationId": "updatePetWithForm",
+        "operationId": "update_PetWithForm",
         "parameters": [
           {
             "name": "petId",
@@ -401,7 +401,7 @@
         ],
         "summary": "Deletes a pet",
         "description": "delete a pet",
-        "operationId": "deletePet",
+        "operationId": "delete_pet",
         "parameters": [
           {
             "name": "api_key",
@@ -445,7 +445,7 @@
         ],
         "summary": "uploads an image",
         "description": "",
-        "operationId": "uploadFile",
+        "operationId": "upload_File",
         "parameters": [
           {
             "name": "petId",
@@ -506,7 +506,7 @@
         ],
         "summary": "Returns pet inventories by status",
         "description": "Returns a map of status codes to quantities",
-        "operationId": "getInventory",
+        "operationId": "get_Inventory",
         "responses": {
           "200": {
             "description": "successful operation",
@@ -584,7 +584,7 @@
         ],
         "summary": "Find purchase order by ID",
         "description": "For valid response try integer IDs with value less than 5 or greater 10. Other values will generate exceptions.",
-        "operationId": "getOrderById",
+        "operationId": "get_OrderById",
         "parameters": [
           {
             "name": "orderId",
@@ -627,7 +627,7 @@
         ],
         "summary": "Delete purchase order by ID",
         "description": "For valid response try integer IDs with value less than 1000. Anything above 1000 or nonintegers will generate API errors",
-        "operationId": "deleteOrder",
+        "operationId": "delete_Order",
         "parameters": [
           {
             "name": "orderId",
@@ -657,7 +657,7 @@
         ],
         "summary": "Create user",
         "description": "This can only be done by the logged in user.",
-        "operationId": "createUser",
+        "operationId": "create_User",
         "requestBody": {
           "description": "Created user object",
           "content": {
@@ -704,7 +704,7 @@
         ],
         "summary": "Creates list of users with given input array",
         "description": "Creates list of users with given input array",
-        "operationId": "createUsersWithListInput",
+        "operationId": "create_UsersWithListInput",
         "requestBody": {
           "content": {
             "application/json": {
@@ -812,7 +812,7 @@
         ],
         "summary": "Logs out current logged in user session",
         "description": "",
-        "operationId": "logoutUser",
+        "operationId": "logout_User",
         "parameters": [],
         "responses": {
           "default": {
@@ -828,7 +828,7 @@
         ],
         "summary": "Get user by user name",
         "description": "",
-        "operationId": "getUserByName",
+        "operationId": "get_UserByName",
         "parameters": [
           {
             "name": "username",
@@ -870,7 +870,7 @@
         ],
         "summary": "Update user",
         "description": "This can only be done by the logged in user.",
-        "operationId": "updateUser",
+        "operationId": "update_User",
         "parameters": [
           {
             "name": "username",
@@ -914,7 +914,7 @@
         ],
         "summary": "Delete user",
         "description": "This can only be done by the logged in user.",
-        "operationId": "deleteUser",
+        "operationId": "delete_User",
         "parameters": [
           {
             "name": "username",
