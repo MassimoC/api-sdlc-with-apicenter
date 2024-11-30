@@ -164,12 +164,6 @@ jobs:
             apicUri="https://management.azure.com/subscriptions/$(subscriptionId)/resourceGroups/${{ parameters.rg }}/providers/Microsoft.ApiCenter/services/${{ parameters.apicName }}/workspaces/default/apis/${{ parameters.apiName }}/versions/$(concatenatedVersions)/definitions/${{ parameters.definitionId }}/updateAnalysisState?api-version=2024-03-01"
             echo "... Upload Linting result to APIC"
             echo $apicUri
-            echo "... with format"
-            echo $format
-            echo "... with state"
-            echo $state
-            echo "... with value"
-            echo $value
             
             echo "... Init APIC analysis"
             json_init=$(jq -n \
@@ -179,6 +173,7 @@ jobs:
               '{format: $format, state: $state, value: $value}')
 
             echo "... az rest for init"
+            echo $json_init
             initResponse=$(az rest --method post \
                     --uri $apicUri \
                     --headers "Content-Type=application/json" \
