@@ -9,6 +9,10 @@ parameters:
     displayName: Publish OpenAPI specification
     type: boolean
     default: true
+  - name: targetCanary
+    displayName: Publish to APIC canary
+    type: boolean
+    default: false
 
 pr: none
 
@@ -41,3 +45,4 @@ stages:
       apiTitle: 'Petstore API v3'
       apiDescription: 'Everything about your Pets'
       currentApiVersion: ${{variables.currentApiVersion}}
+      targetCanary: '${{ parameters.targetCanary }}'

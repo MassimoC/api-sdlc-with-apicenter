@@ -7,6 +7,10 @@ parameters:
   apiTitle: ''
   apiDescription: ''
   currentApiVersion: ''
+  targetCanary: false
+
+variables:
+  apicName: $[eq('${{ parameters.targetCanary }}', 'True')? 'myapicatalogcanary' : 'myapicatalog']
 
 stages:
   - stage: validation
@@ -32,9 +36,11 @@ stages:
           openApiUrl: '$(openApiUrl)'
           #currentApiVersion: $(Build.BuildNumber)
           currentApiVersion: '${{ parameters.currentApiVersion }}'
+          apicName:  ${{variables.apicName}}
           apiName: '${{ parameters.apiName }}'
           apiTitle: '${{ parameters.apiTitle }}'
           apiDescription: '${{ parameters.apiDescription }}'
+          targetCanary: '${{ parameters.targetCanary }}'
 
   - stage: mocking
     displayName: Publish to API Gateway
@@ -64,6 +70,7 @@ stages:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
           apiVersion: $(apicVersionId)
+          apicName:  ${{variables.apicName}}
           apicVersionName: $(apicVersionName)
           environmentCode : 'development'
           lifecycleStage: 'development'
@@ -83,6 +90,7 @@ stages:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
           apiVersion: $(apicVersionId)
+          apicName:  ${{variables.apicName}}
           apicVersionName: $(apicVersionName)
           environmentCode : 'testing'
           environmentId: 'tst001xyz'
@@ -103,6 +111,7 @@ stages:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
           apiVersion: $(apicVersionId)
+          apicName:  ${{variables.apicName}}
           apicVersionName: $(apicVersionName)
           environmentCode : 'staging'
           environmentId: 'acc001xyz'
@@ -123,6 +132,7 @@ stages:
           apiName: '${{ parameters.apiName }}'
           releaseDate: $(Build.BuildNumber)
           apiVersion: $(apicVersionId)
+          apicName:  ${{variables.apicName}}
           apicVersionName: $(apicVersionName)
           environmentCode : 'production'
           environmentId: 'prd001xyz'
